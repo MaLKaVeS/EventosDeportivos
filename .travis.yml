@@ -11,7 +11,7 @@ matrix:
     - php: 7
 
 script:
-  - cd Web/application
+  - cd Web/application/tests
 
  notifications:
   slack: forgotten-hide-out:3SPao4avZI5Ng5PX75v2khys
