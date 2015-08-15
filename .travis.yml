@@ -2,3 +2,6 @@
 rvm:
  - 5.6
  - 5.5
+
+notifications:
+  slack: forgotten-hide-out:3SPao4avZI5Ng5PX75v2khys
