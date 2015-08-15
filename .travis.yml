@@ -1,10 +1,17 @@
 ﻿language: php
-php:
- - 5.6
- - 5.5
 
- before_script:
- - cd Web
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7
+
+matrix:
+  allow_failures:
+    - php: 7
+
+script:
+  - cd Web/application
 
  notifications:
   slack: forgotten-hide-out:3SPao4avZI5Ng5PX75v2khys
