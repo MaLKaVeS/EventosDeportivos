@@ -327,5 +327,5 @@ MonkeyPatchManager::init([
  *  Added for CI PHPUnit Test
  * -------------------------------------------------------------------
  */
-require __DIR__ . '/_ci_phpunit_test/CIPHPUnitTest.php';
+require __DIR__ . '/Web/application/tests/_ci_phpunit_test/CIPHPUnitTest.php';
 CIPHPUnitTest::init();
