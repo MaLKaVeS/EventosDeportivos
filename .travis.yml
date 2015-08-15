@@ -6,14 +6,11 @@ php:
   - 5.6
 
 before_script:
-  - cd Web
-  - pwd
-  - export cwd=`pwd`
   - composer self-update
 
 script:
-  - cd Web/application/tests
-  - ../../vender/bin/phpunit
+- cd Web/application/tests 
+- Web/vendor/bin/phpunit 
 
  notifications:
   slack: forgotten-hide-out:3SPao4avZI5Ng5PX75v2khys
