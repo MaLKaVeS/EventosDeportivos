@@ -10,6 +10,11 @@ matrix:
   allow_failures:
     - php: 7
 
+before_script:
+  - pwd
+  - export cwd=`pwd`
+  - composer self-update
+
 script:
   - cd Web/application/tests
 
