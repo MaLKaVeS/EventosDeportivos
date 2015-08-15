@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1439674130">
-  <project timestamp="1439674130">
+<coverage generated="1439676075">
+  <project timestamp="1439676075">
     <file name="C:\Proyectos\EventosDeportivos\Web\application/controllers/Rest_server.php">
       <class name="Rest_server" namespace="global" fullPackage="Rest">
         <metrics methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
