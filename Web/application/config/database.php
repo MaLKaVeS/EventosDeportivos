@@ -57,17 +57,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 | The $query_builder variables lets you determine whether or not to load
 | the query builder class.
-*/
+ */
 
 $active_group = 'default';
 $query_builder = TRUE;
 
-$db['default'] = array(
+$db['default']['dev']['sta']['real'] = array(
+    array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => '',
-	'password' => '',
-	'database' => '',
+	'hostname' => 'eu-cdbr-azure-north-d.cloudapp.net',
+	'username' => 'b233c5a25aa24b',
+	'password' => 'b1fc50b1',
+	'database' => 'eventosdev',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -82,4 +83,70 @@ $db['default'] = array(
 	'stricton' => FALSE,
 	'failover' => array(),
 	'save_queries' => TRUE
+    ),
+    array(
+	    'dsn'	=> '',
+	    'hostname' => 'eu-cdbr-azure-north-d.cloudapp.net',
+	    'username' => 'b233c5a25aa24b',
+	    'password' => 'b1fc50b1',
+	    'database' => 'eventosdev',
+	    'dbdriver' => 'mysqli',
+	    'dbprefix' => '',
+	    'pconnect' => FALSE,
+	    'db_debug' => TRUE,
+	    'cache_on' => FALSE,
+	    'cachedir' => '',
+	    'char_set' => 'utf8',
+	    'dbcollat' => 'utf8_general_ci',
+	    'swap_pre' => '',
+	    'encrypt' => FALSE,
+	    'compress' => FALSE,
+	    'stricton' => FALSE,
+	    'failover' => array(),
+	    'save_queries' => TRUE
+    ),
+    //Database=eventossta;Data Source=eu-cdbr-azure-north-d.cloudapp.net;User Id=b04a72f9906703;Password=83d9ac2d
+    array(
+	    'dsn'	=> '',
+	    'hostname' => 'eu-cdbr-azure-north-d.cloudapp.net',
+	    'username' => 'b04a72f9906703',
+	    'password' => '83d9ac2d',
+	    'database' => 'eventossta',
+	    'dbdriver' => 'mysqli',
+	    'dbprefix' => '',
+	    'pconnect' => FALSE,
+	    'db_debug' => TRUE,
+	    'cache_on' => FALSE,
+	    'cachedir' => '',
+	    'char_set' => 'utf8',
+	    'dbcollat' => 'utf8_general_ci',
+	    'swap_pre' => '',
+	    'encrypt' => FALSE,
+	    'compress' => FALSE,
+	    'stricton' => FALSE,
+	    'failover' => array(),
+	    'save_queries' => TRUE
+    ),
+    //Database=eventos;Data Source=eu-cdbr-azure-north-d.cloudapp.net;User Id=ba70ed2dbf4ba1;Password=3bdfd49c
+    array(
+	    'dsn'	=> '',
+	    'hostname' => 'eu-cdbr-azure-north-d.cloudapp.net',
+	    'username' => 'ba70ed2dbf4ba1',
+	    'password' => '3bdfd49c',
+	    'database' => 'eventos',
+	    'dbdriver' => 'mysqli',
+	    'dbprefix' => '',
+	    'pconnect' => FALSE,
+	    'db_debug' => TRUE,
+	    'cache_on' => FALSE,
+	    'cachedir' => '',
+	    'char_set' => 'utf8',
+	    'dbcollat' => 'utf8_general_ci',
+	    'swap_pre' => '',
+	    'encrypt' => FALSE,
+	    'compress' => FALSE,
+	    'stricton' => FALSE,
+	    'failover' => array(),
+	    'save_queries' => TRUE
+    ),
 );

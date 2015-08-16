@@ -16,5 +16,7 @@ namespace ED.Datos
         public DbSet<Credencial> Credenciales { get; set; }
         public DbSet<Acceso> Accesos { get; set; }
         public DbSet<Rol> Roles { get; set; }
+        public DbSet<Actividad> Actividades { get; set; }
+        public DbSet<Evento> Eventos { get; set; }
     }
 }

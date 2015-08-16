@@ -57,10 +57,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Evento.cs" />
+    <Compile Include="Actividad.cs" />
     <Compile Include="Contexto.cs" />
     <Compile Include="Migrations\201508142131450_Inicial.cs" />
     <Compile Include="Migrations\201508142131450_Inicial.Designer.cs">
       <DependentUpon>201508142131450_Inicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508161001150_ActividadesEventos.cs" />
+    <Compile Include="Migrations\201508161001150_ActividadesEventos.Designer.cs">
+      <DependentUpon>201508161001150_ActividadesEventos.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MySqlConfiguration.cs" />
@@ -76,6 +82,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201508142131450_Inicial.resx">
       <DependentUpon>201508142131450_Inicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508161001150_ActividadesEventos.resx">
+      <DependentUpon>201508161001150_ActividadesEventos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

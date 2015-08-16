@@ -17,8 +17,8 @@ namespace ED.Datos
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public string Id { get; set; }
-
         public string Nombre { get; set; }
+        public string Descripcion { get; set; }
         public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 
@@ -27,7 +27,6 @@ namespace ED.Datos
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public string Id { get; set; }
-
         public string Email { get; set; }
         public string Nombre { get; set; }
         public string Apellidos { get; set; }
@@ -43,7 +42,6 @@ namespace ED.Datos
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public string Id { get; set; }
-
         public Usuario Usuario { get; set; }
         public string PasswordHash { get; set; }
         public int Intentos { get; set; }
@@ -55,7 +53,6 @@ namespace ED.Datos
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public string Id { get; set; }
-
         public string Credencial { get; set; }
         public int Fecha { get; set; }
         public int Hora { get; set; }

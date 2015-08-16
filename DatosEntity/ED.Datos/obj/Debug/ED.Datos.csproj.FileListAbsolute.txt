@@ -12,3 +12,4 @@ C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\bin\Debug\MySql.Data.dll
 C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\bin\Debug\MySql.Data.Entity.EF6.dll
 C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.Migrations.Inicial.resources
 C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.csproj.GenerateResource.Cache
+C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.Migrations.ActividadesEventos.resources
