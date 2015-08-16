@@ -5,11 +5,8 @@ php:
   - 5.5
   - 5.6
 
- notifications:
-  slack:
-   rooms:
-    - forgotten-hide-out:3SPao4avZI5Ng5PX75v2khys#general
-    - forgotten-hide-out:3SPao4avZI5Ng5PX75v2khys#eventos
+notifications:
+  slack: forgotten-hide-out:3SPao4avZI5Ng5PX75v2khys
 
 before_script:
   - composer self-update
