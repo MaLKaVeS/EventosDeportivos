@@ -409,6 +409,13 @@ class Format {
 
         if (empty($callback) === TRUE)
         {
+            //$utf8Data = array_map(utf8_encode, $data);
+
+            //$results = array_map(function($data) {
+            //  $data['Descripcion'] = utf8_encode($data['Descripcion']);
+            //  return $data;
+            //}, $results);
+
             return json_encode($data);
         }
 

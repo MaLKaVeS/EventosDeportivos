@@ -329,3 +329,7 @@ MonkeyPatchManager::init([
  */
 require __DIR__ . '/Web/application/tests/_ci_phpunit_test/CIPHPUnitTest.php';
 CIPHPUnitTest::init();
+
+require __DIR__.'/Web/vendor/autoload.php';
+
+require __DIR__.'/Web/application/config/autoload.php';

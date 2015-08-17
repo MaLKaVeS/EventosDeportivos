@@ -77,4 +77,24 @@ class CI_Model {
 		return get_instance()->$key;
 	}
 
+
+    /**
+     * 
+     * @return string
+     */
+    protected function _getNewID() {
+        $length = 20;
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+            if (($i === 4) || ($i === 9) || ($i === 14))
+            {
+                $randomString .= '-';
+            }
+        }
+        return $randomString;
+    }
+
 }

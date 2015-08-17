@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="CodeIgniter Application Test Suite" tests="3" assertions="3" failures="0" errors="0" time="0.296102">
-    <testsuite name="Welcome_test" file="C:\Proyectos\EventosDeportivos\Web\application\tests\controllers\Welcome_test.php" tests="3" assertions="3" failures="0" errors="0" time="0.296102">
-      <testcase name="test_index" class="Welcome_test" file="C:\Proyectos\EventosDeportivos\Web\application\tests\controllers\Welcome_test.php" line="13" assertions="1" time="0.120842"/>
-      <testcase name="test_method_404" class="Welcome_test" file="C:\Proyectos\EventosDeportivos\Web\application\tests\controllers\Welcome_test.php" line="19" assertions="1" time="0.097764"/>
-      <testcase name="test_APPPATH" class="Welcome_test" file="C:\Proyectos\EventosDeportivos\Web\application\tests\controllers\Welcome_test.php" line="25" assertions="1" time="0.077496"/>
+  <testsuite name="CodeIgniter Application Test Suite" tests="4" assertions="3" failures="0" errors="1" time="0.381555">
+    <testsuite name="Welcome_test" file="C:\Proyectos\EventosDeportivos\Web\application\tests\controllers\Welcome_test.php" tests="3" assertions="3" failures="0" errors="0" time="0.300614">
+      <testcase name="test_index" class="Welcome_test" file="C:\Proyectos\EventosDeportivos\Web\application\tests\controllers\Welcome_test.php" line="13" assertions="1" time="0.123801"/>
+      <testcase name="test_method_404" class="Welcome_test" file="C:\Proyectos\EventosDeportivos\Web\application\tests\controllers\Welcome_test.php" line="19" assertions="1" time="0.099296"/>
+      <testcase name="test_APPPATH" class="Welcome_test" file="C:\Proyectos\EventosDeportivos\Web\application\tests\controllers\Welcome_test.php" line="25" assertions="1" time="0.077517"/>
+    </testsuite>
+    <testsuite name="Roles_test" file="C:\Proyectos\EventosDeportivos\Web\application\tests\models\Roles_test.php" tests="1" assertions="0" failures="0" errors="1" time="0.080941">
+      <testcase name="test_get" class="Roles_test" file="C:\Proyectos\EventosDeportivos\Web\application\tests\models\Roles_test.php" line="15" assertions="0" time="0.080941">
+        <error type="PHPUnit_Framework_ExceptionWrapper">Roles_test::test_get
+CIPHPUnitTestShowErrorException: You have not selected a database type to connect to.
+
+C:\Proyectos\EventosDeportivos\Web\application\tests\_ci_phpunit_test\replacing\core\Common.php:171
+C:\Proyectos\EventosDeportivos\Web\system\database\DB.php:149
+C:\Proyectos\EventosDeportivos\Web\application\tests\_ci_phpunit_test\replacing\core\Loader.php:365
+C:\Proyectos\EventosDeportivos\Web\application\models\Rol.php:22
+C:\Proyectos\EventosDeportivos\Web\application\tests\models\Roles_test.php:17
+</error>
+      </testcase>
     </testsuite>
   </testsuite>
 </testsuites>

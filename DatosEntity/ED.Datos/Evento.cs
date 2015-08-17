@@ -30,6 +30,9 @@
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public string Id { get; set; }
+        [InverseProperty("Id")]
+        [ForeignKey("ActividadId")]
+        [Key]
         public virtual Actividad Actividad { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }

@@ -2107,4 +2107,18 @@ abstract class REST_Controller extends CI_Controller {
             ->num_rows() > 0;
     }
 
+    /**
+     * Genera una cadena de caracteres aleatorios de la longitud indicada
+     * @param mixed $length 
+     * @return string
+     */
+    protected function _generateRandomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
 }
