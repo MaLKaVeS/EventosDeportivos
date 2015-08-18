@@ -34,7 +34,11 @@ class Evento extends CI_Model
     public function _esValido()
     {
         return ($this->Id !== NULL && strlen($this->Id) > 0) &&
-            ($this->Actividad !== NULL && strlen($this->Actividad) > 0) &&
+            ($this->Actividad_Id !== NULL && strlen($this->Actividad_Id) > 0) &&
+            ($this->FechaInicio !== NULL && $this->FechaInicio > 0) &&
+            ($this->FechaFin !== NULL && $this->HoraFin > 0) &&
+            ($this->HoraInicio !== NULL && $this->HoraInicio > 0) &&
+            ($this->HoraFin !== NULL && $this->HoraFin > 0) &&
             ($this->Nombre !== NULL && strlen($this->Nombre) > 0);
     }
 

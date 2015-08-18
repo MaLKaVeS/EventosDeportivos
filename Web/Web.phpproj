@@ -17,11 +17,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="application\" />
+    <Folder Include="application\app\filters\" />
+    <Folder Include="application\app\layout\" />
+    <Folder Include="application\app\views\" />
+    <Folder Include="application\app\services\" />
+    <Folder Include="application\app\directives\" />
+    <Folder Include="application\app\modules\" />
+    <Folder Include="application\app\controllers\" />
     <Folder Include="application\cache\" />
     <Folder Include="application\config\" />
     <Folder Include="application\controllers\" />
     <Folder Include="application\controllers\api\" />
     <Folder Include="application\core\" />
+    <Folder Include="application\dist\" />
+    <Folder Include="application\dist\css\" />
+    <Folder Include="application\dist\js\" />
     <Folder Include="application\helpers\" />
     <Folder Include="application\hooks\" />
     <Folder Include="application\language\" />
@@ -29,6 +39,8 @@
     <Folder Include="application\libraries\" />
     <Folder Include="application\logs\" />
     <Folder Include="application\models\" />
+    <Folder Include="application\app\" />
+    <Folder Include="application\js\" />
     <Folder Include="application\tests\" />
     <Folder Include="application\tests\build\" />
     <Folder Include="application\tests\build\coverage\" />
@@ -141,15 +153,25 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="application\.htaccess" />
+    <Content Include="application\app\app.js" />
+    <Content Include="application\app\controllers\login.js" />
+    <Content Include="application\app\controllers\panel.js" />
+    <Content Include="application\app\views\login.html" />
+    <Content Include="application\app\_all.js" />
     <Content Include="application\cache\.htaccess" />
     <Content Include="application\cache\index.html" />
     <Content Include="application\config\index.html" />
     <Content Include="application\controllers\api\index.html" />
     <Content Include="application\controllers\index.html" />
     <Content Include="application\core\index.html" />
+    <Content Include="application\dist\css\sb-admin-2.css" />
+    <Content Include="application\dist\css\timeline.css" />
+    <Content Include="application\dist\js\sb-admin-2.js" />
     <Content Include="application\helpers\index.html" />
     <Content Include="application\hooks\index.html" />
     <Content Include="application\index.html" />
+    <Content Include="application\js\flot-data.js" />
+    <Content Include="application\js\morris-data.js" />
     <Content Include="application\language\english\index.html" />
     <Content Include="application\language\index.html" />
     <Content Include="application\libraries\index.html" />
@@ -237,6 +259,7 @@
     <Content Include="application\views\errors\html\index.html" />
     <Content Include="application\views\errors\index.html" />
     <Content Include="application\views\index.html" />
+    <Content Include="bower.json" />
     <Content Include="composer.json" />
     <Content Include="composer.lock" />
     <Content Include="composer.phar" />
@@ -271,8 +294,12 @@
     <Content Include="documentation\source-class-REST_Controller.html" />
     <Content Include="documentation\source-class-Rest_server.html" />
     <Content Include="documentation\source-class-Welcome.html" />
+    <Content Include="gulpfile.js" />
+    <Content Include="humans.txt" />
     <Content Include="license.txt" />
+    <Content Include="package.json" />
     <Content Include="readme.rst" />
+    <Content Include="robots.txt" />
     <Content Include="system\.htaccess" />
     <Content Include="system\core\compat\index.html" />
     <Content Include="system\core\index.html" />
@@ -506,6 +533,8 @@
     <Compile Include="application\config\routes.php" />
     <Compile Include="application\config\smileys.php" />
     <Compile Include="application\config\user_agents.php" />
+    <Compile Include="application\controllers\Web.php" />
+    <Compile Include="application\controllers\api\Eventos.php" />
     <Compile Include="application\controllers\api\Roles.php" />
     <Compile Include="application\controllers\api\Actividades.php" />
     <Compile Include="application\controllers\api\Example.php" />
@@ -753,6 +782,7 @@
     <Compile Include="application\tests\_ci_phpunit_test\replacing\core\Common.php" />
     <Compile Include="application\tests\_ci_phpunit_test\replacing\core\Loader.php" />
     <Compile Include="application\tests\_ci_phpunit_test\replacing\helpers\url_helper.php" />
+    <Compile Include="application\views\admin_login.php" />
     <Compile Include="application\views\errors\cli\error_404.php" />
     <Compile Include="application\views\errors\cli\error_db.php" />
     <Compile Include="application\views\errors\cli\error_exception.php" />
@@ -764,6 +794,7 @@
     <Compile Include="application\views\errors\html\error_general.php" />
     <Compile Include="application\views\errors\html\error_php.php" />
     <Compile Include="application\views\rest_server.php" />
+    <Compile Include="application\views\admin.php" />
     <Compile Include="application\views\welcome_message.php" />
     <Compile Include="index.php" />
     <Compile Include="system\core\Benchmark.php" />

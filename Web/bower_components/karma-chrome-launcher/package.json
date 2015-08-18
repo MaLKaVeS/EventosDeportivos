@@ -1,0 +1,41 @@
+{
+  "name": "karma-chrome-launcher",
+  "version": "0.1.7",
+  "description": "A Karma plugin. Launcher for Chrome and Chrome Canary.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/jasmine-node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/karma-runner/karma-chrome-launcher.git"
+  },
+  "keywords": [
+    "karma-plugin",
+    "karma-launcher",
+    "chrome"
+  ],
+  "author": "Vojta Jina <vojta.jina@gmail.com>",
+  "dependencies": {},
+  "peerDependencies": {
+    "karma": ">=0.9.3"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-npm": "~0.0.2",
+    "grunt-bump": "~0.0.6",
+    "grunt-auto-release": "~0.0.2",
+    "jasmine-node": "~1.14.5"
+  },
+  "contributors": [
+    "Friedel Ziegelmayer <friedel.ziegelmayer@gmail.com>",
+    "Aymeric Beaumet <aymeric@beaumet.me>",
+    "Jeff Cross <middlefloor@gmail.com>",
+    "Joe Doyle <valdain@gmail.com>",
+    "Julien Sanchez <julien.sanchez@lim.eu>",
+    "Marko Vuksanovic <markovuksanovic@gmail.com>",
+    "Michał Gołębiowski <m.goleb@gmail.com>",
+    "Parashuram N <code@r.nparashuram.com>"
+  ]
+}
