@@ -138,9 +138,9 @@ class Actividades extends REST_Controller {
     /**
      * Borra un rol
      */
-    public function actividades_delete()
+    public function actividades_delete($id)
     {
-        $this->Actividad->Id  = $this->delete('Id');
+        $this->Actividad->Id  = $id;
 
         // Identificador válido
         if (strlen($this->Actividad->Id) <= 0)
