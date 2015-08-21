@@ -1,4 +1,6 @@
 <?php
+include_once  'PasswordHash.php';
+include_once  'Credencial.php';
 
 /**
  * Actividad short summary.

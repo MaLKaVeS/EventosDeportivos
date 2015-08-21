@@ -94,6 +94,7 @@ namespace ED.Datos
         public string Credencial { get; set; }
         public int Fecha { get; set; }
         public int Hora { get; set; }
+        public ResultadoAcceso Resultado { get; set; }
     }
 
     /// <summary>

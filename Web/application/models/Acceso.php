@@ -11,6 +11,18 @@
 class Acceso extends CI_Model
 {
     public $Id;
-    public $Nombre;
-    public $Descripcion;
+    public $Credencial;
+    public $Hora;
+    public $Fecha;
+    public $Resultado;
+
+    const TABLA  = "accesoes";
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->database();
+    }
+
+
 }
