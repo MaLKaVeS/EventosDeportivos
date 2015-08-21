@@ -136,7 +136,7 @@ class Actividades extends REST_Controller {
     }
 
     /**
-     * Borra un rol
+     * Borra una actividad
      */
     public function actividades_delete($id)
     {

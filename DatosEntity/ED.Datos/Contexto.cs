@@ -13,6 +13,7 @@ namespace ED.Datos
         {
         }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<PerfilParticipante> Participantes { get; set; }
         public DbSet<Credencial> Credenciales { get; set; }
         public DbSet<Acceso> Accesos { get; set; }
         public DbSet<Rol> Roles { get; set; }

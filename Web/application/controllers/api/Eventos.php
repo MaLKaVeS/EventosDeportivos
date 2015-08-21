@@ -84,12 +84,12 @@ class Eventos extends REST_Controller {
         $this->Evento->Actividad_Id = $this->post('Actividad_Id');
         $this->Evento->Nombre = $this->post('Nombre');
         $this->Evento->Descripcion = $this->post('Descripcion');
-        $this->Evento->FechaInicio = $this->post('FechaInicio');
-        $this->Evento->FechaFin = $this->post('FechaFin');
-        $this->Evento->HoraInicio = $this->post('HoraInicio');
-        $this->Evento->HoraFin = $this->post('HoraFin');
-        $this->Evento->Estado = $this->post('Estado');
-        $this->Evento->EstadoRegistro = $this->post('EstadoRegistro');
+        $this->Evento->FechaInicio = (int) $this->post('FechaInicio');
+        $this->Evento->FechaFin = (int) $this->post('FechaFin');
+        $this->Evento->HoraInicio = (int) $this->post('HoraInicio');
+        $this->Evento->HoraFin = (int) $this->post('HoraFin');
+        $this->Evento->Estado = 0;
+        $this->Evento->EstadoRegistro = (int) $this->post('EstadoRegistro');
 
         $status  = REST_Controller::HTTP_CREATED; // CREATED (201) HTTP response code
         if ($this->Evento->insert())
@@ -153,15 +153,15 @@ class Eventos extends REST_Controller {
     /**
      * Borra un rol
      */
-    public function eventos_delete()
+    public function eventos_delete($id, $actividad_id)
     {
-        $this->Evento->Id  = $this->delete('Id');
-        $this->Evento->Actividad_Id  = $this->delete('Actividad_Id');
+        $this->Evento->Id  = $id;
+        $this->Evento->Actividad_Id  = $actividad_id;
 
         // Identificador    
         if (strlen($this->Evento->Id) <= 0 || strlen($this->Evento->Actividad_Id) <= 0)
         {
-            $msg = sprintf('Error al borrar el Evento %s', $this->Evento->Nombre);
+            $msg = sprintf('Error al borrar el Evento %s', $id);
             $message = [
                     'status' => TRUE,
                     'message' => $msg
@@ -170,7 +170,6 @@ class Eventos extends REST_Controller {
         }
         else
         {
-
             $this->Evento->delete();
             $msg = sprintf('Evento %s eliminado', $this->Evento->Nombre);
             $message = [

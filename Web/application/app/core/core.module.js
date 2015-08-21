@@ -14,6 +14,6 @@
          * 3rd Party modules
          */
         // 'ngplus'
-        'LocalStorageModule'
+        'LocalStorageModule', 'ui.bootstrap'
     ]);
 })();

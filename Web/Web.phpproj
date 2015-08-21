@@ -611,6 +611,7 @@
     <Compile Include="application\config\routes.php" />
     <Compile Include="application\config\smileys.php" />
     <Compile Include="application\config\user_agents.php" />
+    <Compile Include="application\controllers\api\Usuarios.php" />
     <Compile Include="application\controllers\Web.php" />
     <Compile Include="application\controllers\api\Eventos.php" />
     <Compile Include="application\controllers\api\Roles.php" />

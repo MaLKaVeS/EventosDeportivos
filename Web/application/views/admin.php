@@ -71,6 +71,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <!-- Custom CSS -->
     <link href="/application/theme/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Angular UI Bootstrap -->
+    <link href="../../bower_components/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
     <!-- Alvaro CSS -->
     <link href="/application/theme/site.css" rel="stylesheet">
 
@@ -95,7 +97,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
     <!-- jQuery -->
-    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../bower_components/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -106,6 +108,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="../../bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="../../bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
     <script src="../../bower_components/toastr/toastr.js"></script>
+    <script src="../../bower_components/angular-i18n/angular-locale_es-es.js"></script>
+    <script src="../../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
@@ -134,6 +138,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="/application/app/core/config.js"></script>
     <script src="/application/app/core/config.routes.js"></script>
     <script src="/application/app/core/dataservice.js"></script>
+    <script src="/application/app/filters/filter.fecha.js"></script>
 
     <!-- layout -->
     <script src="/application/app/controllers/layout.js"></script>

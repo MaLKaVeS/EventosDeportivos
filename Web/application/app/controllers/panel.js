@@ -34,7 +34,7 @@
 			vm.getNumeroActividades();
 			vm.getNumeroUsuarios();
 			vm.getNumeroParticipantes();
-			vm.getNumeroUsuarios();
+			vm.getNumeroEventos();
 		}
 
 		function getNumeroActividades() {
@@ -43,7 +43,6 @@
 				.then(countActividadesComplete)
 				.catch(function (message) {
                     // exception.catcher('XHR Failed para Panel.getNumeroActividades')(message);
-                    $location.url('/');
                 });
 
 			function countActividadesComplete(data) {
@@ -55,11 +54,10 @@
 
 		function getNumeroUsuarios() {
 			vm.peticiones++;
-			dataservice.getActividadesCount()
+			dataservice.getUsuariosCount()
 				.then(countUsuariosComplete)
 				.catch(function (message) {
                     // exception.catcher('XHR Failed para Panel.getNumeroUsuarios')(message);
-                    $location.url('/');
                 });
 
 			function countUsuariosComplete(data) {
@@ -75,7 +73,6 @@
 				.then(countParticipantesComplete)
 				.catch(function (message) {
                     // exception.catcher('XHR Failed para Panel.activate')(message);
-                    $location.url('/');
                 });
 
 			function countParticipantesComplete(data) {
@@ -91,7 +88,6 @@
 				.then(countEventosComplete)
 				.catch(function (message) {
                     // exception.catcher('XHR Failed para Panel.activate')(message);
-                    $location.url('/');
                 });
 
 			function countEventosComplete(data) {

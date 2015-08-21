@@ -9,26 +9,28 @@
 		/* Propiedades */
 		vm.title = 'Eventos Deportivos | Actividades';
 		vm.usuario = '';
-		vm.clave = '';
 		vm.actividades = [];
 		vm.numactividades = 0;
 		vm.actividad = {};
 		vm.idActividad = '';
-
-		vm.tituloModal = 'Añadir actividad';
-		vm.clickGrabar = clickGrabar;
-		vm.clickAdd = clickAdd;
-		vm.clickEditar = clickEditar;
-		vm.clickBorrar = clickBorrar;
-		vm.clickConfirmaBorrar = clickConfirmaBorrar;
-		vm.validar = validar;
 		vm.mostrarCargando = true;
-
 		vm.addNombre = '';
 		vm.addDescripcion = '';
 
 		vm.valNombre = false;
 		vm.valDescripcion = false;
+
+		vm.tituloModal = 'Añadir actividad';
+
+		/* Funciones */
+		vm.validar = validar;
+
+		/* Eventos */
+		vm.clickGrabar = clickGrabar;
+		vm.clickAdd = clickAdd;
+		vm.clickEditar = clickEditar;
+		vm.clickBorrar = clickBorrar;
+		vm.clickConfirmaBorrar = clickConfirmaBorrar;
 
 		activate();
 
@@ -39,7 +41,6 @@
 				.then(getActividadesComplete)
 				.catch(function (message) {
                     // exception.catcher('XHR Failed para Panel.activate')(message);
-                    $location.url('/');
                 });
 
 			function getActividadesComplete(data) {
@@ -133,6 +134,5 @@
 				activate();				
 			}
 		}
-
 	}
 })();

@@ -30,6 +30,9 @@
             getActividadesCount: getActividadesCount,
             getEventos: getEventos,
             getEventosCount: getEventosCount,
+            postEvento: postEvento,
+            putEvento: putEvento,
+            deleteEvento: deleteEvento,
             getRoles: getRoles,
             getUsuarios: getUsuarios,
             getUsuariosCount: getUsuariosCount,
@@ -38,6 +41,9 @@
             getUsuario : getUsuario,
             postUsuario : postUsuario,
             putUsuario : putUsuario,
+            deleteUsuarios : deleteUsuarios,
+            fechaToInt : fechaToInt,
+            fechaToString : fechaToString,
             LogOut : LogOut,
             ready: ready
         };
@@ -111,7 +117,9 @@
                 .catch(exception.catcher('XHR Failed para getActividadesCount'));
 
             function getActividadesComplete (data) {
-                count = data.length;
+                if (data !== undefined) { 
+                   count = data.length;
+                }
                 return $q.when(count);
             }
         }
@@ -121,7 +129,6 @@
                 .then(getEventosComplete)
                 .catch(function(message) {
                     exception.catcher('XHR Failed para getEventos')(message);
-                    $location.url('/');
                 });
 
             function getEventosComplete(data, status, headers, config) {
@@ -129,19 +136,59 @@
             }
         }
         
-        function getRoles() {
-            return $http.get(serviceBase + '/api/roles/roles')
-                .then(getRolesComplete)
+        function postEvento(evento) {            
+            return $http({
+                method: 'POST', 
+                url: serviceBase + '/api/eventos/eventos?XDEBUG_SESSION_START=CB3FFBE9',
+                data: 'Nombre=' + evento.Nombre + '&Descripcion=' + evento.Descripcion +
+                '&Actividad_Id=' + evento.Actividad_Id + '&FechaInicio=' + fechaToInt(evento.FechaInicio) +
+                '&HoraInicio=' + evento.HoraInicio + '&FechaFin=' + fechaToInt(evento.FechaFin) +
+                '&HoraFin=' + evento.HoraFin + '&EstadoRegistro=' + evento.EstadoRegistro               
+                })
+                .then(postEventoComplete)
                 .catch(function(message) {
-                    exception.catcher('XHR Failed para getRoles')(message);
-                    $location.url('/');
+                    exception.catcher('XHR Failed para postEvento')(message);
+                    // $location.url('/');
                 });
 
-            function getRolesComplete(data, status, headers, config) {
-                return data.data;
+            function postEventoComplete(data, status, headers, config) {
+                return data;
             }
         }
+        
+        function putEvento(evento) {
+            return $http({
+                method: 'PUT', 
+                url: serviceBase + '/api/eventos/eventos',
+                data: 'Id=' + evento.Id + '&Nombre=' + evento.Nombre + '&Descripcion=' + evento.Descripcion +
+                '&Actividad_Id=' + evento.Actividad_Id + '&FechaInicio=' + fechaToInt(evento.FechaInicio) +
+                '&HoraInicio=' + evento.HoraInicio + '&FechaFin=' + fechaToInt(evento.FechaFin) +
+                '&HoraFin=' + evento.HoraFin + '&EstadoRegistro=' + evento.EstadoRegistro
+                 })
+                .then(putEventoComplete)
+                .catch(function(message) {
+                    exception.catcher('XHR Failed para putEvento')(message);
+                    // $location.url('/');
+                });
 
+            function putEventoComplete(data, status, headers, config) {
+                return data;
+            }
+        }
+        
+        function deleteEvento(evento, actividad) {
+            return $http.delete(serviceBase + '/api/eventos/eventos/' + evento + '/'  + actividad)
+                .then(deleteEventoComplete)
+                .catch(function(message) {
+                    exception.catcher('XHR Failed para deleteEvento')(message);
+                    // $location.url('/');
+                });
+
+            function deleteEventoComplete(data, status, headers, config) {
+                return data;
+            }
+        }
+        
         function getEventosCount() {
             var count = 0;
             return getEventos()
@@ -149,32 +196,35 @@
                 .catch(exception.catcher('XHR Failed para getEventosCount'));
 
             function getEventosCountComplete (data) {
-                count = data.length;
+                if (data !== undefined) {
+                    count = data.length;
+                }
                 return $q.when(count);
             }
         }
         
         function getUsuarios() {
-            return $http.get(serviceBase + '/api/usuarios/usuarios')
-                .then(getAvengersComplete)
+            return $http.get(serviceBase + '/api/usuarios/usuarios?XDEBUG_SESSION_START=CB3FFBE9')
+                .then(getUsuariosComplete)
                 .catch(function(message) {
                     exception.catcher('XHR Failed para getUsuarios')(message);
-                    $location.url('/');
                 });
 
-            function getAvengersComplete(data, status, headers, config) {
+            function getUsuariosComplete(data, status, headers, config) {
                 return data.data;
             }
         }
         
         function getUsuariosCount() {
             var count = 0;
-            return getActividades()
-                .then(getActividadesComplete)
-                .catch(exception.catcher('XHR Failed para getActividadesCount'));
+            return getUsuarios()
+                .then(getUsuariosComplete)
+                .catch(exception.catcher('XHR Failed para getUsuariosCount'));
 
-            function getActividadesComplete (data) {
-                count = data.length;
+            function getUsuariosComplete (data) {
+                if (data !== undefined) { 
+                    count = data.length;
+                }
                 return $q.when(count);
             }
         }
@@ -184,7 +234,6 @@
                 .then(getUsuarioComplete)
                 .catch(function(message) {
                     exception.catcher('XHR Failed para getUsuario')(message);
-                    $location.url('/');
                 });
 
             function getUsuarioComplete(data, status, headers, config) {
@@ -197,7 +246,6 @@
                 .then(postUsuarioComplete)
                 .catch(function(message) {
                     exception.catcher('XHR Failed para postUsuario')(message);
-                    $location.url('/');
                 });
 
             function postUsuarioComplete(data, status, headers, config) {
@@ -210,11 +258,35 @@
                 .then(putUsuarioComplete)
                 .catch(function(message) {
                     exception.catcher('XHR Failed para putUsuario')(message);
-                    $location.url('/');
                 });
 
             function putUsuarioComplete(data, status, headers, config) {
                 return data;
+            }
+        }
+        
+        function deleteUsuarios(usuario) {
+            return $http.delete(serviceBase + '/api/usuarios/usuarios/' + usuario)
+                .then(deleteUsuariosComplete)
+                .catch(function(message) {
+                    exception.catcher('XHR Failed para deleteUsuarios')(message);
+                    // $location.url('/');
+                });
+
+            function deleteUsuariosComplete(data, status, headers, config) {
+                return data;
+            }
+        }
+        
+        function getRoles() {
+            return $http.get(serviceBase + '/api/roles/roles')
+                .then(getRolesComplete)
+                .catch(function(message) {
+                    exception.catcher('XHR Failed para getRoles')(message);
+                });
+
+            function getRolesComplete(data, status, headers, config) {
+                return data.data;
             }
         }
         
@@ -223,7 +295,6 @@
                 .then(getParticipantesComplete)
                 .catch(function(message) {
                     exception.catcher('XHR Failed para getParticipantes')(message);
-                    $location.url('/');
                 });
 
             function getParticipantesComplete(data, status, headers, config) {
@@ -238,9 +309,45 @@
                 .catch(exception.catcher('XHR Failed para getActividadesCount'));
 
             function getActividadesComplete (data) {
-                count = data.length;
+                if (data !== undefined) { 
+                    count = data.length;
+                }
                 return $q.when(count);
             }
+        }
+        
+        function fechaToString(fecha) {
+            if (isNumber(fecha) && fecha > 0) {
+                fecha = fecha.toString().substring(6, 8) + "/" + fecha.toString().substring(4, 6) + "/" + fecha.toString().substring(0, 4);
+                return fecha;
+            } else { return fecha; }
+        }
+
+        function fechaToInt(fecha) {
+            if (isNaN(fecha)) {
+                if (fecha != "") {
+                    fecha = fecha.toString().trim().split('/');
+                    fecha = padLeft(fecha[2], 4, '0') + padLeft(fecha[1],2,'0') + padLeft(fecha[0], 2, '0');
+
+                    return Number(fecha);
+
+                } else { return 0; }
+            } else {
+                return fecha;
+            }
+        }        
+
+        function isNumber(n) {
+            return !isNaN(parseFloat(n)) && isFinite(n);
+        }
+        
+        function padLeft(cadena, longitud, caracter) {
+            if (cadena !== undefined) {
+                while (cadena.length < longitud) {
+                    cadena = caracter + cadena;
+                }
+            }
+            return cadena;
         }
         
         function getLogin(loginData) {
