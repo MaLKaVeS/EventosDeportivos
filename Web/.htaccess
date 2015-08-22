@@ -1,0 +1,5 @@
+<FilesMatch "(\.(css|js)|~)$">
+    ## Apache 2.2
+    Order allow,deny
+    Allow all
+</FilesMatch>

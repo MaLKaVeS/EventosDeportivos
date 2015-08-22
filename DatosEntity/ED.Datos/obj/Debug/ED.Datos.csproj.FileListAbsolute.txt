@@ -14,3 +14,5 @@ C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.dll
 C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.pdb
 C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.Migrations.SaltPerfil.resources
 C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.Migrations.Perfil.resources
+C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.csprojResolveAssemblyReference.cache
+C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.Migrations.ResultadoAcceso.resources

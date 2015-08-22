@@ -8,9 +8,12 @@
 	stopOnIncomplete="false"
 	stopOnSkipped="false">
 	<testsuites>
-		<testsuite name="CodeIgniter Application Test Suite">
-			<directory suffix="test.php">./</directory>
-		</testsuite>
+    <tessuite name="models">
+      <file>./models/Accesos_test.php</file>
+      <file>./models/Credenciales_test.php</file>
+      <file>./models/Roles_test.php</file>
+      <file>./models/Usuarios_test.php</file>
+    </tessuite>
 	</testsuites>
 	<filter>
 		<whitelist>

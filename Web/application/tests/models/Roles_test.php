@@ -24,7 +24,8 @@ class Roles_test extends TestCase
 		$rol = new Rol();
 
         $_actual = $rol->get();
+        $msg = 'Número de resultados no esperado. Obtenidos: '. count($_actual);
         
-        $this->assertCount(0, $_actual, 'Número de resultados no esperado');
+        $this->assertCount(6, $_actual, $msg);
 	}
 }

@@ -76,6 +76,10 @@
     <Compile Include="Migrations\201508212133245_Perfil.Designer.cs">
       <DependentUpon>201508212133245_Perfil.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508220907200_ResultadoAcceso.cs" />
+    <Compile Include="Migrations\201508220907200_ResultadoAcceso.Designer.cs">
+      <DependentUpon>201508220907200_ResultadoAcceso.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MySqlConfiguration.cs" />
     <Compile Include="MySqlHistoryContext.cs" />
@@ -99,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508212133245_Perfil.resx">
       <DependentUpon>201508212133245_Perfil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508220907200_ResultadoAcceso.resx">
+      <DependentUpon>201508220907200_ResultadoAcceso.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

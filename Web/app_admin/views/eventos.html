@@ -1,0 +1,172 @@
+﻿<div id="wrapper" data-ng-controller="Eventos as vm">
+	<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div data-ng-include="'/app_admin/views/navbar.html'"></div>
+        <div data-ng-include="'/app_admin/views/sidebar.html'"></div>
+    </nav>
+	
+	<div id="page-wrapper">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Eventos</h1>
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+		<div class="row margin-top-20">
+			<div class="col-lg-12 margin-bottom-10">
+				<button type="button" class="btn btn-success rigth" ng-click="vm.clickAdd()"><i class="fa fa-plus"> Añadir</i></button>
+			</div>
+			<div class="col-lg-12">
+				<div class="dataTable_wrapper">
+					<div ng-show="vm.mostrarCargando">
+						<i class="fa fa-spin fa-spinner"></i> Cargando
+					</div>
+					<div class="ng-hide" ng-hide="vm.mostrarCargando || vm.eventos.length > 0">
+						<i class="fa fa-users danger"></i> No se encontraron eventos
+					</div>
+							
+					<table ng-show="!vm.mostrarCargando && vm.eventos.length > 0" class="table table-striped table-bordered table-hover" id="dataTables-example">
+						<thead>
+							<tr>
+								<th>Nombre</th>
+								<th>Actividad</th>
+								<th>Descripcion</th>
+								<th>Fechas</th>
+								<th>Inscripcion</th>
+								<th>Estado</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody ng-repeat="evento in vm.eventos | orderBy: '-FechaInicio'">
+							<tr class="gradeA" ng-class="{ odd: $index % 2 != 0, even: $index % 2 == 0}">
+								<td ng-bind="evento.Nombre"></td>
+								<td ng-repeat="actividad in vm.actividades | filter: evento.Actividad_Id" ng-bind="actividad.Nombre"></td>
+								<td ng-bind="evento.Descripcion"></td>
+								<td>
+									<span>Fecha Inicio </span>
+									<span ng-bind="vm.FechaInicio | fecha"></span>
+									<br />
+									<span>Fecha Fin </span>
+									<span ng-bind="vm.FechaFin | fecha"></span>
+								</td>
+								<td ng-repeat="tipoIns in vm.tiposInscripciones | filter:evento.EstadoRegistro" ng-bind="tipoIns.valor"></td>
+								<td ng-repeat="estado in vm.estados | filter:evento.Estado" ng-bind="estado.valor"></td>
+								<td>
+									<button type="button" class="btn btn-default" ng-click="vm.clickEditar(evento)"><i class="fa fa-edit"></i> Editar</button>
+									<button type="button" class="btn btn-danger" ng-click="vm.clickBorrar(evento)"><i class="fa fa-remove"></i> Borrar</button>
+								</td>
+							</tr>							
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!--</div>-->
+			<!-- Modal -->
+			<div class="modal fade" id="modalEvento" tabindex="-1" role="dialog" aria-labelledby="Añadir evento" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" ng-bind="vm.tituloModal">Añadir Evento</h4>
+						</div>
+						<div class="modal-body">
+							<form role="form">
+								<div class="row">
+									<div class="col-lg-12 form-group" ng-class="{'hasError': vm.valNombre}">
+										<label>Nombre</label>
+										<input ng-model="vm.addNombre" name="nombre" type="text" class="form-control" placeholder="Nombre" />
+									</div>
+									<div class="col-lg-12 form-group"  ng-class="{'hasError': vm.valDescripcion }">
+										<label>Descripcion</label>
+										<textarea  ng-model="vm.addDescripcion" name="descripcion" type="text" class="form-control" rows="3" placeholder="Descripcion" />
+									</div>
+									<div class="col-lg-12 form-group"  ng-class="{'hasError': vm.valActividad }">
+										<label>Actividad</label>
+										<select class="form-control"  ng-model="vm.addActividad_Id" ng-options="actividad.Id as actividad.Nombre for actividad in vm.actividades | orderBy : 'Nombre'">
+											<option value="">- Elegir actividad</option>
+										</select>
+										<!--<input  ng-model="vm.addEmail" name="descripcion" type="text" class="form-control" rows="3" placeholder="Email" />-->
+									</div>
+									<div class="col-lg-6 form-group"  ng-class="{'hasError': vm.valFechaInicio}">
+										<label>Fecha Inicio</label>
+										<p class="input-group">
+											<input  ng-model="vm.addFechaInicio" name="fechaInicio" type="text" class="form-control" placeholder="Fecha en formato dd/mm/yyyy"
+												datepicker-popup="{{ 	vm.formatoFecha }}"  datepicker-options="vm.dateOptions"
+												ng-required="true" close-text="cerrar" current-text="hoy" clear-text="limpiar"
+												is-open="vm.estadoFechaInicio.abierto"
+												 />
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-default" ng-click="vm.openDatePicker($event, 1)"><i class="glyphicon glyphicon-calendar"></i></button>
+											</span>
+										</p>
+									</div>
+									<div class="col-lg-6 form-group"  ng-class="{'hasError': vm.valFechaFin}">
+										<label>Fecha Fin</label>
+										<p class="input-group">
+											<input  ng-model="vm.addFechaFin" name="fechaFin" type="text" class="form-control" placeholder="Fecha en formato dd/mm/yyyy"
+												datepicker-popup="{{ 	vm.formatoFecha }}"  datepicker-options="vm.dateOptions"
+												ng-required="true" close-text="cerrar" current-text="hoy" clear-text="limpiar"
+												is-open="vm.estadoFechaFin.abierto"
+												 />
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-default" ng-click="vm.openDatePicker($event, 2)"><i class="glyphicon glyphicon-calendar"></i></button>
+											</span>
+										</p>
+									</div>
+									<div class="col-lg-6 form-group"  ng-class="{'hasError': vm.valHoraInicio}">
+										<label>Hora Inicio</label>
+										<input  ng-model="vm.addHoraInicio" name="horaInicio" type="text" class="form-control" placeholder="Hora en formato hh:mm" />
+									</div>
+									<div class="col-lg-6 form-group"  ng-class="{'hasError': vm.valHoraFin}">
+										<label>Hora Fin</label>
+										<input  ng-model="vm.addHoraFin" name="horaFin" type="text" class="form-control" placeholder="Hora en formato hh:mm" />
+									</div>
+									<div class="col-lg-12 form-group"  ng-class="{'hasError': vm.valHoraFin}">
+										<label>Tipo Inscripción</label>
+										<select class="form-control" name="tipoRegistro" ng-model="vm.addRegistro">
+											<option selected value="0">Abierta</option>
+											<option value="1">Administrada</option>
+											<option value="2">Cerrada</option>
+										</select>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+							<button type="button" class="btn btn-primary" ng-click="vm.clickGrabar()"><i class="fa fa-save"></i> Grabar</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+			
+			<!-- Modal -->
+			<div class="modal fade" id="modalConfirmar" tabindex="-1" role="dialog" aria-labelledby="Confirmar borrar" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Confirmar borrado</h4>
+						</div>
+						<div class="modal-body">
+							<div class="alert alert-danger">
+                                Va a borrar el evento <a href="#" class="alert-link">{{ vm.evento.Nombre  }}</a>.
+								¿Está seguro?
+                            </div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+							<button type="button" class="btn btn-danger" ng-click="vm.clickConfirmaBorrar()"><i class="fa fa-save"></i> Borrar</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+		</div>
+	</div>
+</div>

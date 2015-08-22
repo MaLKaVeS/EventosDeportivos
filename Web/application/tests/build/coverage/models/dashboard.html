@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for C:\Proyectos\EventosDeportivos\Web\application/models</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/nv.d3.min.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="../js/html5shiv.min.js"></script>
+  <script src="../js/respond.min.js"></script>
+  <![endif]-->
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="../index.html">C:\Proyectos\EventosDeportivos\Web\application</a></li>
+        <li><a href="index.html">models</a></li>
+        <li class="active">(Dashboard)</li>
+
+      </ol>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Rol.php.html#11">Rol</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Evento.php.html#11">Evento</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Credencial.php.html#11">Credencial</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Acceso.php.html#11">Acceso</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Actividad.php.html#11">Actividad</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Usuario.php.html#13">Usuario</a></td><td class="text-right">64%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Evento.php.html#11">Evento</a></td><td class="text-right">870</td></tr>
+       <tr><td><a href="Rol.php.html#11">Rol</a></td><td class="text-right">306</td></tr>
+       <tr><td><a href="Credencial.php.html#11">Credencial</a></td><td class="text-right">306</td></tr>
+       <tr><td><a href="Actividad.php.html#11">Actividad</a></td><td class="text-right">306</td></tr>
+       <tr><td><a href="Acceso.php.html#11">Acceso</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Usuario.php.html#13">Usuario</a></td><td class="text-right">64</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Evento.php.html#103"><abbr title="Evento::delete">delete</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Rol.php.html#19"><abbr title="Rol::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Rol.php.html#25"><abbr title="Rol::_esValido">_esValido</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Evento.php.html#90"><abbr title="Evento::update">update</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Evento.php.html#73"><abbr title="Evento::insert">insert</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Evento.php.html#45"><abbr title="Evento::getNewID">getNewID</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Evento.php.html#56"><abbr title="Evento::get">get</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Rol.php.html#31"><abbr title="Rol::getNewID">getNewID</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Rol.php.html#42"><abbr title="Rol::get">get</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Usuario.php.html#94"><abbr title="Usuario::getRandomPassword">getRandomPassword</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Usuario.php.html#99"><abbr title="Usuario::has_password">has_password</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Usuario.php.html#103"><abbr title="Usuario::update">update</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Usuario.php.html#89"><abbr title="Usuario::insert_credenciales">insert_credenciales</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Rol.php.html#82"><abbr title="Rol::delete">delete</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Rol.php.html#55"><abbr title="Rol::insert">insert</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Rol.php.html#69"><abbr title="Rol::update">update</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Acceso.php.html#21"><abbr title="Acceso::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Evento.php.html#34"><abbr title="Evento::_esValido">_esValido</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Actividad.php.html#25"><abbr title="Actividad::_esValido">_esValido</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Actividad.php.html#31"><abbr title="Actividad::getNewID">getNewID</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Actividad.php.html#42"><abbr title="Actividad::get">get</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Actividad.php.html#19"><abbr title="Actividad::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Acceso.php.html#47"><abbr title="Acceso::insert">insert</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Acceso.php.html#27"><abbr title="Acceso::getNewID">getNewID</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Acceso.php.html#38"><abbr title="Acceso::get">get</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Evento.php.html#28"><abbr title="Evento::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Actividad.php.html#55"><abbr title="Actividad::insert">insert</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Actividad.php.html#69"><abbr title="Actividad::update">update</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Credencial.php.html#44"><abbr title="Credencial::get">get</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Credencial.php.html#55"><abbr title="Credencial::insert">insert</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Credencial.php.html#125"><abbr title="Credencial::update">update</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Credencial.php.html#33"><abbr title="Credencial::getNewID">getNewID</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Actividad.php.html#82"><abbr title="Actividad::delete">delete</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Credencial.php.html#27"><abbr title="Credencial::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Credencial.php.html#74"><abbr title="Credencial::update_estado">update_estado</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Usuario.php.html#48"><abbr title="Usuario::getNewID">getNewID</a></a></td><td class="text-right">57%</td></tr>
+       <tr><td><a href="Usuario.php.html#59"><abbr title="Usuario::get">get</a></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Usuario.php.html#118"><abbr title="Usuario::delete">delete</a></a></td><td class="text-right">83%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Evento.php.html#34"><abbr title="Evento::_esValido">_esValido</abbr></a></td><td class="text-right">210</td></tr>
+       <tr><td><a href="Credencial.php.html#74"><abbr title="Credencial::update_estado">update_estado</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Evento.php.html#56"><abbr title="Evento::get">get</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Rol.php.html#25"><abbr title="Rol::_esValido">_esValido</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Actividad.php.html#25"><abbr title="Actividad::_esValido">_esValido</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Credencial.php.html#44"><abbr title="Credencial::get">get</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Evento.php.html#103"><abbr title="Evento::delete">delete</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Rol.php.html#42"><abbr title="Rol::get">get</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Actividad.php.html#82"><abbr title="Actividad::delete">delete</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Rol.php.html#82"><abbr title="Rol::delete">delete</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Acceso.php.html#38"><abbr title="Acceso::get">get</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Actividad.php.html#42"><abbr title="Actividad::get">get</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Usuario.php.html#103"><abbr title="Usuario::update">update</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Rol.php.html#69"><abbr title="Rol::update">update</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Rol.php.html#55"><abbr title="Rol::insert">insert</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Rol.php.html#31"><abbr title="Rol::getNewID">getNewID</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Evento.php.html#90"><abbr title="Evento::update">update</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Evento.php.html#45"><abbr title="Evento::getNewID">getNewID</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Evento.php.html#73"><abbr title="Evento::insert">insert</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Actividad.php.html#31"><abbr title="Actividad::getNewID">getNewID</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Acceso.php.html#47"><abbr title="Acceso::insert">insert</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Actividad.php.html#69"><abbr title="Actividad::update">update</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Actividad.php.html#55"><abbr title="Actividad::insert">insert</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Acceso.php.html#27"><abbr title="Acceso::getNewID">getNewID</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Credencial.php.html#33"><abbr title="Credencial::getNewID">getNewID</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Credencial.php.html#55"><abbr title="Credencial::insert">insert</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Usuario.php.html#59"><abbr title="Usuario::get">get</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="Usuario.php.html#118"><abbr title="Usuario::delete">delete</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="Usuario.php.html#48"><abbr title="Usuario::getNewID">getNewID</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 2.2.2</a> using <a href="http://php.net/" target="_top">PHP 5.6.0</a> and <a href="http://phpunit.de/">PHPUnit 4.8.4</a> at Sat Aug 22 20:42:51 AST 2015.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../js/jquery.min.js" type="text/javascript"></script>
+  <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../js/holder.min.js" type="text/javascript"></script>
+  <script src="../js/d3.min.js" type="text/javascript"></script>
+  <script src="../js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([5,0,0,0,0,0,0,1,0,0,0,1], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([35,0,0,0,0,0,1,1,0,1,1,3], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,8,"<a href=\"Acceso.php.html#11\">Acceso<\/a>"],[0,17,"<a href=\"Actividad.php.html#11\">Actividad<\/a>"],[0,17,"<a href=\"Credencial.php.html#11\">Credencial<\/a>"],[0,29,"<a href=\"Evento.php.html#11\">Evento<\/a>"],[0,17,"<a href=\"Rol.php.html#11\">Rol<\/a>"],[100,0,"<a href=\"RolUsuarios.php.html#11\">RolUsuarios<\/a>"],[64,28,"<a href=\"Usuario.php.html#13\">Usuario<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,1,"<a href=\"Acceso.php.html#21\">Acceso::__construct<\/a>"],[0,2,"<a href=\"Acceso.php.html#27\">Acceso::getNewID<\/a>"],[0,3,"<a href=\"Acceso.php.html#38\">Acceso::get<\/a>"],[0,2,"<a href=\"Acceso.php.html#47\">Acceso::insert<\/a>"],[0,1,"<a href=\"Actividad.php.html#19\">Actividad::__construct<\/a>"],[0,4,"<a href=\"Actividad.php.html#25\">Actividad::_esValido<\/a>"],[0,2,"<a href=\"Actividad.php.html#31\">Actividad::getNewID<\/a>"],[0,3,"<a href=\"Actividad.php.html#42\">Actividad::get<\/a>"],[0,2,"<a href=\"Actividad.php.html#55\">Actividad::insert<\/a>"],[0,2,"<a href=\"Actividad.php.html#69\">Actividad::update<\/a>"],[0,3,"<a href=\"Actividad.php.html#82\">Actividad::delete<\/a>"],[0,1,"<a href=\"Credencial.php.html#27\">Credencial::__construct<\/a>"],[0,2,"<a href=\"Credencial.php.html#33\">Credencial::getNewID<\/a>"],[0,3,"<a href=\"Credencial.php.html#44\">Credencial::get<\/a>"],[0,2,"<a href=\"Credencial.php.html#55\">Credencial::insert<\/a>"],[0,8,"<a href=\"Credencial.php.html#74\">Credencial::update_estado<\/a>"],[0,1,"<a href=\"Credencial.php.html#125\">Credencial::update<\/a>"],[0,1,"<a href=\"Evento.php.html#28\">Evento::__construct<\/a>"],[0,14,"<a href=\"Evento.php.html#34\">Evento::_esValido<\/a>"],[0,2,"<a href=\"Evento.php.html#45\">Evento::getNewID<\/a>"],[0,5,"<a href=\"Evento.php.html#56\">Evento::get<\/a>"],[0,2,"<a href=\"Evento.php.html#73\">Evento::insert<\/a>"],[0,2,"<a href=\"Evento.php.html#90\">Evento::update<\/a>"],[0,3,"<a href=\"Evento.php.html#103\">Evento::delete<\/a>"],[0,1,"<a href=\"Rol.php.html#19\">Rol::__construct<\/a>"],[0,4,"<a href=\"Rol.php.html#25\">Rol::_esValido<\/a>"],[0,2,"<a href=\"Rol.php.html#31\">Rol::getNewID<\/a>"],[0,3,"<a href=\"Rol.php.html#42\">Rol::get<\/a>"],[0,2,"<a href=\"Rol.php.html#55\">Rol::insert<\/a>"],[0,2,"<a href=\"Rol.php.html#69\">Rol::update<\/a>"],[0,3,"<a href=\"Rol.php.html#82\">Rol::delete<\/a>"],[100,1,"<a href=\"Usuario.php.html#27\">Usuario::__construct<\/a>"],[100,10,"<a href=\"Usuario.php.html#33\">Usuario::_esValido<\/a>"],[100,1,"<a href=\"Usuario.php.html#42\">Usuario::esMailValido<\/a>"],[57.142857142857,2,"<a href=\"Usuario.php.html#48\">Usuario::getNewID<\/a>"],[66.666666666667,3,"<a href=\"Usuario.php.html#59\">Usuario::get<\/a>"],[90,3,"<a href=\"Usuario.php.html#72\">Usuario::insert<\/a>"],[0,1,"<a href=\"Usuario.php.html#89\">Usuario::insert_credenciales<\/a>"],[0,1,"<a href=\"Usuario.php.html#94\">Usuario::getRandomPassword<\/a>"],[0,1,"<a href=\"Usuario.php.html#99\">Usuario::has_password<\/a>"],[0,2,"<a href=\"Usuario.php.html#103\">Usuario::update<\/a>"],[83.333333333333,3,"<a href=\"Usuario.php.html#118\">Usuario::delete<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

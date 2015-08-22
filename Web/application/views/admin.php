@@ -65,16 +65,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- DataTables Responsive CSS -->
     <link href="../../bower_components/datatables-responsive/css/responsive.dataTables.scss" rel="stylesheet">
     <!-- Timeline CSS -->
-    <link href="/application/theme/css/timeline.css" rel="stylesheet">
+    <link href="/app_admin/theme/css/timeline.css" rel="stylesheet">
     <!-- Toastr CSS -->
     <link href="../../bower_components/toastr/toastr.css" rel="stylesheet" />
 
     <!-- Custom CSS -->
-    <link href="/application/theme/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/app_admin/theme/css/sb-admin-2.css" rel="stylesheet">
     <!-- Angular UI Bootstrap -->
     <link href="../../bower_components/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
     <!-- Alvaro CSS -->
-    <link href="/application/theme/site.css" rel="stylesheet">
+    <link href="/app_admin/theme/site.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
     <!--<link href="../../bower_components/morrisjs/morris.css" rel="stylesheet">-->
@@ -120,36 +120,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="application/js/morris-data.js"></script>-->
 
     <!-- Custom Theme JavaScript -->
-    <script src="/application/theme/js/sb-admin-2.js"></script>
+    <script src="/app_admin/theme/js/sb-admin-2.js"></script>
 
     <!-- Eventos Deportivos -->
-    <script src="/application/app/app.js"></script>
-    <script src="/application/app/blocks/exception/exception.module.js"></script>
-    <script src="/application/app/blocks/exception/exception-handler.provider.js"></script>
-    <script src="/application/app/blocks/exception/exception.js"></script>
-    <script src="/application/app/blocks/logger/logger.module.js"></script>
-    <script src="/application/app/blocks/logger/logger.js"></script>
-    <script src="/application/app/blocks/router/router.module.js"></script>
-    <script src="/application/app/blocks/router/routehelper.js"></script>
+    <script src="/app_admin/app.js"></script>
+    <script src="/app_admin/blocks/exception/exception.module.js"></script>
+    <script src="/app_admin/blocks/exception/exception-handler.provider.js"></script>
+    <script src="/app_admin/blocks/exception/exception.js"></script>
+    <script src="/app_admin/blocks/logger/logger.module.js"></script>
+    <script src="/app_admin/blocks/logger/logger.js"></script>
+    <script src="/app_admin/blocks/router/router.module.js"></script>
+    <script src="/app_admin/blocks/router/routehelper.js"></script>
 
     <!-- core module -->
-    <script src="/application/app/core/core.module.js"></script>
-    <script src="/application/app/core/constants.js"></script>
-    <script src="/application/app/core/config.js"></script>
-    <script src="/application/app/core/config.routes.js"></script>
-    <script src="/application/app/core/dataservice.js"></script>
-    <script src="/application/app/filters/filter.fecha.js"></script>
+    <script src="/app_admin/core/core.module.js"></script>
+    <script src="/app_admin/core/constants.js"></script>
+    <script src="/app_admin/core/config.js"></script>
+    <script src="/app_admin/core/config.routes.js"></script>
+    <script src="/app_admin/core/dataservice.js"></script>
+    <script src="/app_admin/filters/filter.fecha.js"></script>
 
     <!-- layout -->
-    <script src="/application/app/controllers/layout.js"></script>
-    <script src="/application/app/controllers/login.js"></script>
-    <script src="/application/app/controllers/panel.js"></script>
-    <script src="/application/app/controllers/actividades.js"></script>
-    <script src="/application/app/controllers/usuarios.js"></script>
-    <script src="/application/app/controllers/encuentros.js"></script>
-    <script src="/application/app/controllers/eventos.js"></script>
-    <script src="/application/app/controllers/perfil.js"></script>
-    <script src="/application/app/controllers/eventos.js"></script>
+    <script src="/app_admin/controllers/layout.js"></script>
+    <script src="/app_admin/controllers/login.js"></script>
+    <script src="/app_admin/controllers/panel.js"></script>
+    <script src="/app_admin/controllers/actividades.js"></script>
+    <script src="/app_admin/controllers/usuarios.js"></script>
+    <script src="/app_admin/controllers/encuentros.js"></script>
+    <script src="/app_admin/controllers/eventos.js"></script>
+    <script src="/app_admin/controllers/perfil.js"></script>
+    <script src="/app_admin/controllers/eventos.js"></script>
     <!--<script src="/application/app/layout/shell.controller.js"></script>
     <script src="/application/app/layout/sidebar.controller.js"></script>-->
 

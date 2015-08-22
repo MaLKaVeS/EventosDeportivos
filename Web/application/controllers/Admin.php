@@ -21,11 +21,4 @@ class Admin extends CI_Controller {
 
 		$this->load->view('admin');
 	}
-
-    public function login()
-    {
-		$this->load->helper('url');
-		
-        $this->load->view('admin_login');
-    }
 }

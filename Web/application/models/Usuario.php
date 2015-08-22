@@ -16,6 +16,7 @@ class Usuario extends CI_Model
     public $Nombre;
     public $Apellidos;
     public $Email;
+    public $HoraAlta;
     public $FechaAlta;
     public $FechaNacimiento;
 
@@ -36,6 +37,12 @@ class Usuario extends CI_Model
             ($this->Apellidos !== NULL && strlen($this->Apellidos) > 0) &&
             ($this->Email !== NULL && strlen($this->Email) > 0) &&
             ($this->FechaNacimiento !== NULL && strlen($this->FechaNacimiento) > 0);
+    }
+
+    public function esMailValido()
+    {
+        $resultado = $this->db->where('Email', $this->Email)->get(self::TABLA)->num_rows();
+        return $resultado === 0;
     }
 
     private function getNewID()
@@ -65,10 +72,11 @@ class Usuario extends CI_Model
     public function insert()
     {
         $this->getNewID();
-        if ($this->_esValido())
+        if ($this->_esValido() && $this->esMailValido())
         {
             $fecha = getdate();            
             $this->FechaAlta = $fecha["year"] * 10000 + $fecha["mon"] * 100 + $fecha["mday"];
+            $this->HoraAlta = $fecha["hours"] * 10000 + $fecha["minutes"] * 100 + $fecha["seconds"];
             $result = $this->db->insert(self::TABLA, $this);
         }
         else

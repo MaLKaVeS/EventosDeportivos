@@ -190,10 +190,10 @@ $db['real'] = array(
 );
 $db['production'] = array(
     'dsn'	=> '',
-    'hostname' => 'eu-cdbr-azure-north-d.cloudapp.net',
-    'username' => 'ba70ed2dbf4ba1',
-    'password' => '3bdfd49c',
-    'database' => 'eventos',
+    'hostname' => 'localhost',
+    'username' => 'apardo',
+    'password' => 'aps702K',
+    'database' => 'apardo',
     'dbdriver' => 'mysqli',
     'dbprefix' => '',
     'pconnect' => FALSE,
