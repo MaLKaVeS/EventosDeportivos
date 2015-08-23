@@ -7,7 +7,7 @@
 	function Perfil($timeout, $location, dataservice, logger) {
 		var vm = this;
 		/* Propiedades */
-		vm.title = 'Eventos Deportivos | Perfil de Usuario';
+		vm.title = 'Perfil de Usuario | Eventos Deportivos';
 		vm.nombre = 0;
 		vm.apellido1 = 0;
 		vm.apellido2 = 0;
@@ -56,7 +56,6 @@
 				.then(countActividadesComplete)
 				.catch(function (message) {
                     // exception.catcher('XHR Failed para Panel.getNumeroActividades')(message);
-                    $location.url('/');
                 });
 
 			function countActividadesComplete(data) {
@@ -72,7 +71,6 @@
 				.then(countActividadesComplete)
 				.catch(function (message) {
                     // exception.catcher('XHR Failed para Panel.getNumeroActividades')(message);
-                    $location.url('/');
                 });
 
 			function countActividadesComplete(data) {

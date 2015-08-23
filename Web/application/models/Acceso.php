@@ -46,17 +46,17 @@ class Acceso extends CI_Model
 
     public function insert() {
         $this->getNewID();
-        if ($this->_esValido())
-        {
+        //if ($this->_esValido())
+        //{
             $fecha = getdate();            
             $this->Fecha = $fecha["year"] * 10000 + $fecha["mon"] * 100 + $fecha["mday"];
             $this->Hora = $fecha["hours"] * 10000 + $fecha["minutes"] * 100 + $fecha["seconds"];
             $result = $this->db->insert(self::TABLA, $this);
-        }
-        else
-        {
-            $result = false;
-        }
+        //}
+        //else
+        //{
+        //    $result = false;
+        //}
         return $result;
     }
 }

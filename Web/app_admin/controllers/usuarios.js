@@ -7,7 +7,7 @@
 	function Usuarios(dataservice, logger) {
 		var vm = this;
 		/* Propiedades */
-		vm.title = 'Eventos Deportivos | Acceso';
+		vm.title = 'Usuarios | Eventos Deportivos';
 		vm.tituloModal = 'Añadir usuario';		
 		vm.usuario = '';
 		vm.mostrarCargando = true;		
@@ -18,11 +18,16 @@
 		vm.addApellidos = '';
 		vm.addFechaNacimiento = '';
 		vm.addEmail = '';
-
 		vm.valNombre = false;
 		vm.valApellidos = false;
 		vm.valEmail = false;
 		vm.valFechaNacimiento = false;	
+		vm.dateOptions = {
+			formatYear: 'yy',
+			startingDay: 1
+		};
+		vm.formatoFecha = 'dd/MM/yyyy';
+		vm.estadoFechaNacimiento = { abierto: false };
 			
 		/* Funciones */
 		vm.validar = validar;
@@ -33,6 +38,7 @@
 		vm.clickEditar = clickEditar;
 		vm.clickBorrar = clickBorrar;
 		vm.clickConfirmaBorrar = clickConfirmaBorrar;
+		vm.openDatePicker = openDatePicker;
 
 		activate();
 
@@ -67,12 +73,13 @@
 		
 		function clickGrabar() {
 			if (vm.validar()) {
-				vm.mostrarCargando = true;				
+				vm.mostrarCargando = true;	
+				
+				vm.usuario.Nombre = vm.addNombre;
+				vm.usuario.Apellidos = vm.addApellidos;
+				vm.usuario.Email = vm.addEmail;
+				vm.usuario.FechaNacimiento = vm.addFechaNacimiento.toLocaleDateString();			
 				if (vm.idUsuario !== '') {
-					vm.usuario.Nombre = vm.addNombre;
-					vm.usuario.Apellidos = vm.addApellidos;
-					vm.usuario.Email = vm.addEmail;
-					vm.usuario.FechaNacimiento = vm.addFechaNacimiento;
 					dataservice.putUsuario(vm.usuario)
 					.then(grabarUsuarioComplete)
 					.catch(function() {
@@ -80,11 +87,6 @@
 					});
 				}
 				else {
-					vm.usuario.Nombre = vm.addNombre;
-					vm.usuario.Apellidos = vm.addDescripcion;
-					vm.usuario.Email = vm.addEmail;
-					vm.usuario.FechaNacimiento = vm.addFechaNacimiento;
-					
 					dataservice.postUsuario(vm.usuario)
 					.then(grabarUsuarioComplete)
 					.catch(function() {
@@ -179,5 +181,9 @@
 				activate();				
 			}
 		}
+		
+		function openDatePicker($event) {
+			vm.estadoFechaNacimiento.abierto = !vm.estadoFechaNacimiento.abierto;			
+		};
 	}
 })();

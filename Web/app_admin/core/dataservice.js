@@ -67,9 +67,9 @@
         function postActividades(actividad) {            
             return $http({
                 method: 'POST', 
-                url: serviceBase + '/api/actividades/actividades?XDEBUG_SESSION_START=CB3FFBE9',
-                data: 'Nombre=' + actividad.Nombre + '&Descripcion=' + actividad.Descripcion,
-                
+                url: serviceBase + '/api/actividades/actividades',
+                data: 'Nombre=' + encodeURIComponent(actividad.Nombre) 
+                + '&Descripcion=' + encodeURIComponent(actividad.Descripcion)                
                 })
                 .then(postActividadesComplete)
                 .catch(function(message) {
@@ -86,7 +86,9 @@
             return $http({
                 method: 'PUT', 
                 url: serviceBase + '/api/actividades/actividades',
-                data: 'Id=' + actividad.Id + '&Nombre=' + actividad.Nombre + '&Descripcion=' + actividad.Descripcion, })
+                data: 'Id=' + actividad.Id + '&Nombre=' + encodeURIComponent(actividad.Nombre)
+                 + '&Descripcion=' + encodeURIComponent(actividad.Descripcion)
+                 })
                 .then(putActividadesComplete)
                 .catch(function(message) {
                     exception.catcher('XHR Failed para putActividades')(message);
@@ -140,7 +142,7 @@
         function postEvento(evento) {            
             return $http({
                 method: 'POST', 
-                url: serviceBase + '/api/eventos/eventos?XDEBUG_SESSION_START=CB3FFBE9',
+                url: serviceBase + '/api/eventos/eventos',
                 data: 'Nombre=' + evento.Nombre + '&Descripcion=' + evento.Descripcion +
                 '&Actividad_Id=' + evento.Actividad_Id + '&FechaInicio=' + fechaToInt(evento.FechaInicio) +
                 '&HoraInicio=' + evento.HoraInicio + '&FechaFin=' + fechaToInt(evento.FechaFin) +
@@ -205,7 +207,7 @@
         }
         
         function getUsuarios() {
-            return $http.get(serviceBase + '/api/usuarios/usuarios?XDEBUG_SESSION_START=CB3FFBE9')
+            return $http.get(serviceBase + '/api/usuarios/usuarios')
                 .then(getUsuariosComplete)
                 .catch(function(message) {
                     exception.catcher('XHR Failed para getUsuarios')(message);
@@ -243,7 +245,12 @@
         }
         
         function postUsuario(usuario) {
-            return $http.post(serviceBase + '/api/usuarios/usuarios', usuario)
+            return $http({
+                method: 'POST', 
+                url: serviceBase + '/api/usuarios/usuarios?XDEBUG_SESSION_START=CB3FFBE9',
+                data: 'Nombre=' + encodeURIComponent(usuario.Nombre) + '&Apellidos=' + encodeURIComponent(usuario.Apellidos) +
+                '&Email=' + encodeURIComponent(usuario.Email) + '&FechaNacimiento=' + fechaToInt(usuario.FechaNacimiento)         
+                })
                 .then(postUsuarioComplete)
                 .catch(function(message) {
                     exception.catcher('XHR Failed para postUsuario')(message);
@@ -255,7 +262,12 @@
         }
         
         function putUsuario(usuario) {
-            return $http.put(serviceBase + '/api/usuarios/usuarios', usuario)
+            return $http({
+                method: 'PUT', 
+                url: serviceBase + '/api/usuarios/usuarios',
+                data: 'Id=' + usuario.Id + '&Nombre=' + encodeURIComponent(usuario.Nombre) + '&Apellidos=' + encodeURIComponent(usuario.Apellidos) +
+                '&Email=' + encodeURIComponent(usuario.Email) + '&FechaNacimiento=' + fechaToInt(usuario.FechaNacimiento)
+                })
                 .then(putUsuarioComplete)
                 .catch(function(message) {
                     exception.catcher('XHR Failed para putUsuario')(message);
@@ -352,30 +364,39 @@
         }
         
         function getLogin(loginData) {
-//             var data = "grant_type=password&username=" + loginData.usuario + "&password=" + loginData.clave;
-// 
-            var deferred = $q.defer();
-// 
-//             $http
-//                 .post(serviceBase + '/login', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
-//                 .success(function (response) {
-// 
-                $timeout(function() {
+            // var deferred = $q.defer();
+
+            return $http({
+                method: 'POST', 
+                url: serviceBase + '/api/usuarios/acceso?XDEBUG_SESSION_START=CB3FFBE9',
+                data: 'Usuario=' + loginData.usuario + '&Clave=' + loginData.clave         
+                })
+                .then(postAccesoComplete, postAccesoFail)
+                .catch(function(message) {
+                    exception.catcher('XHR Failed para getLogin')(message);
+                });
+                
+
+            // return deferred.promise;
+            
+            function postAccesoComplete(response) {
+                // $timeout(function() {
                     localStorageService.set('authorizationData', { token: /*response.access_token*/'TokenTemporal', 
                         userName: loginData.usuario });
 
                     _authentication.isAuth = true;
                     _authentication.userName = loginData.usuario;
 
-                    deferred.resolve(_authentication);
-        }, 1000);
-//                 })
-//                 .error(function (err, status) {
-//                     LogOut();
-//                     deferred.reject(err);
-//                 });
-
-            return deferred.promise;
+                    return _authentication;
+                    // deferred.resolve(_authentication);
+        // }, 1000);
+            }
+            
+            function postAccesoFail(err) {
+                LogOut();
+                throw 'Login incorrecto';
+                // deferred.reject(err);
+            }
         }
 
         function getAuthData() {
@@ -402,6 +423,8 @@
 
             _authentication.isAuth = false;
             _authentication.userName = "";
+            
+            $location.url('/');            
         }
 
         function prime() {

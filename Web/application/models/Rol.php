@@ -52,6 +52,16 @@ class Rol extends CI_Model
         return $query->result();
     }
 
+    public function get_by_name($nombre = "")
+    {
+        if ($nombre !== NULL && $nombre !== "")
+        {
+            $query = $this->db->where('Nombre', $nombre)->get(self::TABLA);
+            return $query->row();
+        }
+        return NULL;
+    }
+
     public function insert()
     {
         $this->getNewID();

@@ -7,7 +7,7 @@
 	function Eventos(dataservice, logger) {
 		var vm = this;
 		/* Propiedades */
-		vm.title = 'Eventos Deportivos | Acceso';
+		vm.title = 'Eventos | Eventos Deportivos';
 		vm.tituloModal = 'Añadir evento';
 		vm.evento = '';
 		vm.mostrarCargando = true;

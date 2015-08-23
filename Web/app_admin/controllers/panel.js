@@ -7,7 +7,7 @@
 	function Panel($timeout, $location, dataservice, logger) {
 		var vm = this;
 		/* Propiedades */
-		vm.title = 'Eventos Deportivos | Acceso';
+		vm.title = 'Acceso | Eventos Deportivos';
 		vm.usuario = '';
 		vm.clave = '';
 		vm.actividades = 0;
@@ -30,6 +30,11 @@
 
 		function activate() {
 			vm.mostrarCargando = true;
+			
+			if (!dataservice.getAuthData())
+			{
+				$location.path('/');
+			}
 
 			vm.getNumeroActividades();
 			vm.getNumeroUsuarios();

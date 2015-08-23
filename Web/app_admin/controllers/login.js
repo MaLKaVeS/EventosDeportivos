@@ -7,7 +7,7 @@
 	function Login($timeout, $location, dataservice, logger) {
 		var vm = this;
 		/* Propiedades */
-		vm.title = 'Eventos Deportivos | Acceso';
+		vm.title = 'Acceso | Eventos Deportivos';
 		vm.usuario = '';
 		vm.clave = '';
 		vm.mostrarCargando = false;
@@ -47,13 +47,19 @@
 		function getLoginResult(login) {
 
 			dataservice.getLogin(login)
-				.then(getLoginResultComplete)
+				.then(getLoginResultComplete, getLoginResultError)
 				.catch();
 
 			function getLoginResultComplete(data) {
 				// logger.success('Acceso correcto. Abriendo panel de administracion.');
-				$location.path('/panel');				
-
+				if (data !== undefined)
+				{
+					$location.path('/panel');
+				}
+			}
+			
+			function getLoginResultError() {
+				
 			}
 		}
 	}

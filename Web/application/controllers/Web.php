@@ -19,13 +19,6 @@ class Web extends CI_Controller {
 	{
 		$this->load->helper('url');
 
-		$this->load->view('welcome_message');
+		$this->load->view('public');
 	}
-
-    public function login()
-    {
-		$this->load->helper('url');
-		
-        $this->load->view('login');
-    }
 }

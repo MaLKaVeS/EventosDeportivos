@@ -7,7 +7,7 @@
 	function Actividades($timeout, $location, dataservice, logger) {
 		var vm = this;
 		/* Propiedades */
-		vm.title = 'Eventos Deportivos | Actividades';
+		vm.title = 'Actividades | Eventos Deportivos';
 		vm.usuario = '';
 		vm.actividades = [];
 		vm.numactividades = 0;

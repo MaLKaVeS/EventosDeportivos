@@ -1,8 +1,7 @@
 ﻿/// <reference path="_all.js" />
 (function(){
 	'use strict';
-	var eventos = angular.module('eventos', [
-		
+	var eventos = angular.module('eventos', [		
 		'eventos.core',
 		'eventos.panel',
 		'eventos.login',
@@ -11,6 +10,8 @@
 		'eventos.encuentros',
 		'eventos.eventos',
 		'eventos.perfil',
+		'eventos.ajustes',
+		'eventos.inscripciones',
 		'eventos.layout',
 	]);
 })();

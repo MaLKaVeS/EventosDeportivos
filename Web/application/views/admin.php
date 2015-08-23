@@ -5,6 +5,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="es" data-ng-app="eventos" ng-hint>
 
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
@@ -22,10 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Panel de administraci�n de eventos deportivos">
+   <meta name="description" content="Panel de administraci�n de eventos deportivos">
     <meta name="author" content="">
     <style>
         /* This helps the ng-show/ng-hide animations start at the right place. */
@@ -140,7 +140,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="/app_admin/core/dataservice.js"></script>
     <script src="/app_admin/filters/filter.fecha.js"></script>
 
-    <!-- layout -->
+    <!-- controllers -->
     <script src="/app_admin/controllers/layout.js"></script>
     <script src="/app_admin/controllers/login.js"></script>
     <script src="/app_admin/controllers/panel.js"></script>
@@ -150,10 +150,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="/app_admin/controllers/eventos.js"></script>
     <script src="/app_admin/controllers/perfil.js"></script>
     <script src="/app_admin/controllers/eventos.js"></script>
-    <!--<script src="/application/app/layout/shell.controller.js"></script>
-    <script src="/application/app/layout/sidebar.controller.js"></script>-->
-
-
+    <script src="/app_admin/controllers/ajustes.js"></script>
+    <script src="/app_admin/controllers/inscripciones.js"></script>
 
 </body>
 

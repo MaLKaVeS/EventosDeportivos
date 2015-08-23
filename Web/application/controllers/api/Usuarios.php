@@ -81,7 +81,9 @@ class Usuarios extends REST_Controller {
     public function usuarios_post()
     {
         $this->Usuario->Nombre = $this->post('Nombre');
-        $this->Usuario->Descripcion = $this->post('Descripcion');
+        $this->Usuario->Apellidos = $this->post('Apellidos');
+        $this->Usuario->Email = $this->post('Email');
+        $this->Usuario->FechaNacimiento = $this->post('FechaNacimiento');
 
         $status  = REST_Controller::HTTP_CREATED; // CREATED (201) HTTP response code
         if ($this->Usuario->insert())
@@ -110,8 +112,10 @@ class Usuarios extends REST_Controller {
     public function usuarios_put()
     {
         $this->Usuario->Id = $this->put('Id');
-        $this->Usuario->Nombre = $this->put('Nombre');
-        $this->Usuario->Descripcion = $this->put('Descripcion');
+        $this->Usuario->Nombre = $this->post('Nombre');
+        $this->Usuario->Apellidos = $this->post('Apellidos');
+        $this->Usuario->Email = $this->post('Email');
+        $this->Usuario->FechaNacimiento = $this->post('FechaNacimiento');
 
         $status =  REST_Controller::HTTP_ACCEPTED; // CREATED (202) HTTP response code
 
@@ -162,6 +166,88 @@ class Usuarios extends REST_Controller {
                     'message' => $msg
                 ];
             $status =  REST_Controller::HTTP_NO_CONTENT; // CREATED (204) HTTP response code
+        }
+        $this->set_response($message, $status);
+    }
+
+    public function rol_post()
+    {
+        $this->load->model('RolUsuarios');
+        
+        $this->RolUsuarios->Rol_Id = $this->post('rol');
+        $this->RolUsuarios->Usuario_Id = $this->post('usuario');
+
+        if ($this->RolUsuarios->insert())
+        {
+            $status = REST_Controller::HTTP_OK; // BAD_REQUEST (400) HTTP response code
+            $msg = sprintf('Rol asignado a Usuario', $this->Usuario->Nombre);
+            $message = [
+                    'status' => TRUE,
+                    'message' => $msg
+                ];
+        }
+        else
+        {
+            $status = REST_Controller::HTTP_BAD_REQUEST; // BAD_REQUEST (400) HTTP response code
+            $msg = 'Error al asignar el rol del usuario';
+            $message = [
+                    'status' => TRUE,
+                    'message' => $msg
+                ];
+        }
+        $this->set_response($message, $status);
+
+    }
+
+    public function rol_delete($rol, $usuario)
+    {
+        $this->load->model('RolUsuarios');
+        
+        $this->RolUsuarios->Rol_Id = $rol;
+        $this->RolUsuarios->Usuario_Id = $usuario;
+
+        if ($this->RolUsuarios->delete())
+        {
+            $status = REST_Controller::HTTP_OK; // OK (200) HTTP response code
+            $msg = sprintf('Rol eliminado del Usuario', $this->Usuario->Nombre);
+            $message = [
+                    'status' => TRUE,
+                    'message' => $msg
+                ];
+        }
+        else
+        {
+            $status = REST_Controller::HTTP_BAD_REQUEST; // BAD_REQUEST (400) HTTP response code
+            $msg = sprintf('Error al eliminar Rol del Usuario', $this->Usuario->Nombre);
+            $message = [
+                    'status' => TRUE,
+                    'message' => $msg
+                ];
+        }
+        $this->set_response($message, $status);
+    }
+
+    public function acceso_post()
+    {
+        $resultado = $this->Usuario->acceso($this->post('Usuario'),$this->post('Clave'));
+        $status = REST_Controller::HTTP_BAD_REQUEST; // BAD_REQUEST (400) HTTP response code
+        if ($resultado)
+        {
+            $status = REST_Controller::HTTP_OK; // OK (200) HTTP response code
+            $msg = 'Acceso correcto';
+            $message = [
+                    'status' => TRUE,
+                    'message' => $msg
+                ];
+            $_SESSION["usuario"] = $this->post('Usuario');
+        }
+        else
+        {
+            $msg = 'Acceso incorrecto';
+            $message = [
+                    'status' => TRUE,
+                    'message' => $msg
+                ];
         }
         $this->set_response($message, $status);
     }

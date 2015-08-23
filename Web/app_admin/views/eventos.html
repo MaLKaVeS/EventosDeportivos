@@ -31,7 +31,7 @@
 								<th>Nombre</th>
 								<th>Actividad</th>
 								<th>Descripcion</th>
-								<th>Fechas</th>
+								<th>Duracion</th>
 								<th>Inscripcion</th>
 								<th>Estado</th>
 								<th></th>
@@ -43,11 +43,9 @@
 								<td ng-repeat="actividad in vm.actividades | filter: evento.Actividad_Id" ng-bind="actividad.Nombre"></td>
 								<td ng-bind="evento.Descripcion"></td>
 								<td>
-									<span>Fecha Inicio </span>
-									<span ng-bind="vm.FechaInicio | fecha"></span>
-									<br />
-									<span>Fecha Fin </span>
-									<span ng-bind="vm.FechaFin | fecha"></span>
+									<span ng-bind="evento.FechaInicio | fecha"></span>
+									-									
+									<span ng-bind="evento.FechaFin | fecha"></span>
 								</td>
 								<td ng-repeat="tipoIns in vm.tiposInscripciones | filter:evento.EstadoRegistro" ng-bind="tipoIns.valor"></td>
 								<td ng-repeat="estado in vm.estados | filter:evento.Estado" ng-bind="estado.valor"></td>

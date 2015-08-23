@@ -55,7 +55,8 @@ class Credencial extends CI_Model
     public function insert($usuario_id, $password_hash, $salt)
     {
         $result = NULL;
-        if ($this->get($usuario_id) === NULL)
+
+        if (count($this->get($usuario_id)) === 0)
         {
             $this->Usuario_Id = $usuario_id;
             $this->getNewID();
