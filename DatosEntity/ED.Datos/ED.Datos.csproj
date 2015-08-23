@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Encuentro.cs" />
     <Compile Include="Evento.cs" />
     <Compile Include="Actividad.cs" />
     <Compile Include="Contexto.cs" />
@@ -79,6 +80,18 @@
     <Compile Include="Migrations\201508220907200_ResultadoAcceso.cs" />
     <Compile Include="Migrations\201508220907200_ResultadoAcceso.Designer.cs">
       <DependentUpon>201508220907200_ResultadoAcceso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508230955380_TipoEvento_Encuentro.cs" />
+    <Compile Include="Migrations\201508230955380_TipoEvento_Encuentro.Designer.cs">
+      <DependentUpon>201508230955380_TipoEvento_Encuentro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508231002053_ClaseEvento_Encuentro.cs" />
+    <Compile Include="Migrations\201508231002053_ClaseEvento_Encuentro.Designer.cs">
+      <DependentUpon>201508231002053_ClaseEvento_Encuentro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508231013514_EncuentroParticipantes.cs" />
+    <Compile Include="Migrations\201508231013514_EncuentroParticipantes.Designer.cs">
+      <DependentUpon>201508231013514_EncuentroParticipantes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MySqlConfiguration.cs" />
@@ -106,6 +119,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508220907200_ResultadoAcceso.resx">
       <DependentUpon>201508220907200_ResultadoAcceso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508230955380_TipoEvento_Encuentro.resx">
+      <DependentUpon>201508230955380_TipoEvento_Encuentro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508231002053_ClaseEvento_Encuentro.resx">
+      <DependentUpon>201508231002053_ClaseEvento_Encuentro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508231013514_EncuentroParticipantes.resx">
+      <DependentUpon>201508231013514_EncuentroParticipantes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

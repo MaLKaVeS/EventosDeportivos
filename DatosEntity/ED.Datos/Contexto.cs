@@ -19,5 +19,8 @@ namespace ED.Datos
         public DbSet<Rol> Roles { get; set; }
         public DbSet<Actividad> Actividades { get; set; }
         public DbSet<Evento> Eventos { get; set; }
+        public DbSet<Encuentro> Encuentros { get; set; }
+        public DbSet<ClaseEvento> ClaseEventos { get; set; }
+        public DbSet<EncuentroParticipante> EncuentroParticipantes { get; set; }
     }
 }

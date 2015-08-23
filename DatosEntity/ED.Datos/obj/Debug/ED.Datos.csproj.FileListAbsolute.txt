@@ -16,3 +16,6 @@ C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.Migration
 C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.Migrations.Perfil.resources
 C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.csprojResolveAssemblyReference.cache
 C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.Migrations.ResultadoAcceso.resources
+C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.Migrations.TipoEvento_Encuentro.resources
+C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.Migrations.ClaseEvento_Encuentro.resources
+C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.Migrations.EncuentroParticipantes.resources

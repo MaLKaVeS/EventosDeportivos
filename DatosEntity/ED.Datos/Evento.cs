@@ -25,6 +25,25 @@
         Cerrado, // El registro está cerrado y no se permiten más participantes
     }
 
+    /// <summary>
+    /// Tipo de encuentro que tiene lugar en el evento
+    /// </summary>
+    public enum TipoEncuentro
+    {
+        Individual, // Sin marcador, sólo tiempo
+        Enfrentamiento,
+        EnfrentamientoIndividual
+    }
+
+    /// <summary>
+    /// Tipos de competición
+    /// </summary>
+    public enum TipoEvento
+    {
+        Liga,
+        Eliminatoria,
+    }
+
     public class Evento
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -32,9 +51,11 @@
         public string Id { get; set; }
         //[InverseProperty("Id")]
         //[ForeignKey("ActividadId")]
-        //[Key]
+        [Key]
         public virtual Actividad Actividad { get; set; }
+        [MaxLength(200)]
         public string Nombre { get; set; }
+        [MaxLength(1000)]
         public string Descripcion { get; set; }
         public int FechaCreacion { get; set; }
         public int HoraCreacion { get; set; }
@@ -44,5 +65,26 @@
         public int HoraFin { get; set; }
         public Estado Estado { get; set; }
         public Registro EstadoRegistro { get; set; }
+        public ClaseEvento ClaseEvento { get; set; }
+        public int MaximoNumeroParticipantes { get; set; }
+    }
+
+    public class ClaseEvento
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public string Id { get; set; }
+        [MaxLength(200)]
+        public string Nombre { get; set; }
+        [MaxLength(1000)]
+        public string Descripcion { get; set; }
+        public bool FasePrevia { get; set; }
+        public bool EsPorEquipos { get; set; }
+        public int ParticipantesEncuentro { get; set; }
+        public int MaximoParticipantesEquipo { get; set; }
+        public TipoEncuentro TipoEncuentro { get; set; }
+        public TipoEvento TipoEvento { get; set; }
+        public int DuracionEncuentro { get; set; }
+        public int PartesPorEncuentro { get; set; }
     }
 }
