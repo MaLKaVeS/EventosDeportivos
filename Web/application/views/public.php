@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-ng-app="eventos">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -54,7 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
     </style>
 
-    <title>Eventos Deportivos</title>
+    <title update-title>Eventos Deportivos</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -94,46 +94,53 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <![endif]-->
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Eventos Deportivos</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-            <li class="active"><a href="#/actividades">Actividades</a></li>
-            <li><a href="#/eventos">Eventos</a></li>
-            <li><a href="#/contacto">Contacto</a></li>
-            <li><a href="#/about">Acerca de</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Clave" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Acceso</button>
-            <a href="#/registro" class="btn btn-primary">Registro</a>
-          </form>
-        </div><!--/.navbar-collapse -->
-      </div>
-    </nav>
-
-    
+    <!-- Header -->
+    <header ng-include="'app_public/core/views/header.html'"></header>
+    <!-- Views -->
+    <div class="container-fluid full-width-container">
+        <section class="container main-content">
+            <section ui-view></section>
+        </section>
+    </div>
+    <!-- Footer -->
     <footer class="footer" >
         <div class="container">
             <hr>
             <p>&copy; &Aacute;lvaro Pardo de Santayana 2015</p>
         </div>
     </footer>
+    
+    <!-- Vendors -->
     <script src="../../bower_components/jquery/jquery.min.js"></script>
+    <script src="../../bower_components/angular/angular.js"></script>
+    <script src="../../bower_components/angular-animate/angular-animate.js"></script>
+    <script src="../../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="../../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="../../bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
     <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    
+    <!-- Core Modules -->
+    <script src="app_public/config.js"></script>
+    <script src="app_public/app.js"></script>
+    <script src="app_public/core/core.init.js"></script>
+    <script src="app_public/core/config/core.routes.js"></script>
+    <script src="app_public/core/directives/updatetitle.directive.js"></script>
+    <script src="app_public/core/filters/fecha.filter.js"></script>
+
+    <!-- Services -->
+    <script src="app_public/services/eventos.dataservice.js"></script>
+    <script src="app_public/services/actividades.dataservice.js"></script>
+
+    <!-- Inicio Modules -->
+    <script src="app_public/modules/inicio/inicio.init.js"></script>
+    <script src="app_public/modules/inicio/config/inicio.routes.js"></script>
+    <script src="app_public/modules/inicio/controllers/inicio.controller.js"></script>
+    <script src="app_public/modules/inicio/controllers/inicio.actividades.controller.js"></script>
+    <script src="app_public/modules/inicio/controllers/inicio.eventos.controller.js"></script>
+
+    <!-- Registro Modules -->
+    <script src="app_public/modules/registro/registro.init.js"></script>
+    <script src="app_public/modules/registro/config/registro.routes.js"></script>
+    <script src="app_public/modules/registro/controllers/registro.controller.js"></script>
 </body>
 </html>

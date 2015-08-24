@@ -70,6 +70,35 @@ class Evento extends CI_Model
         return $query->result();
     }
 
+    public function ultimos($actividad = "", $id = "", $limite = 20)
+    {
+        if ($id !== NULL && $id !== "" && $actividad !== NULL && $actividad !== "")
+        {
+            $query = $this->db->where('Estado < ',0)
+                ->where('Actividad_Id', $actividad)
+                ->where('Id', $id)
+                ->order_by('FechaInicio', 'DESC')
+                ->limit($limite)
+                ->get(self::TABLA);
+        }
+        else if ($actividad !== NULL && $actividad !== "")
+        {
+            $query = $this->db->where('Estado < ',0)
+                ->where('Actividad_Id', $actividad)
+                ->order_by('FechaInicio', 'DESC')
+                ->limit($limite)
+                ->get(self::TABLA);
+        }
+        else
+        {
+            $query = $this->db->order_by('FechaInicio', 'DESC')
+                ->where('Estado > ', 0)
+                ->limit($limite)
+                ->get(self::TABLA);
+        }
+        return $query->result();
+    }
+
     public function insert()
     {
         $this->getNewID();
