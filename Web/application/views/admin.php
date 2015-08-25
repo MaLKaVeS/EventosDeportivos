@@ -8,6 +8,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <?php
+    if (isset($_SERVER['CI_ENV']) && $_SERVER['CI_ENV'] === 'production')
+    {
+        echo '<base href="http://aglinformatica.es:6080/pardo/" />';
+    }
+    else
+    {
+        echo '<base href="/" />';
+    }
+    ?>
+
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
@@ -55,32 +67,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title>Eventos Deportivos - Panel de Administracion</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href="bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
     <!-- DataTables CSS -->
-    <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
 
     <!-- DataTables Responsive CSS -->
-    <link href="../../bower_components/datatables-responsive/css/responsive.dataTables.scss" rel="stylesheet">
+    <link href="bower_components/datatables-responsive/css/responsive.dataTables.scss" rel="stylesheet">
     <!-- Timeline CSS -->
-    <link href="/app_admin/theme/css/timeline.css" rel="stylesheet">
+    <link href="app_admin/theme/css/timeline.css" rel="stylesheet">
     <!-- Toastr CSS -->
-    <link href="../../bower_components/toastr/toastr.css" rel="stylesheet" />
+    <link href="bower_components/toastr/toastr.css" rel="stylesheet" />
 
     <!-- Custom CSS -->
-    <link href="/app_admin/theme/css/sb-admin-2.css" rel="stylesheet">
+    <link href="app_admin/theme/css/sb-admin-2.css" rel="stylesheet">
     <!-- Angular UI Bootstrap -->
-    <link href="../../bower_components/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
+    <link href="bower_components/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
     <!-- Alvaro CSS -->
-    <link href="/app_admin/theme/site.css" rel="stylesheet">
+    <link href="app_admin/theme/site.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <!--<link href="../../bower_components/morrisjs/morris.css" rel="stylesheet">-->
+    <!--<link href="bower_components/morrisjs/morris.css" rel="stylesheet">-->
 
     <!-- Custom Fonts -->
-    <link href="../../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -92,66 +104,64 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 
 <body>
-    <div data-ng-include="'http://localhost:22832/application/app/views/shell.html'"></div>
-
-
+    <div data-ng-include="'app_admin/views/shell.html'"></div>
 
     <!-- jQuery -->
-    <script src="../../bower_components/jquery/jquery.min.js"></script>
+    <script src="bower_components/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="../../bower_components/angular/angular.js"></script>
-    <script src="../../bower_components/angular-animate/angular-animate.js"></script>
-    <script src="../../bower_components/angular-route/angular-route.js"></script>
-    <script src="../../bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="../../bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
-    <script src="../../bower_components/toastr/toastr.js"></script>
-    <script src="../../bower_components/angular-i18n/angular-locale_es-es.js"></script>
-    <script src="../../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="bower_components/toastr/toastr.js"></script>
+    <script src="bower_components/angular-i18n/angular-locale_es-es.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
     <!-- Morris Charts JavaScript -->
-    <!--<script src="../../bower_components/raphael/raphael-min.js"></script>
-    <script src="../../bower_components/morrisjs/morris.min.js"></script>
+    <!--<script src="bower_components/raphael/raphael-min.js"></script>
+    <script src="bower_components/morrisjs/morris.min.js"></script>
     <script src="application/js/morris-data.js"></script>-->
 
     <!-- Custom Theme JavaScript -->
-    <script src="/app_admin/theme/js/sb-admin-2.js"></script>
+    <script src="app_admin/theme/js/sb-admin-2.js"></script>
 
     <!-- Eventos Deportivos -->
-    <script src="/app_admin/app.js"></script>
-    <script src="/app_admin/blocks/exception/exception.module.js"></script>
-    <script src="/app_admin/blocks/exception/exception-handler.provider.js"></script>
-    <script src="/app_admin/blocks/exception/exception.js"></script>
-    <script src="/app_admin/blocks/logger/logger.module.js"></script>
-    <script src="/app_admin/blocks/logger/logger.js"></script>
-    <script src="/app_admin/blocks/router/router.module.js"></script>
-    <script src="/app_admin/blocks/router/routehelper.js"></script>
+    <script src="app_admin/app.js"></script>
+    <script src="app_admin/blocks/exception/exception.module.js"></script>
+    <script src="app_admin/blocks/exception/exception-handler.provider.js"></script>
+    <script src="app_admin/blocks/exception/exception.js"></script>
+    <script src="app_admin/blocks/logger/logger.module.js"></script>
+    <script src="app_admin/blocks/logger/logger.js"></script>
+    <script src="app_admin/blocks/router/router.module.js"></script>
+    <script src="app_admin/blocks/router/routehelper.js"></script>
 
     <!-- core module -->
-    <script src="/app_admin/core/core.module.js"></script>
-    <script src="/app_admin/core/constants.js"></script>
-    <script src="/app_admin/core/config.js"></script>
-    <script src="/app_admin/core/config.routes.js"></script>
-    <script src="/app_admin/core/dataservice.js"></script>
-    <script src="/app_admin/filters/filter.fecha.js"></script>
+    <script src="app_admin/core/core.module.js"></script>
+    <script src="app_admin/core/constants.js"></script>
+    <script src="app_admin/core/config.js"></script>
+    <script src="app_admin/core/config.routes.js"></script>
+    <script src="app_admin/core/dataservice.js"></script>
+    <script src="app_admin/filters/filter.fecha.js"></script>
 
     <!-- controllers -->
-    <script src="/app_admin/controllers/layout.js"></script>
-    <script src="/app_admin/controllers/login.js"></script>
-    <script src="/app_admin/controllers/panel.js"></script>
-    <script src="/app_admin/controllers/actividades.js"></script>
-    <script src="/app_admin/controllers/usuarios.js"></script>
-    <script src="/app_admin/controllers/encuentros.js"></script>
-    <script src="/app_admin/controllers/eventos.js"></script>
-    <script src="/app_admin/controllers/perfil.js"></script>
-    <script src="/app_admin/controllers/eventos.js"></script>
-    <script src="/app_admin/controllers/ajustes.js"></script>
-    <script src="/app_admin/controllers/inscripciones.js"></script>
+    <script src="app_admin/controllers/layout.js"></script>
+    <script src="app_admin/controllers/login.js"></script>
+    <script src="app_admin/controllers/panel.js"></script>
+    <script src="app_admin/controllers/actividades.js"></script>
+    <script src="app_admin/controllers/usuarios.js"></script>
+    <script src="app_admin/controllers/encuentros.js"></script>
+    <script src="app_admin/controllers/eventos.js"></script>
+    <script src="app_admin/controllers/perfil.js"></script>
+    <script src="app_admin/controllers/eventos.js"></script>
+    <script src="app_admin/controllers/ajustes.js"></script>
+    <script src="app_admin/controllers/inscripciones.js"></script>
 
 </body>
 

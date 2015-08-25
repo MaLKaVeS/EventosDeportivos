@@ -59,7 +59,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | the query builder class.
  */
 
-$active_group = 'default';
+if (isset($_SERVER['CI_ENV']) && $_SERVER['CI_ENV'] === 'production')
+{
+    $active_group = 'production';
+}
+else
+{
+    $active_group = 'default';
+}
+//$active_group = 'production';
+
 $query_builder = TRUE;
 
 $db['default'] = array(

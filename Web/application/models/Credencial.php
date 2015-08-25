@@ -19,7 +19,7 @@ class Credencial extends CI_Model
     public $Usuario_Id;
     public $Estado;
 
-    const TABLA  = "credencials";
+    const TABLA  = "Credencials";
     const PETICIONES_MAXIMAS  = 5;
     const TIEMPO_PETICIONES  = 5;
     const DURACION_BLOQUEO = 30;

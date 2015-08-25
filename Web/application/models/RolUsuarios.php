@@ -13,7 +13,7 @@ class RolUsuarios extends CI_Model
     public $Rol_Id;
     public $Usuario_Id;
 
-    const TABLA  = "rolusuarios";
+    const TABLA  = "RolUsuarios";
 
     public function __construct()
     {

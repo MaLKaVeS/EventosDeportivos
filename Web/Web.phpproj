@@ -561,6 +561,7 @@
     <Content Include="app_admin\_all.js" />
     <Content Include="app_public\app.js" />
     <Content Include="app_public\config.js" />
+    <Content Include="app_public\core\config\core.routes.js" />
     <Content Include="app_public\core\core.init.js" />
     <Content Include="app_public\core\directives\updatetitle.directive.js" />
     <Content Include="app_public\core\filters\fecha.filter.js" />
@@ -917,12 +918,12 @@
     <Compile Include="application\config\routes.php" />
     <Compile Include="application\config\smileys.php" />
     <Compile Include="application\config\user_agents.php" />
+    <Compile Include="application\controllers\api\Sesion.php" />
     <Compile Include="application\controllers\api\Usuarios.php" />
     <Compile Include="application\controllers\Web.php" />
     <Compile Include="application\controllers\api\Eventos.php" />
     <Compile Include="application\controllers\api\Roles.php" />
     <Compile Include="application\controllers\api\Actividades.php" />
-    <Compile Include="application\controllers\api\Example.php" />
     <Compile Include="application\controllers\api\Key.php" />
     <Compile Include="application\controllers\Rest_server.php" />
     <Compile Include="application\controllers\Admin.php" />

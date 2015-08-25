@@ -17,8 +17,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = '';
-
+//$_SERVER['CI_ENV'] = 'production';
+if (isset($_SERVER['CI_ENV']) && $_SERVER['CI_ENV'] === 'production')
+{
+    $config['base_url'] = 'http://aglinformatica.es:6080/pardo/';
+}
+else
+{
+    $config['base_url'] = '';
+}
 /*
 |--------------------------------------------------------------------------
 | Index File

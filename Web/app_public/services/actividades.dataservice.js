@@ -8,7 +8,8 @@
     ActividadesDataService.$inject = ['$http', '$q', '$timeout', '$location'];
 
     function ActividadesDataService($http, $q, $timeout, $location) {
-        var serviceBase = window.location.protocol + '//' + window.location.host + '/index.php';
+        var serviceBase = window.location.protocol + '//' + window.location.host +
+            ((window.location.hostname === 'localhost') ? '/index.php' : '/pardo/index.php');
 
         var service = {
             getActividades: getActividades
@@ -22,7 +23,7 @@
 
             $http.get(serviceBase + '/api/actividades/actividades')
                 .then(getActividadesComplete, getActividadesFail);
-                
+
             return promise;
 
             function getActividadesComplete(data) {

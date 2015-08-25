@@ -8,6 +8,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    
+    <?php
+    if (isset($_SERVER['CI_ENV']) && $_SERVER['CI_ENV'] === 'production')
+    {
+        echo '<base href="//aglinformatica.es:6080/pardo/" />';
+    }
+    else
+    {
+        echo '<base href="/" />';
+    }
+    ?>
+
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="/favicon.ico">
@@ -57,7 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title update-title>Eventos Deportivos</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style type="text/css">
     html {
@@ -79,14 +91,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     }
     </style>
     <!-- Toastr CSS -->
-    <link href="../../bower_components/toastr/toastr.css" rel="stylesheet" />
+    <link href="bower_components/toastr/toastr.css" rel="stylesheet" />
 
     <!-- Angular UI Bootstrap -->
-    <link href="../../bower_components/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
+    <link href="bower_components/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
     <!-- Alvaro CSS -->
     <link href="/app_admin/theme/site.css" rel="stylesheet">
     <!-- Custom Fonts -->
-    <link href="../../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -111,13 +123,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </footer>
     
     <!-- Vendors -->
-    <script src="../../bower_components/jquery/jquery.min.js"></script>
-    <script src="../../bower_components/angular/angular.js"></script>
-    <script src="../../bower_components/angular-animate/angular-animate.js"></script>
-    <script src="../../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="../../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="../../bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
-    <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/jquery/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     
     <!-- Core Modules -->
     <script src="app_public/config.js"></script>
