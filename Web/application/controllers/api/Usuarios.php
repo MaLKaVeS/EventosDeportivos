@@ -84,9 +84,10 @@ class Usuarios extends REST_Controller {
         $this->Usuario->Apellidos = $this->post('Apellidos');
         $this->Usuario->Email = $this->post('Email');
         $this->Usuario->FechaNacimiento = $this->post('FechaNacimiento');
+        $clave = $this->post('clave');
 
         $status  = REST_Controller::HTTP_CREATED; // CREATED (201) HTTP response code
-        if ($this->Usuario->insert())
+        if ($this->Usuario->insert($clave))
         {
             $msg =sprintf('Usuario %s creada con exito', $this->Usuario->Nombre);
             $message = [

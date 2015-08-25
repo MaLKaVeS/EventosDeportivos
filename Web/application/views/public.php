@@ -140,8 +140,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="app_public/core/filters/fecha.filter.js"></script>
 
     <!-- Services -->
+    <script src="app_public/services/fecha.dataservice.js"></script>
     <script src="app_public/services/eventos.dataservice.js"></script>
     <script src="app_public/services/actividades.dataservice.js"></script>
+    <script src="app_public/services/usuarios.dataservice.js"></script>
 
     <!-- Inicio Modules -->
     <script src="app_public/modules/inicio/inicio.init.js"></script>

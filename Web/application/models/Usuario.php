@@ -81,7 +81,7 @@ class Usuario extends CI_Model
         return $query;
     }
 
-    public function insert()
+    public function insert($clave)
     {
         $this->getNewID();
         if ($this->_esValido() && $this->esMailValido())
@@ -93,7 +93,7 @@ class Usuario extends CI_Model
 
             if ($result)
             {
-                $result = $this->insert_credenciales();
+                $result = $this->insert_credenciales($clave);
 
                 if ($result)
                 {
@@ -108,13 +108,19 @@ class Usuario extends CI_Model
         return $result;
     }
 
-    private function insert_credenciales() 
+    private function insert_credenciales($clave) 
     {
         $credencial = new Credencial();
-
-        $password = $this->_getRandomString(10);
-        
-        $passwordhash = create_hash($password);
+        if (!isset($clave))
+        {
+            $password = $this->_getRandomString(10);
+            
+            $passwordhash = create_hash($password);
+        }
+        else
+        {
+            $passwordhash = create_hash($clave);
+        }
 
         return $credencial->insert($this->Id, $passwordhash, $this->_getRandomString());
     }
