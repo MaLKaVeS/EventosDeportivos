@@ -1,0 +1,23 @@
+﻿<div data-ng-controller="ActividadesController as actividades">
+    <div class="loading" ng-show="actividades.mostrarCargando">
+        <p>
+            <i class="fa fa-spin fa-spinner"></i> <span ng-bind="actividades.textoCargando"></span>
+        </p>
+    </div>
+    <div class="row">
+        <div ng-repeat="actividad in actividades.actividades" class="col-md-4">
+            <div>
+                <h2 ng-bind="actividad.Nombre"></h2>
+                <p ng-bind="actividad.Descripcion"></p>
+                <p>
+                    <a ng-href="#/eventos/{{evento.Id}}"><i class="fa fa-ticket"></i> Ver eventos</a>
+                    <!--<a ui-sref="eventos/{{evento.Id}}">Ver detalles</a>-->
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="ng-hide" ng-show="!vm.mostrarCargando && vm.haCargado">
+        <p>No hay actvidades.</p>
+    </div>
+</div>

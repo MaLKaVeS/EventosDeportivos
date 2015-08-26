@@ -1,4 +1,6 @@
-﻿'use strict';
+﻿/// <reference path="../../../_all.js" />
+
+'use strict';
 
 (function () {
 
@@ -7,9 +9,9 @@
     angular.module(moduleName)
         .controller('RegistroController', RegistroController);
 
-    RegistroController.$inject = ['$http', 'UsuariosDataService'];
+    RegistroController.$inject = ['$scope', 'UsuariosDataService'];
 
-    function RegistroController($http, UsuariosDataService) {
+    function RegistroController($scope, UsuariosDataService) {
 
         /* jshint validthis: true */
         var vm = this;
@@ -25,22 +27,53 @@
 			formatYear: 'yy',
 			startingDay: 1
 		};
+        vm.mostrarCargando = true;        
+        vm.mostrarErroresValidacion = false;
         
         vm.openDatePicker = openDatePicker;
+        vm.isPasswordMatch = isPasswordMatch;
         vm.clickEnviar = clickEnviar;
         
         activate();
 
         function activate() {
-
+            vm.mostrarCargando = false;
+        }
+        
+        function isPasswordMatch() {
+            return vm.Clave === vm.ConfirmarClave;
         }
 
         function openDatePicker() {
             vm.estadoFechaNacimiento.abierto = !vm.estadoFechaNacimiento.abierto;
         }
         
-        function clickEnviar() {
+        function esValido() {
+            if (vm.datosFormulario)
+            {
+                
+            }
             
+            return true;
+        }
+        
+        function clickEnviar() {
+            if (esValido()) {
+                vm.mostrarCargando = true;
+                UsuariosDataService.postUsuario()
+                .then(postUsuarioComplete, postUsuarioFail);
+            }
+            else {
+                vm.mostrarErroresValidacion = true;
+            }
+            
+            function postUsuarioComplete() {
+                
+            }
+            
+            function postUsuarioFail() {
+                
+            }
         }
     }
 

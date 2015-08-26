@@ -1,4 +1,9 @@
 ﻿<div data-ng-controller="InicioEventosController as inicioEventos">
+	<div class="loading" ng-show="inicioEventos.mostrarCargando">
+		<p>
+			<i class="fa fa-spin fa-spinner"></i> <span ng-bind="inicioEventos.textoCargando"></span>
+		</p>
+	</div>
     <div ng-repeat="evento in inicioEventos.eventos" class="row">
 		<div class="col-md-4">
 			<h2 ng-bind="evento.Nombre"></h2>
@@ -8,9 +13,12 @@
 				<small ng-bind="evento.FechaInicio | fecha"></small> - <small  ng-bind="evento.FechaFin  | fecha"></small> 
 			</p>
 			<p>
-				<a ng-href="#/eventos/{{evento.Id}}">Ver detalles</a>
+				<a ng-href="#/eventos/{{evento.Id}}"><i class="fa fa-eye"></i> Ver detalles</a>
 				<!--<a ui-sref="eventos/{{evento.Id}}">Ver detalles</a>-->
 			</p>
 		</div>
+	</div>
+	<div class="ng-hide" ng-show="!vm.mostrarCargando && vm.haCargado">
+		<p>No hay eventos disponibles<p>
 	</div>
 </div>

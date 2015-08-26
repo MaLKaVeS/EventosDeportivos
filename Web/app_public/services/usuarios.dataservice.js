@@ -1,16 +1,19 @@
-﻿'use strict';
+﻿/// <reference path="../_all.js" />
+'use strict';
 
 (function () {
 
     angular.module(ApplicationConfiguration.applicationCoreModuleName)
         .factory('UsuariosDataService', UsuariosDataService);
 
-    UsuariosDataService.$inject = ['$http', '$q', '$timeout', '$location', 'FechaDataService'];
+    UsuariosDataService.$inject = ['$http', '$q', '$timeout', '$location'];
 
-    function UsuariosDataService($http, $q, $timeout, $location, FechaDataService) {
+    function UsuariosDataService($http, $q, $timeout, $location) {
         var serviceBase = window.location.protocol + '//' + window.location.host +
             ((window.location.hostname === 'localhost') ? '/index.php' : '/pardo/index.php');
-
+        
+        var helperFecha = ApplicationConfiguration.applicationHelperFunctions.Fecha;
+        
         var service = {
             getValidacionEmail: getValidacionEmail,
             postUsuario: postUsuario
@@ -49,9 +52,9 @@
                 url: serviceBase + '/api/actividades/actividades',
                 method: 'POST',
                 data: 'Nombre=' + encodeURIComponent(usuario.Nombre) + '&Apellidos=' + encodeURIComponent(usuario.Apellidos) +
-                '&Email=' + encodeURIComponent(usuario.Email) + '&FechaNacimiento=' + FechaDataService.fechaToInt(usuario.FechaNacimiento)
+                '&Email=' + encodeURIComponent(usuario.Email) + '&FechaNacimiento=' + helperFecha.fechaToInt(usuario.FechaNacimiento)
             })
-                .then(getActividadesComplete, getActividadesFail);
+            .then(getActividadesComplete, getActividadesFail);
 
             return promise;
 

@@ -7,56 +7,56 @@
     angular.module(moduleName)
         .controller('InicioEventosController', InicioEventosController);
 
-    InicioEventosController.$inject = ['$http', '$filter', 'EventosDataService', 'ActividadesDataService'];
+    InicioEventosController.$inject = ['$q', '$filter', 'EventosDataService', 'ActividadesDataService'];
 
-    function InicioEventosController($http, $filter, EventosDataService, ActividadesDataService) {
+    function InicioEventosController($q, $filter, EventosDataService, ActividadesDataService) {
 
         /* jshint validthis: true */
         var vm = this;
         vm.actividades = [];
         vm.eventos = [];
-        vm.texto = "SECCION DE LISTADO";
-
+        vm.textoCargando = "Cargando eventos";
+        vm.mostrarCargando = true;
+        vm.haCargado = false;
+        
         activate();
 
         function activate() {
-            ActividadesDataService.getActividades()
-                .then(getActividadesComplete, getActividadesFail);
+            var promises = []
+            promises.push(ActividadesDataService.getActividades());
+            promises.push(EventosDataService.getUltimosEventos());
 
-            function getActividadesComplete(data) {
-                vm.actividades = data;
+            $q.all(promises)
+                .then(activateComplete, activateFail);
 
-                EventosDataService.getUltimosEventos()
-                    .then(getUltimosEventosComplete, getUltimosEventosFail);
-            }
+            function activateComplete(data) {
+                if (Object.prototype.toString.call(data[0]) === '[object Array]' 
+                    && Object.prototype.toString.call(data[1]) === '[object Array]') {
+                    vm.actividades = data[0];
+                    vm.eventos = data[1];
 
-            function getActividadesFail(data) {
-                vm.actividades = [];
-                alert('Error');
-            }
-
-            function getUltimosEventosComplete(data) {
-                vm.eventos = data;
-
-                if (vm.actividades.length > 0) {
-                    var numevento = vm.eventos.length;
-                    var actividad = '';
-                    for (var i = 0; i < numevento; i++) {
-                        vm.eventos[i].Actividad = '';
-                        actividad = $filter('filter')(vm.actividades, function(act) {
-                             return act.Id === vm.eventos[i].Actividad_Id;
-                             })[0].Nombre;
-                        vm.eventos[i].Actividad = actividad;
+                    if (vm.actividades.length > 0) {
+                        var numevento = vm.eventos.length;
+                        var actividad = '';
+                        for (var i = 0; i < numevento; i++) {
+                            vm.eventos[i].Actividad = '';
+                            actividad = $filter('filter')(vm.actividades, function (act) {
+                                return act.Id === vm.eventos[i].Actividad_Id;
+                            })[0].Nombre;
+                            vm.eventos[i].Actividad = actividad;
+                        }
                     }
+                    vm.mostrarCargando = false;
+                    vm.haCargado = true;                    
                 }
             }
 
-            function getUltimosEventosFail(data) {
+            function activateFail(data) {
+                vm.actividades = [];
                 vm.eventos = [];
-                alert('Error');
+                vm.mostrarCargando = false;                
+                vm.haCargado = true;                    
             }
-
-
         }
     }
 })();
