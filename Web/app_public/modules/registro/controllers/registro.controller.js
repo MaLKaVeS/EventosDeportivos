@@ -49,22 +49,31 @@
         }
         
         function esValido() {
-            if (vm.datosFormulario)
-            {
-                
-            }
+            var isValid = false;
+            // if (vm.datosFormulario && vm.)
+            // {
+            //     
+            // }
             
-            return true;
+            return isValid;
         }
         
         function clickEnviar() {
             if (esValido()) {
                 vm.mostrarCargando = true;
-                UsuariosDataService.postUsuario()
+                var usuario = {
+                    Nombre: vm.Nombre,
+                    Apellidos: vm.Apellidos,
+                    Email: vm.Email,
+                    Clave: vm.Clave,
+                    FechaNacimiento: vm.FechaNacimiento
+                };
+                
+                UsuariosDataService.postUsuario(usuario)
                 .then(postUsuarioComplete, postUsuarioFail);
             }
             else {
-                vm.mostrarErroresValidacion = true;
+                vm.datosFormulario.$submitted = true;
             }
             
             function postUsuarioComplete() {

@@ -7,8 +7,8 @@
     angular.module(moduleName).config(['$stateProvider',
     function ProvidersRouter($stateProvider) {
         $stateProvider
-            .state('login', {
-                url: '/login',
+            .state('acceso', {
+                url: '/acceso',
                 templateUrl: 'app_public/modules/login/views/login.html',
                 data: { title: 'Eventos deportivos - Acceso' },
                 views: {

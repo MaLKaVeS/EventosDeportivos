@@ -12,5 +12,12 @@
         public string Nombre { get; set; }
         [MaxLength(1000)]
         public string Descripcion { get; set; }
+
+        [MaxLength(1000)]
+        public string Imagen { get; set; }
+        [MaxLength(1000)]
+        public string Icono { get; set; }
+        [MaxLength(1000)]
+        public string ImagenPortada { get; set; }
     }
 }

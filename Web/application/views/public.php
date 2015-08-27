@@ -194,5 +194,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="app_public/modules/contacto/contacto.init.js"></script>
     <script src="app_public/modules/contacto/config/contacto.routes.js"></script>
     <script src="app_public/modules/contacto/controllers/contacto.controller.js"></script>
+
+    <!-- Acceso Modules -->
+    <script src="app_public/modules/login/login.init.js"></script>
+    <script src="app_public/modules/login/config/login.routes.js"></script>
+    <script src="app_public/modules/login/controllers/login.controller.js"></script>
 </body>
 </html>

@@ -61,6 +61,7 @@
     <Compile Include="Evento.cs" />
     <Compile Include="Actividad.cs" />
     <Compile Include="Contexto.cs" />
+    <Compile Include="Mensaje.cs" />
     <Compile Include="Migrations\201508142131450_Inicial.cs" />
     <Compile Include="Migrations\201508142131450_Inicial.Designer.cs">
       <DependentUpon>201508142131450_Inicial.cs</DependentUpon>

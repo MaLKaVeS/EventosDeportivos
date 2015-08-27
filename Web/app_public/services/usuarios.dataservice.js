@@ -12,7 +12,7 @@
         var serviceBase = window.location.protocol + '//' + window.location.host +
             ((window.location.hostname === 'localhost') ? '/index.php' : '/pardo/index.php');
         
-        var helperFecha = ApplicationConfiguration.applicationHelperFunctions.Fecha;
+        var helperFecha = ApplicationConfiguration.applicationHelperFunctions.FechaHelper;
         
         var service = {
             getValidacionEmail: getValidacionEmail,

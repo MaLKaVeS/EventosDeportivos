@@ -17,6 +17,9 @@ namespace ED.Datos
         public int Ronda { get; set; }
         public int Duracion { get; set; }
         public int Partes { get; set; }
+        [MaxLength(1000)]
+        public string Lugar { get; set; }
+        public int Hora { get; set; }
     }
 
     public class EncuentroParticipante
@@ -27,5 +30,6 @@ namespace ED.Datos
         public PerfilParticipante Participante { get; set; }
         public List<string> Puntuacion { get; set; }
         public bool Ganador { get; set; }
+
     }
 }
