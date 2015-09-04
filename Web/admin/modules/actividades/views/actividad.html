@@ -1,0 +1,108 @@
+﻿<div id="wrapper" data-ng-controller="Actividades as vm">
+	<!-- Navigation -->
+	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+		<div data-ng-include="'/app_admin/views/navbar.html'"></div>
+		<div data-ng-include="'/app_admin/views/sidebar.html'"></div>
+	</nav>
+
+	<div id="page-wrapper">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Actividades</h1>
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+		<div class="row margin-top-20">
+			<div class="col-lg-12 margin-bottom-10">
+				<button type="button" class="btn btn-success rigth" ng-click="vm.clickAdd()"><i class="fa fa-plus"> Añadir</i></button>
+			</div>
+			<div class="col-lg-12">
+				<!--<div class="panel panel-default">
+					<div class="panel-heading">
+						Actividades
+					</div>
+					<!-- /.panel-heading -->
+				<!--<div class="panel-body">-->
+				<div class="dataTable_wrapper">
+					<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+						<thead>
+							<tr>
+								<th>Nombre</th>
+								<th>Descripcion</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody ng-repeat="actividad in vm.actividades | orderBy: 'Nombre'">
+							<tr class="gradeA" ng-class="{ odd: $index % 2 != 0, even: $index % 2 == 0}">
+								<td ng-bind="actividad.Nombre"></td>
+								<td ng-bind="actividad.Descripcion"></td>
+								<td>
+									<button type="button" class="btn btn-default" ng-click="vm.clickEditar(actividad)"><i class="fa fa-edit"></i> Editar</button>
+									<button type="button" class="btn btn-danger" ng-click="vm.clickBorrar(actividad)"><i class="fa fa-remove"></i> Borrar</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!--</div>-->
+			<!-- Modal -->
+			<div class="modal fade" id="modalActividad" tabindex="-1" role="dialog" aria-labelledby="Añadir actividad" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" ng-bind="vm.tituloModal">Añadir Actividad</h4>
+						</div>
+						<div class="modal-body">
+							<form role="form">
+								<div class="row">
+									<div class="col-lg-12 form-group" ng-class="{'hasError': vm.valNombre}">
+										<label>Nombre</label>
+										<input ng-model="vm.addNombre" name="nombre" type="text" class="form-control" placeholder="Nombre de la actividad" />
+									</div>
+									<div class="col-lg-12">
+										<label>Descripcion</label>
+										<textarea  ng-model="vm.addDescripcion" name="descripcion" class="form-control" rows="3" placeholder="Descripción de la actividad" />
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+							<button type="button" class="btn btn-primary" ng-click="vm.clickGrabar()"><i class="fa fa-save"></i> Grabar</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+			
+			<!-- Modal -->
+			<div class="modal fade" id="modalConfirmar" tabindex="-1" role="dialog" aria-labelledby="Confirmar borrar" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Confirmar borrado</h4>
+						</div>
+						<div class="modal-body">
+							<div class="alert alert-danger">
+                                Va a borrar la actividad <a href="#" class="alert-link">{{ vm.actividad.Nombre }}</a>.
+								¿Está seguro?
+                            </div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+							<button type="button" class="btn btn-danger" ng-click="vm.clickConfirmaBorrar()"><i class="fa fa-save"></i> Borrar</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+		</div>
+	</div>
+</div>

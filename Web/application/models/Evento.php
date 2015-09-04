@@ -99,6 +99,18 @@ class Evento extends CI_Model
         return $query->result();
     }
 
+    public function actividad($actividad_id = "")
+    {
+        if (isset($actividad_id))
+        {
+            $query = $this->db->where('Estado >= ',0)
+                ->where('Actividad_Id', $actividad_id)
+                ->order_by('FechaInicio', 'DESC')
+                ->get(self::TABLA);
+        }
+        return $query->result();
+    }
+
     public function insert()
     {
         $this->getNewID();

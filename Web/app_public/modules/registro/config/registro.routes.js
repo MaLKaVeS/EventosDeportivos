@@ -10,7 +10,7 @@
             .state('registro', {
                 url: '/registro',
                 templateUrl: 'app_public/modules/registro/views/registro.html',
-                data: { title: 'Eventos deportivos - Registro' },
+                data: { title: 'Registro - Eventos deportivos' },
                 views: {
                     '': {
                         templateUrl: 'app_public/modules/registro/views/registro.html'

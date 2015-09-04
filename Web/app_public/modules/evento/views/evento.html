@@ -1,0 +1,74 @@
+﻿<div data-ng-controller="EventoController as evento">
+    <div class="loading" ng-show="evento.mostrarCargando">
+        <p>
+            <i class="fa fa-spin fa-spinner"></i> <span ng-bind="evento.textoCargando"></span>
+        </p>
+    </div>
+    <div class="jumbotron ng-hide" data-ng-hide="evento.mostrarCargando">
+        <h1 ng-bind="evento.evento.Nombre"></h1>
+        <h2>
+            <img data-ng-src="{{ evento.actividad.Icono }}" /><span ng-bind="evento.actividad.Nombre"></span>
+        </h2>
+        <p><i class="fa fa-calendar"></i>
+            <small ng-bind="evento.evento.FechaInicio | fecha"></small> - <small ng-bind="evento.evento.FechaFin  | fecha"></small>
+        </p>
+        <p class="lead" ng-bind="evento.evento.Descripcion"></p>
+    </div>
+    <div class="row ng-hide" data-ng-hide="evento.mostrarCargando && evento.evento.Estado > 1">
+        <div class="col-md-4">
+            <h4>Inscripción</h4>
+            <p class="ng-hide" data-ng-show="evento.evento.EstadoRegistro == '0' && evento.participantes.length < evento.evento.MaximoNumeroParticipantes">Puede inscribirse en el evento <a class="btn btn-primary"><i class="fa fa-file"></i> Aquí</a></p>
+            <p class="ng-hide" data-ng-show="evento.evento.EstadoRegistro == '1' && evento.participantes.length < evento.evento.MaximoNumeroParticipantes">Para inscribirse al evento debe enviar sus datos a: </p>
+            <p class="ng-hide" data-ng-show="evento.evento.EstadoRegistro == '2' || evento.participantes.length >= evento.evento.MaximoNumeroParticipantes">La inscripción para este evento está cerrada.</p>
+        </div>
+        <div class="col-md-4">
+            <h4>Donde</h4>
+            <p></p>
+        </div>
+        <div class="col-md-4">
+            <h4>Cuando</h4>
+        </div>
+    </div>
+    <div class="row ng-hide" data-ng-hide="evento.mostrarCargando">
+        <div class="col-lg-6 ng-hide" ng-show="evento.participantes.length > 0">
+            <h2>Participantes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dorsal</th>
+                        <th>Nombre</th>
+                        <th>Ranking</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="participante in evento.participantes"></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-6 ng-hide" ng-show="evento.encuentros.length > 0"
+            <h2>Encuentros</h2>
+            <div data-ng-repeat="encuentro in evento.encuentros" class="row">
+                <div class="col-md-12">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ronda</th>
+                                <th>Lugar</th>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="encuentro in evento.encuentros">
+                                <td ng-bind="encuentro.Ronda"></td>
+                                <td ng-bind="encuentro.Lugar"></td>
+                                <td ng-bind="encuentro.Fecha | fecha"></td>
+                                <td ng-bind="encuentro.Hora"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

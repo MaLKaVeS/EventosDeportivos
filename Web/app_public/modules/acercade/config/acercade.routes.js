@@ -10,7 +10,7 @@
             .state('acercade', {
                 url: '/acercade',
                 templateUrl: 'app_public/modules/acercade/views/acercade.html',
-                data: { title: 'Eventos deportivos - Acerca De' },
+                data: { title: 'Acerca De - Eventos deportivos' },
                 views: {
                     '': {
                         templateUrl: 'app_public/modules/acercade/views/acercade.html'

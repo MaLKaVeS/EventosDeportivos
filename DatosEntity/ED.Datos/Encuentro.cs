@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 
 namespace ED.Datos
 {
+    public enum EncuentroEstado {
+        Pendiente,
+        EnCurso,
+        Finalizado
+    }
+
     public class Encuentro
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -20,6 +26,11 @@ namespace ED.Datos
         [MaxLength(1000)]
         public string Lugar { get; set; }
         public int Hora { get; set; }
+        public int Fecha { get; set; }
+        public int HoraInicio { get; set; }
+        public int FechaInicio { get; set; }
+        public EncuentroEstado Estado { get; set; }
+        public int TiempoTranscurrido { get; set; }
     }
 
     public class EncuentroParticipante

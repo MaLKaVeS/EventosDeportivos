@@ -36,11 +36,8 @@ class Actividades extends REST_Controller {
     /**
      * Recupera un rol si se envía el parametro id. Si no todos los roles en la base de datos.
      */
-    public function actividades_get()
+    public function actividades_get($id = NULL)
     {
-        // Miramos si hay un identificador en la petición.
-        $id = $this->get('id');
-
         $actividades = $this->Actividad->get($id);
 
         // Miramos si el resultado contiene algo

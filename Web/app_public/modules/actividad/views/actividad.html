@@ -1,0 +1,56 @@
+﻿<div data-ng-controller="ActividadController as actividad">   
+    <div class="loading" ng-show="actividad.mostrarCargando">
+        <p>
+            <i class="fa fa-spin fa-spinner"></i> <span ng-bind="actividad.textoCargando"></span>
+        </p>
+    </div>
+    <div class="jumbotron ng-hide" data-ng-hide="actividad.mostrarCargando">
+        <h1>
+            <img ng-src="{{ actividad.Icono }}" alt="actividad.Nombre" height="50" width="50" /> <span ng-bind="actividad.Nombre"></span>
+        </h1>
+        <p class="lead" ng-bind="actividad.Descripcion"></p>
+    </div>
+    <div class="row ng-hide" data-ng-hide="actividad.mostrarCargando">        
+        <div  class="col-lg-3">
+            <img ng-src="{{ actividad.Imagen }}" alt="{{ actividad.Nombre }}" width="200" />            
+        </div>
+        <div class="col-lg-9">
+            <h2>Eventos</h2>
+            <div data-ng-repeat="evento in actividad.Eventos" data-ng-if="$index % 3 == 0" class="row">
+                <div class="col-md-4">
+                    <h3 ng-bind="evento.Nombre"></h3>
+                    <p ng-bind="evento.Descripcion"></p>
+                    <p>
+                        <small ng-bind="evento.FechaInicio | fecha"></small> - <small ng-bind="evento.FechaFin  | fecha"></small>
+                    </p>
+                    <p>
+                        <a ng-href="#/eventos/{{evento.Id}}"><i class="fa fa-eye"></i> Ver detalles</a>
+                        <!--<a ui-sref="eventos/{{evento.Id}}">Ver detalles</a>-->
+                    </p>
+                </div>
+                <div class="col-md-4" ng-class="{ 'ng-hide' : !actividad.Eventos[$index + 1] }">
+                    <h3 ng-bind="actividad.Eventos[$index + 1].Nombre"></h3>
+                    <p ng-bind="actividad.Eventos[$index + 1].Descripcion"></p>
+                    <p>
+                        <small ng-bind="actividad.Eventos[$index + 1].FechaInicio | fecha"></small> - <small ng-bind="actividad.Eventos[$index + 1].FechaFin  | fecha"></small>
+                    </p>
+                    <p>
+                        <a ng-href="#/eventos/{{actividad.Eventos[$index + 1].Id}}"><i class="fa fa-eye"></i> Ver detalles</a>
+                        <!--<a ui-sref="eventos/{{actividad.Eventos[$index + 1].Id}}">Ver detalles</a>-->
+                    </p>
+                </div>
+                <div class="col-md-4" ng-class="{ 'ng-hide' : !actividad.Eventos[$index + 2] }">
+                    <h3 ng-bind="actividad.Eventos[$index + 2].Nombre"></h3>
+                    <p ng-bind="actividad.Eventos[$index + 2].Descripcion"></p>
+                    <p>
+                        <small ng-bind="actividad.Eventos[$index + 2].FechaInicio | fecha"></small> - <small ng-bind="actividad.Eventos[$index + 2].FechaFin  | fecha"></small>
+                    </p>
+                    <p>
+                        <a ng-href="#/eventos/{{actividad.Eventos[$index + 2].Id}}"><i class="fa fa-eye"></i> Ver detalles</a>
+                        <!--<a ui-sref="eventos/{{actividad.Eventos[$index + 1].Id}}">Ver detalles</a>-->
+                    </p>
+                </div>
+            </div>            
+        </div>
+    </div>        
+</div>

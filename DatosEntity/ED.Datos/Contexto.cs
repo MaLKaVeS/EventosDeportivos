@@ -22,5 +22,6 @@ namespace ED.Datos
         public DbSet<Encuentro> Encuentros { get; set; }
         public DbSet<ClaseEvento> ClaseEventos { get; set; }
         public DbSet<EncuentroParticipante> EncuentroParticipantes { get; set; }
+        public DbSet<Mensaje> Mensajes { get; set; }
     }
 }

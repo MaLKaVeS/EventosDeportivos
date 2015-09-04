@@ -29,6 +29,7 @@ class Eventos extends REST_Controller {
         $this->methods['eventos_put']['limit'] = 100; // 100 requests per hour per user/key
         $this->methods['eventos_delete']['limit'] = 50; // 50 requests per hour per user/key
         $this->methods['ultimos_get']['limit'] = 50; // 50 requests per hour per user/key
+        $this->methods['actividad_get']['limit'] = 50; // 50 requests per hour per user/key
 
         // Cargamos el modelo
         $this->load->model('Evento');
@@ -95,6 +96,57 @@ class Eventos extends REST_Controller {
             $limite = 10;
         }
         $eventos = $this->Evento->ultimos($actividad, $id, $limite);
+
+        // Miramos si el resultado contiene algo
+        if ($eventos)
+        {
+            // Set the response and exit
+            $this->response($eventos, REST_Controller::HTTP_OK); // OK (200) HTTP response code
+        }
+        else
+        {
+            if ($id === NULL && $actividad === NULL)
+            {
+                // No hay eventos en la bbdd
+                $this->response([
+                    'status' => FALSE,
+                    'message' => 'No se encontraron eventos'
+                ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) HTTP response code
+            }
+            else if (FALSE)
+            {
+                // Identificador no valido.
+                $this->response(NULL, REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) HTTP response code
+            }
+            else
+            {
+                // No hay un evento para ese identificador y actividad
+                $this->set_response([
+                   'status' => FALSE,
+                   'message' => 'No se encontro el Evento'
+                ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) HTTP response code
+            }
+        }
+    }
+
+    /**
+     * Recupera el listado de los últimos eventos.
+     */
+    public function actividad_get($actividad_id)
+    {
+        // Comprobar si el usuario tiene el rol adecuado para acceder a este método
+
+        // Si no hay actividad generamos respuesta de error y salimos
+        if (!isset($actividad_id))
+        {
+            $error = [
+                   'status' => FALSE,
+                   'message' => 'No ha se ha recibido identificador de la actividad'
+                ];
+            $this->response($error, REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) HTTP response code
+            return;
+        }
+        $eventos = $this->Evento->actividad($actividad_id);
 
         // Miramos si el resultado contiene algo
         if ($eventos)

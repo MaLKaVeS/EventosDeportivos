@@ -4,16 +4,36 @@
             <i class="fa fa-spin fa-spinner"></i> <span ng-bind="actividades.textoCargando"></span>
         </p>
     </div>
-    <div class="row">
-        <div ng-repeat="actividad in actividades.actividades" class="col-md-4">
-            <div>
-                <h2 ng-bind="actividad.Nombre"></h2>
-                <p ng-bind="actividad.Descripcion"></p>
-                <p>
-                    <a ng-href="#/eventos/{{evento.Id}}"><i class="fa fa-ticket"></i> Ver eventos</a>
-                    <!--<a ui-sref="eventos/{{evento.Id}}">Ver detalles</a>-->
-                </p>
-            </div>
+    <div ng-repeat="actividad in actividades.actividades" class="row" data-ng-if="$index % 3 == 0">
+        <div class="col-md-4">
+            <h2>
+                <img ng-src="{{ actividad.Icono }}" alt="actividad.Nombre" height="25" width="25" /> <span ng-bind="actividad.Nombre"></span>
+            </h2>
+            <p ng-bind="actividad.Descripcion"></p>
+            <p>
+                <a ng-href="#/actividad/{{actividad.Id}}"><i class="fa fa-ticket"></i> Ver detalles</a>
+                <!--<a ui-sref="eventos/{{evento.Id}}">Ver detalles</a>-->
+            </p>
+        </div>
+        <div class="col-md-4" ng-class="{ 'ng-hide' : !actividades.actividades[$index + 1] }">
+            <h2>
+                <img ng-src="{{ actividades.actividades[$index + 1].Icono }}" alt="actividades.actividades[$index + 1].Nombre" height="25" width="25" /> <span ng-bind="actividades.actividades[$index + 1].Nombre"></span>
+            </h2>
+            <p ng-bind="actividades.actividades[$index + 1].Descripcion"></p>
+            <p>
+                <a ng-href="#/actividad/{{actividades.actividades[$index + 1].Id}}"><i class="fa fa-ticket"></i> Ver detalles</a>
+                <!--<a ui-sref="eventos/{{evento.Id}}">Ver detalles</a>-->
+            </p>
+        </div>
+        <div class="col-md-4" ng-class="{ 'ng-hide' : !actividades.actividades[$index + 2] }">
+            <h2>
+                <img ng-src="{{ actividades.actividades[$index + 2].Icono }}" alt="actividades.actividades[$index + 2].Nombre" height="25" width="25" /> <span ng-bind="actividades.actividades[$index + 2].Nombre"></span>
+            </h2>
+            <p ng-bind="actividades.actividades[$index + 2].Descripcion"></p>
+            <p>
+                <a ng-href="#/actividad/{{actividades.actividades[$index + 2].Id}}"><i class="fa fa-ticket"></i> Ver detalles</a>
+                <!--<a ui-sref="eventos/{{actividades.actividades[$index + 2].Id}}">Ver detalles</a>-->
+            </p>
         </div>
     </div>
 

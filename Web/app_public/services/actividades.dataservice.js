@@ -8,35 +8,49 @@
     ActividadesDataService.$inject = ['$http', '$q', '$timeout', '$location'];
 
     function ActividadesDataService($http, $q, $timeout, $location) {
-        var serviceBase = window.location.protocol + '//' + window.location.host +
-            ((window.location.hostname === 'localhost') ? '/index.php' : '/pardo/index.php');
+        var serviceBase = ApplicationConfiguration.applicationUrlServiceBase + '/api/actividades/actividades';
 
         var service = {
-            getActividades: getActividades
+            getActividades: getActividades,
+            getActividad: getActividad,
         }
 
         return service;
 
         function getActividades() {
-            var defered = $q.defer();
-            var promise = defered.promise;
 
-            $http.get(serviceBase + '/api/actividades/actividades')
-                .then(getActividadesComplete, getActividadesFail);
-
-            return promise;
+            return $http.get(serviceBase).then(getActividadesComplete, getActividadesFail);
 
             function getActividadesComplete(data) {
                 if (data.status === 200) {
-                    defered.resolve(data.data);
+                    return data.data;
                 }
                 else {
-                    defered.reject(data.data);
+                    return data.data;
                 }
             }
 
-            function getActividadesFail(err) {
-                defered.reject(err);
+            function getActividadesFail(error) {
+                return error;
+            }
+        }
+
+        function getActividad(id) {
+
+            return $http.get(serviceBase + '/' + id)
+                        .then(getActividadesComplete, getActividadesFail);
+
+            function getActividadesComplete(data) {
+                if (data.status === 200) {
+                    return data.data[0];
+                }
+                else {
+                    return {};
+                }
+            }
+
+            function getActividadesFail(error) {
+                return error;
             }
         }
     }

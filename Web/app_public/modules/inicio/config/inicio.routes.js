@@ -10,7 +10,7 @@
             .state('inicio', {
                 url: '/inicio',
                 templateUrl: 'app_public/modules/inicio/views/inicio.html',
-                data: { title: 'Eventos deportivos - Inicio' },
+                data: { title: 'Eventos deportivos' },
                 views: {
                     '': {
                         templateUrl: 'app_public/modules/inicio/views/inicio.html'

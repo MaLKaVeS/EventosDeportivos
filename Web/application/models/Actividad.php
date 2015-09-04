@@ -13,6 +13,9 @@ class Actividad extends CI_Model
     public $Id;
     public $Nombre;
     public $Descripcion;
+    public $Imagen;
+    public $Icono;
+    public $ImagenPortada;
 
     const TABLA  = "Actividads";
 

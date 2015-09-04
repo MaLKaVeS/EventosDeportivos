@@ -97,7 +97,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- Angular UI Bootstrap -->
     <link href="bower_components/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
     <!-- Alvaro CSS -->
-    <link href="/app_admin/theme/site.css" rel="stylesheet">
+    <?php
+    if (isset($_SERVER['CI_ENV']) && $_SERVER['CI_ENV'] === 'production')
+    {
+        echo '<link href="app_admin/theme/site.css" rel="stylesheet">';
+    }
+    else
+    {
+        echo '<link href="/app_admin/theme/site.css" rel="stylesheet">';
+    }
+    ?>
+    
     <!-- Custom Fonts -->
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -125,6 +135,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <!-- Vendors -->
     <script src="bower_components/jquery/jquery.min.js"></script>
+    <script src="bower_components/lodash/lodash.min.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-i18n/angular-locale_es-es.js"></script>
@@ -145,7 +156,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- Services -->
     <script src="app_public/services/actividades.dataservice.js"></script>
     <script src="app_public/services/contacto.dataservice.js"></script>
+    <script src="app_public/services/encuentros.dataservice.js"></script>
     <script src="app_public/services/eventos.dataservice.js"></script>
+    <script src="app_public/services/participantes.dataservice.js"></script>
     <script src="app_public/services/usuarios.dataservice.js"></script>
 
     <!-- Inicio Modules -->
@@ -194,6 +207,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="app_public/modules/contacto/contacto.init.js"></script>
     <script src="app_public/modules/contacto/config/contacto.routes.js"></script>
     <script src="app_public/modules/contacto/controllers/contacto.controller.js"></script>
+
+    <!-- Actividad Modules -->
+    <script src="app_public/modules/actividad/actividad.init.js"></script>
+    <script src="app_public/modules/actividad/config/actividad.routes.js"></script>
+    <script src="app_public/modules/actividad/controllers/actividad.controller.js"></script>
+
+    <!-- Evento Modules -->
+    <script src="app_public/modules/evento/evento.init.js"></script>
+    <script src="app_public/modules/evento/config/evento.routes.js"></script>
+    <script src="app_public/modules/evento/controllers/evento.controller.js"></script>
 
     <!-- Acceso Modules -->
     <script src="app_public/modules/login/login.init.js"></script>

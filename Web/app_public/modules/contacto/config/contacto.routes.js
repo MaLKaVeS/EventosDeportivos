@@ -10,7 +10,7 @@
             .state('contacto', {
                 url: '/contacto',
                 templateUrl: 'app_public/modules/contacto/views/contacto.html',
-                data: { title: 'Eventos deportivos - Contacto' },
+                data: { title: 'Contacto - Eventos deportivos' },
                 views: {
                     '': {
                         templateUrl: 'app_public/modules/contacto/views/contacto.html'

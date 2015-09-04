@@ -10,7 +10,7 @@
             .state('actividades', {
                 url: '/actividades',
                 templateUrl: 'app_public/modules/actividades/views/actividades.html',
-                data: { title: 'Eventos deportivos - Actividades' },
+                data: { title: 'Actividades - Eventos deportivos' },
                 views: {
                     '': {
                         templateUrl: 'app_public/modules/actividades/views/actividades.html'

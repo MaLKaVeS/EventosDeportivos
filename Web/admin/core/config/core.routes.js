@@ -6,7 +6,7 @@
            .config(['$urlRouterProvider',
 	                function ($urlRouterProvider) {
 
-	                    $urlRouterProvider.when('', '/inicio');
+	                    $urlRouterProvider.when('', '/login');
 
 	                    $urlRouterProvider.otherwise('/pagina404');
 

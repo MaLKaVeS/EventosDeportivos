@@ -94,6 +94,14 @@
     <Compile Include="Migrations\201508231013514_EncuentroParticipantes.Designer.cs">
       <DependentUpon>201508231013514_EncuentroParticipantes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509032127467_Imagenes.cs" />
+    <Compile Include="Migrations\201509032127467_Imagenes.Designer.cs">
+      <DependentUpon>201509032127467_Imagenes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509040017408_Mensajes.cs" />
+    <Compile Include="Migrations\201509040017408_Mensajes.Designer.cs">
+      <DependentUpon>201509040017408_Mensajes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MySqlConfiguration.cs" />
     <Compile Include="MySqlHistoryContext.cs" />
@@ -129,6 +137,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508231013514_EncuentroParticipantes.resx">
       <DependentUpon>201508231013514_EncuentroParticipantes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509032127467_Imagenes.resx">
+      <DependentUpon>201509032127467_Imagenes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509040017408_Mensajes.resx">
+      <DependentUpon>201509040017408_Mensajes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

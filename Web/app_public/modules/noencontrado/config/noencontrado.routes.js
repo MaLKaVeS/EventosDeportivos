@@ -10,7 +10,7 @@
             .state('no-encontrado', {
                 url: '/no-encontrado',
                 templateUrl: 'app_public/modules/noencontrado/views/noencontrado.html',
-                data: { title: 'Eventos deportivos - No Encontrado' },
+                data: { title: 'No Encontrado - Eventos deportivos' },
                 views: {
                     '': {
                         templateUrl: 'app_public/modules/noencontrado/views/noencontrado.html'

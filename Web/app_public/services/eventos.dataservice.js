@@ -8,63 +8,79 @@
     EventosDataService.$inject = ['$http', '$q', '$timeout', '$location'];
 
     function EventosDataService($http, $q, $timeout, $location) {
-        var serviceBase = window.location.protocol + '//' + window.location.host +
-            ((window.location.hostname === 'localhost') ? '/index.php' : '/pardo/index.php');
-        
+        var serviceBase = ApplicationConfiguration.applicationUrlServiceBase + '/api/eventos';
+
         var service = {
+            getEventos: getUltimosEventos,
             getUltimosEventos: getUltimosEventos,
             getEventoById: getEventoById,
             getEventosFiltrados: getEventosFiltrados,
+            getEventosActividad: getEventosActividad,
         }
 
         return service;
 
         function getUltimosEventos() {
-            var defered = $q.defer();
-            var promise = defered.promise;
-            
-            $http.get(serviceBase + '/api/eventos/ultimos')
-                .then(getUltimosEventosComplete, getUltimosEventosFail);
-                // .catch(function(message) {
-                //     exception.catcher('XHR Failed para getActividades')(message);
-                //     $location.url('/');
-                // });
+
+            return $http.get(serviceBase + '/ultimos')
+                        .then(getUltimosEventosComplete, getUltimosEventosFail);
+
             return promise;
-                    
+
             function getUltimosEventosComplete(data) {
-                if (data.status === 200)
-                {
-                  defered.resolve(data.data);
+                if (data.status === 200) {
+                    return data.data;
                 }
                 else {
-                    defered.reject(data.data);
+                    return data.data;
                 }
             }
-            
+
             function getUltimosEventosFail() {
-                
+
             }
         }
 
-        function getEventoById(id)
-        {
-            var defered = $q.defer();
-            var promise = defered.promise;
+        function getEventoById(id) {
+            return getUltimosEventos().then(getEventosComplete, getEventosFail);
 
-            var testProvider = {};
+            function getEventosComplete(data) {
+                var result = _.find(data, function (evento) { return evento.Id === id; });
+                if (result) {
+                    return result;
+                }
+                else {
+                    return {}
+                }
+            }
 
-            testProvider.id = id;
-            testProvider.name = "Proveedor " + id;
-
-            $timeout(function () {
-                defered.resolve(testProvider);
-            }, 5000); // delay 5 s
-
-            return promise;
+            function getEventosFail(error) {
+                return error;
+            }
         }
-        
+
         function getEventosFiltrados() {
-            
+
+        }
+
+        function getEventosActividad(idActividad) {
+
+            return $http.get(serviceBase + '/actividad/' + idActividad)
+                        .then(getEventosActividadComplete, getEventosActividadFail);
+            return promise;
+
+            function getEventosActividadComplete(data) {
+                if (data.status === 200) {
+                    return data.data;
+                }
+                else {
+                    return data.data;
+                }
+            }
+
+            function getEventosActividadFail(data) {
+                return data.data;
+            }
         }
     }
 
