@@ -1,8 +1,8 @@
-﻿<div id="wrapper" data-ng-controller="Eventos as vm">
+﻿<div id="wrapper" data-ng-controller="EventosController as vm">
 	<!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div data-ng-include="'/app_admin/views/navbar.html'"></div>
-        <div data-ng-include="'/app_admin/views/sidebar.html'"></div>
+        <div data-ng-include="'admin/core/views/navbar.html'"></div>
+        <div data-ng-include="'admin/core/views/sidebar.html'"></div>
     </nav>
 	
 	<div id="page-wrapper">
@@ -13,7 +13,20 @@
 			<!-- /.col-lg-12 -->
 		</div>
 		<div class="row margin-top-20">
-			<div class="col-lg-12 margin-bottom-10">
+            <div class="col-lg-6 margin-bottom-10">
+                <form role="form" class="form-inline">
+                    <div class="row">
+                        <div class="col-lg-12 form-group">
+                            <label>Buscar</label>
+                            <input type="text" ng-model="vm.buscar" name="buscar" class="form-control" placeholder="Buscar ..." />
+                            <button type="reset" class="btn btn-primary">
+                                <i class="fa fa-minus-circle"></i> Limpiar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+			<div class="col-lg-6 margin-bottom-10">
 				<button type="button" class="btn btn-success rigth" ng-click="vm.clickAdd()"><i class="fa fa-plus"> Añadir</i></button>
 			</div>
 			<div class="col-lg-12">
@@ -30,18 +43,21 @@
 							<tr>
 								<th>Nombre</th>
 								<th>Actividad</th>
-								<th>Descripcion</th>
-								<th>Duracion</th>
+								<!--<th>Descripcion</th>-->
+								<th>Fechas</th>
 								<th>Inscripcion</th>
 								<th>Estado</th>
 								<th></th>
 							</tr>
 						</thead>
-						<tbody ng-repeat="evento in vm.eventos | orderBy: '-FechaInicio'">
+						<tbody ng-repeat="evento in vm.eventos | filter: vm.buscar | orderBy: '-FechaInicio'">
 							<tr class="gradeA" ng-class="{ odd: $index % 2 != 0, even: $index % 2 == 0}">
-								<td ng-bind="evento.Nombre"></td>
+								<td>
+                                    <span ng-bind="evento.Nombre"></span>
+                                    <small ng-bind="evento.Descripcion"></small>
+                                </td>
 								<td ng-repeat="actividad in vm.actividades | filter: evento.Actividad_Id" ng-bind="actividad.Nombre"></td>
-								<td ng-bind="evento.Descripcion"></td>
+								<!--<td ></td>-->
 								<td>
 									<span ng-bind="evento.FechaInicio | fecha"></span>
 									-									
@@ -70,22 +86,22 @@
 						<div class="modal-body">
 							<form role="form">
 								<div class="row">
-									<div class="col-lg-12 form-group" ng-class="{'hasError': vm.valNombre}">
+									<div class="col-lg-12 form-group" ng-class="{'has-error': !vm.valNombre && vm.enviado}">
 										<label>Nombre</label>
 										<input ng-model="vm.addNombre" name="nombre" type="text" class="form-control" placeholder="Nombre" />
 									</div>
-									<div class="col-lg-12 form-group"  ng-class="{'hasError': vm.valDescripcion }">
+									<div class="col-lg-12 form-group"  ng-class="{'has-error': vm.valDescripcion }">
 										<label>Descripcion</label>
 										<textarea  ng-model="vm.addDescripcion" name="descripcion" type="text" class="form-control" rows="3" placeholder="Descripcion" />
 									</div>
-									<div class="col-lg-12 form-group"  ng-class="{'hasError': vm.valActividad }">
+									<div class="col-lg-12 form-group"  ng-class="{'has-error': !vm.valActividad_Id  && vm.enviado}">
 										<label>Actividad</label>
 										<select class="form-control"  ng-model="vm.addActividad_Id" ng-options="actividad.Id as actividad.Nombre for actividad in vm.actividades | orderBy : 'Nombre'">
 											<option value="">- Elegir actividad</option>
 										</select>
 										<!--<input  ng-model="vm.addEmail" name="descripcion" type="text" class="form-control" rows="3" placeholder="Email" />-->
 									</div>
-									<div class="col-lg-6 form-group"  ng-class="{'hasError': vm.valFechaInicio}">
+									<div class="col-lg-6 form-group"  ng-class="{'has-error': !vm.valFechaInicio && vm.enviado}">
 										<label>Fecha Inicio</label>
 										<p class="input-group">
 											<input  ng-model="vm.addFechaInicio" name="fechaInicio" type="text" class="form-control" placeholder="Fecha en formato dd/mm/yyyy"
@@ -98,7 +114,7 @@
 											</span>
 										</p>
 									</div>
-									<div class="col-lg-6 form-group"  ng-class="{'hasError': vm.valFechaFin}">
+									<div class="col-lg-6 form-group"  ng-class="{'has-error': !vm.valFechaFin  && vm.enviado}">
 										<label>Fecha Fin</label>
 										<p class="input-group">
 											<input  ng-model="vm.addFechaFin" name="fechaFin" type="text" class="form-control" placeholder="Fecha en formato dd/mm/yyyy"
@@ -129,6 +145,9 @@
 									</div>
 								</div>
 							</form>
+                            <div class="ng-hide alert alert-danger margin-top-20" ng-show="vm.hayError">
+                                <i class="fa fa-exclamation"></i> <span ng-bind="vm.mensajeError"></span>
+                            </div>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

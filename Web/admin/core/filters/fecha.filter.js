@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
     angular
-        .module('eventos.core')
+        .module(ApplicationConfiguration.applicationCoreModuleName)
         .filter('fecha', function () {
             return function (fecha) {
                 return AplicaFormatoFecha(fecha);

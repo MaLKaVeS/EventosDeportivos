@@ -7,13 +7,13 @@
     angular.module(moduleName).config(['$stateProvider',
     function ProvidersRouter($stateProvider) {
         $stateProvider
-            .state('login', {
-                url: '/login',
-                templateUrl: 'admin/modules/login/views/login.html',
-                data: { title: 'Acceso - Eventos deportivos' },
+            .state('panel', {
+                url: '/panel',
+                templateUrl: 'admin/modules/panel/views/panel.html',
+                data: { title: 'Panel de Administración - Eventos deportivos' },
                 views: {
                     '': {
-                        templateUrl: 'admin/modules/login/views/login.html'
+                        templateUrl: 'admin/modules/panel/views/panel.html'
                     }
                 }
             });

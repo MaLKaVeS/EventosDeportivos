@@ -3,13 +3,6 @@
 
 (function () {
 
-    //     angular.module(ApplicationConfiguration.applicationCoreModuleName)
-    //         .factory('FechaDataService', FechaDataService);
-    // 
-    //     FechaDataService.$inject = ['$q'];
-    // 
-    //     function FechaDataService($q) {
-
     var service = {
         fechaToInt: fechaToInt,
     }
@@ -42,4 +35,4 @@
         }
         return cadena;
     }
-});
+})();

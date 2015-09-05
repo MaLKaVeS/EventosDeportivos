@@ -1,8 +1,8 @@
-﻿<div id="wrapper" data-ng-controller="Ajustes as vm">
+﻿<div id="wrapper" data-ng-controller="AjustesController as vm">
     <!-- Navigation -->
 	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-		<div data-ng-include="'/app_admin/views/navbar.html'"></div>
-		<div data-ng-include="'/app_admin/views/sidebar.html'"></div>
+		<div data-ng-include="'admin/core/views/navbar.html'"></div>
+		<div data-ng-include="'admin/core/views/sidebar.html'"></div>
 	</nav>
 	<div class="loading" ng-show="vm.mostrarCargando">
 		<i class="fa fa-spin fa-spinner"></i>

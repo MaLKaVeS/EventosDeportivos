@@ -15,12 +15,12 @@
                     '': {
                         templateUrl: 'admin/modules/usuarios/views/usuarios.html'
                     },
-                    'viewRoles': {
-                        templateUrl: 'admin/modules/usuarios/views/roles.html'
-                    },
-                    'editRoles': {
-                        templateUrl: 'admin/modules/usuarios/views/editRoles.html'
-                    },
+                    //'viewRoles': {
+                    //    templateUrl: 'admin/modules/usuarios/views/roles.html'
+                    //},
+                    //'editRoles': {
+                    //    templateUrl: 'admin/modules/usuarios/views/editRoles.html'
+                    //},
                 }
             })
             .state('editUsuario', {

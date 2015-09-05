@@ -5,12 +5,15 @@
     angular.module(ApplicationConfiguration.applicationCoreModuleName)
         .factory('LoginDataService', LoginDataService);
 
-    LoginDataService.$inject = ['$http', '$q', '$timeout', '$location'];
+    LoginDataService.$inject = ['$http', '$q', '$timeout', '$location', 'localStorageService'];
 
-    function LoginDataService($http, $q, $timeout, $location) {
+    function LoginDataService($http, $q, $timeout, $location, localStorageService) {
+
+        $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+
         var serviceBase = ApplicationConfiguration.applicationUrlServiceBase;
 
-        var _authentication = {
+        var authentication = {
             isAuth: false,
             userName: ''
         };
@@ -24,38 +27,32 @@
         return service;
 
         function getLogin(loginData) {
-            // var deferred = $q.defer();
 
             return $http({
                 method: 'POST', 
                 url: serviceBase + '/api/usuarios/acceso?XDEBUG_SESSION_START=CB3FFBE9',
                 data: 'Usuario=' + loginData.usuario + '&Clave=' + loginData.clave         
                 })
-                .then(postAccesoComplete, postAccesoFail)
-                .catch(function(message) {
-                    exception.catcher('XHR Failed para getLogin')(message);
-                });
-                
-
-            // return deferred.promise;
+                .then(postAccesoComplete, postAccesoFail);
             
-            function postAccesoComplete(response) {
-                // $timeout(function() {
-                    localStorageService.set('authorizationData', { token: /*response.access_token*/'TokenTemporal', 
-                        userName: loginData.usuario });
+            function postAccesoComplete(data) {
+                if (data.status == 200) {
+                    localStorageService.set('authorizationData', {
+                        token: /*response.access_token*/'TokenTemporal',
+                        userName: loginData.usuario
+                    });
 
-                    _authentication.isAuth = true;
-                    _authentication.userName = loginData.usuario;
+                    authentication.isAuth = true;
+                    authentication.userName = loginData.usuario;
 
-                    return _authentication;
-                    // deferred.resolve(_authentication);
-        // }, 1000);
+                    return authentication;
+                }
+            
             }
             
             function postAccesoFail(err) {
                 LogOut();
-                throw 'Login incorrecto';
-                // deferred.reject(err);
+                return authentication;
             }
         }
 
@@ -71,8 +68,8 @@
 
             if (authData) {
                 if (authData.token != '' || authData.token != undefined) {
-                    _authentication.isAuth = true;
-                    _authentication.userName = authData.userName;
+                    authentication.isAuth = true;
+                    authentication.userName = authData.userName;
                 }
             }
             return authData;
@@ -81,10 +78,44 @@
         function LogOut() {
             localStorageService.remove('authorizationData');
 
-            _authentication.isAuth = false;
-            _authentication.userName = '';
-            
-            $location.url('/');            
+            authentication.isAuth = false;
+            authentication.userName = '';
         }
+
+        var param = function (obj) {
+            var query = '', name, value, fullSubName, subName, subValue, innerObj, i;
+
+            for (name in obj) {
+                value = obj[name];
+
+                if (value instanceof Array) {
+                    for (i = 0; i < value.length; ++i) {
+                        subValue = value[i];
+                        fullSubName = name + '[' + i + ']';
+                        innerObj = {};
+                        innerObj[fullSubName] = subValue;
+                        query += param(innerObj) + '&';
+                    }
+                }
+                else if (value instanceof Object) {
+                    for (subName in value) {
+                        subValue = value[subName];
+                        fullSubName = name + '[' + subName + ']';
+                        innerObj = {};
+                        innerObj[fullSubName] = subValue;
+                        query += param(innerObj) + '&';
+                    }
+                }
+                else if (value !== undefined && value !== null)
+                    query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
+            }
+
+            return query.length ? query.substr(0, query.length - 1) : query;
+        };
+
+        // Override $http service's default transformRequest
+        $http.defaults.transformRequest = [function (data) {
+            return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
+        }];
     }
 })();

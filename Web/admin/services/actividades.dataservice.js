@@ -8,8 +8,11 @@
     ActividadesDataService.$inject = ['$http', '$q', '$timeout', '$location'];
 
     function ActividadesDataService($http, $q, $timeout, $location) {
-        var serviceBase = window.location.protocol + '//' + window.location.host +
-            ((window.location.hostname === 'localhost') ? '/index.php' : '/pardo/index.php');
+        $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+
+        var serviceBase = ApplicationConfiguration.applicationUrlServiceBase;
+
+        var utils = ApplicationConfiguration.applicationHelperFunctions;
 
         var service = {
             getActividades: getActividades,
@@ -46,18 +49,14 @@
 
         function postActividades(actividad) {            
             return $http({
-                method: 'POST', 
+                method: 'POST',
                 url: serviceBase + '/api/actividades/actividades',
-                data: 'Nombre=' + encodeURIComponent(actividad.Nombre) 
-                + '&Descripcion=' + encodeURIComponent(actividad.Descripcion)                
-                })
-                .then(postActividadesComplete)
-                .catch(function(message) {
-                    exception.catcher('XHR Failed para postActividades')(message);
-                    // $location.url('/');
-                });
+                data: 'Nombre=' + encodeURIComponent(actividad.Nombre)
+                + '&Descripcion=' + encodeURIComponent(actividad.Descripcion)
+            })
+                .then(postActividadesComplete);
 
-            function postActividadesComplete(data, status, headers, config) {
+            function postActividadesComplete(data) {
                 return data;
             }
         }
@@ -69,26 +68,18 @@
                 data: 'Id=' + actividad.Id + '&Nombre=' + encodeURIComponent(actividad.Nombre)
                  + '&Descripcion=' + encodeURIComponent(actividad.Descripcion)
                  })
-                .then(putActividadesComplete)
-                .catch(function(message) {
-                    exception.catcher('XHR Failed para putActividades')(message);
-                    // $location.url('/');
-                });
+                .then(putActividadesComplete);
 
-            function putActividadesComplete(data, status, headers, config) {
+            function putActividadesComplete(data) {
                 return data;
             }
         }
         
         function deleteActividades(actividad) {
             return $http.delete(serviceBase + '/api/actividades/actividades/' + actividad)
-                .then(deleteActividadesComplete)
-                .catch(function(message) {
-                    exception.catcher('XHR Failed para deleteActividades')(message);
-                    // $location.url('/');
-                });
+                .then(deleteActividadesComplete);
 
-            function deleteActividadesComplete(data, status, headers, config) {
+            function deleteActividadesComplete(data) {
                 return data;
             }
         }
@@ -96,8 +87,7 @@
         function getActividadesCount() {
             var count = 0;
             return getActividades()
-                .then(getActividadesComplete)
-                .catch(exception.catcher('XHR Failed para getActividadesCount'));
+                .then(getActividadesComplete);
 
             function getActividadesComplete (data) {
                 if (data !== undefined) { 
@@ -106,6 +96,42 @@
                 return $q.when(count);
             }
         }
+
+        var param = function (obj) {
+            var query = '', name, value, fullSubName, subName, subValue, innerObj, i;
+
+            for (name in obj) {
+                value = obj[name];
+
+                if (value instanceof Array) {
+                    for (i = 0; i < value.length; ++i) {
+                        subValue = value[i];
+                        fullSubName = name + '[' + i + ']';
+                        innerObj = {};
+                        innerObj[fullSubName] = subValue;
+                        query += param(innerObj) + '&';
+                    }
+                }
+                else if (value instanceof Object) {
+                    for (subName in value) {
+                        subValue = value[subName];
+                        fullSubName = name + '[' + subName + ']';
+                        innerObj = {};
+                        innerObj[fullSubName] = subValue;
+                        query += param(innerObj) + '&';
+                    }
+                }
+                else if (value !== undefined && value !== null)
+                    query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
+            }
+
+            return query.length ? query.substr(0, query.length - 1) : query;
+        };
+
+        // Override $http service's default transformRequest
+        $http.defaults.transformRequest = [function (data) {
+            return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
+        }];
     }
 
 })();

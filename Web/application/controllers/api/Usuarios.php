@@ -230,7 +230,10 @@ class Usuarios extends REST_Controller {
 
     public function acceso_post()
     {
-        $resultado = $this->Usuario->acceso($this->post('Usuario'),$this->post('Clave'));
+        $email = $this->post('Usuario');
+        $clave = $this->post('Clave');
+
+        $resultado = $this->Usuario->acceso($email, $clave);
         $status = REST_Controller::HTTP_BAD_REQUEST; // BAD_REQUEST (400) HTTP response code
         if ($resultado)
         {

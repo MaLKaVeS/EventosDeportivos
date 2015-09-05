@@ -8,7 +8,7 @@
 
 	                    $urlRouterProvider.when('', '/login');
 
-	                    $urlRouterProvider.otherwise('/pagina404');
+	                    $urlRouterProvider.otherwise('/no-encontrado');
 
 	                }
            ]);

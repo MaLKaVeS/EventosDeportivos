@@ -1,23 +1,31 @@
 ﻿/// <reference path="../_all.js" />
+'use strict';
 (function () {
-    'use strict';
-    angular.module('eventos.actividades', [])
+
+    var moduleName = ApplicationConfiguration.applicationModuleName + ".actividades";
+
+    angular.module(moduleName)
 		.controller('ActividadesController', ActividadesController);
 
-    ActividadesController.$inject = ['$timeout', '$location', 'ActividadesDataService', 'logger'];
+    ActividadesController.$inject = ['$timeout', '$location', 'LoginDataService', 'ActividadesDataService'];
 
-    function ActividadesController($timeout, $location, dataservice, logger) {
+    function ActividadesController($timeout, $location, LoginDataService, ActividadesDataService) {
         var vm = this;
         /* Propiedades */
         vm.title = 'Actividades | Eventos Deportivos';
         vm.usuario = '';
         vm.actividades = [];
+        vm.buscar = '';
         vm.numactividades = 0;
         vm.actividad = {};
         vm.idActividad = '';
         vm.mostrarCargando = true;
         vm.addNombre = '';
         vm.addDescripcion = '';
+        vm.addIcono = '';
+        vm.addImagen = '';
+        vm.hayError = false;
+        vm.mensajeError = 'Error al guardar la actividad';
 
         vm.valNombre = false;
         vm.valDescripcion = false;
@@ -37,17 +45,19 @@
         activate();
 
         function activate() {
-            logger.info('Pantalla de actividades activa');
 
-            dataservice.getActividades()
-				.then(getActividadesComplete)
-				.catch(function (message) {
-				    // exception.catcher('XHR Failed para Panel.activate')(message);
-				});
+            if (!LoginDataService.getAuthData()) {
+                $location.path('/login');
+            }
+            else {
 
-            function getActividadesComplete(data) {
-                vm.actividades = data;
-                vm.numactividades = data.length;
+                ActividadesDataService.getActividades()
+                    .then(getActividadesComplete);
+
+                function getActividadesComplete(data) {
+                    vm.actividades = data;
+                    vm.numactividades = data.length;
+                }
             }
         }
 
@@ -60,28 +70,24 @@
         function clickGrabar() {
             if (vm.validar()) {
                 vm.mostrarCargando = true;
+
+                vm.actividad.Nombre = vm.addNombre;
+                vm.actividad.Descripcion = vm.addDescripcion;
+                vm.actividad.Imagen = vm.addImagen;
+                vm.actividad.Icono = vm.addIcono;
+
                 if (vm.idActividad !== '') {
-                    vm.actividad.Nombre = vm.addNombre;
-                    vm.actividad.Descripcion = vm.addDescripcion;
-                    dataservice.putActividades(vm.actividad)
-					.then(grabarActividadComplete)
-					.catch(function () {
-					    $('#modalActividad').modal('hide');
-					});
+                    ActividadesDataService.putActividades(vm.actividad)
+					.then(grabarActividadComplete, grabarActividadFail);
                 }
                 else {
-                    vm.actividad.Nombre = vm.addNombre;
-                    vm.actividad.Descripcion = vm.addDescripcion;
-
-                    dataservice.postActividades(vm.actividad)
-					.then(grabarActividadComplete)
-					.catch(function () {
-					    $('#modalActividad').modal('hide');
-					});
+                    ActividadesDataService.postActividades(vm.actividad)
+					.then(grabarActividadComplete, grabarActividadFail);
                 }
             }
             else {
-                logger.error('El nombre debe ser un texto de más de 5 caracteres.');
+                vm.hayError = true;
+                vm.mensajeError = 'Debe indicar el nombre de la actividad';
             }
 
             function grabarActividadComplete() {
@@ -91,7 +97,14 @@
                 vm.idActividad = '';
                 vm.addNombre = '';
                 vm.addDescripcion = '';
+                vm.addImagen = '';
+                vm.addIcono = '';
                 activate();
+            }
+
+            function grabarActividadFail() {
+                vm.hayError = true;
+                vm.mensajeError = 'Ocurrió un error al guardar la actividad';
             }
         }
 
@@ -123,11 +136,8 @@
         }
 
         function clickConfirmaBorrar() {
-            dataservice.deleteActividades(vm.idActividad)
-				.then(borradoComplete)
-				.catch(function () {
-
-				});
+            ActividadesDataService.deleteActividades(vm.idActividad)
+				.then(borradoComplete);
 
             function borradoComplete() {
                 vm.actividad = {};

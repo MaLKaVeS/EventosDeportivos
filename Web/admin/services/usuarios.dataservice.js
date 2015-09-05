@@ -5,11 +5,14 @@
     angular.module(ApplicationConfiguration.applicationCoreModuleName)
         .factory('UsuariosDataService', UsuariosDataService);
 
-    UsuariosDataService.$inject = ['$http', '$q', '$timeout', '$location', 'FechaDataService'];
+    UsuariosDataService.$inject = ['$http', '$q', '$timeout', '$location'];
 
-    function UsuariosDataService($http, $q, $timeout, $location, FechaDataService) {
-        var serviceBase = window.location.protocol + '//' + window.location.host +
-            ((window.location.hostname === 'localhost') ? '/index.php' : '/pardo/index.php');
+    function UsuariosDataService($http, $q, $timeout, $location) {
+        $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+
+        var serviceBase = ApplicationConfiguration.applicationUrlServiceBase;
+
+        var utils = ApplicationConfiguration.applicationHelperFunctions;
 
         var service = {
             getValidacionEmail: getValidacionEmail,
@@ -58,7 +61,7 @@
                 url: serviceBase + '/api/actividades/actividades',
                 method: 'POST',
                 data: 'Nombre=' + encodeURIComponent(usuario.Nombre) + '&Apellidos=' + encodeURIComponent(usuario.Apellidos) +
-                '&Email=' + encodeURIComponent(usuario.Email) + '&FechaNacimiento=' + FechaDataService.fechaToInt(usuario.FechaNacimiento)
+                '&Email=' + encodeURIComponent(usuario.Email) + '&FechaNacimiento=' + utils.FechaHelper.fechaToInt(usuario.FechaNacimiento)
             })
                 .then(getActividadesComplete, getActividadesFail);
 
@@ -80,12 +83,9 @@
 
         function getUsuarios() {
             return $http.get(serviceBase + '/api/usuarios/usuarios')
-                .then(getUsuariosComplete)
-                .catch(function(message) {
-                    exception.catcher('XHR Failed para getUsuarios')(message);
-                });
+                .then(getUsuariosComplete);
 
-            function getUsuariosComplete(data, status, headers, config) {
+            function getUsuariosComplete(data) {
                 return data.data;
             }
         }
@@ -93,8 +93,7 @@
         function getUsuariosCount() {
             var count = 0;
             return getUsuarios()
-                .then(getUsuariosComplete)
-                .catch(exception.catcher('XHR Failed para getUsuariosCount'));
+                .then(getUsuariosComplete);
 
             function getUsuariosComplete (data) {
                 if (data !== undefined) { 
@@ -106,10 +105,7 @@
         
         function getUsuario(usuario) {
             return $http.get(serviceBase + '/api/usuarios/usuarios/' + usuario)
-                .then(getUsuarioComplete)
-                .catch(function(message) {
-                    exception.catcher('XHR Failed para getUsuario')(message);
-                });
+                .then(getUsuarioComplete);
 
             function getUsuarioComplete(data, status, headers, config) {
                 return data.data;
@@ -121,12 +117,9 @@
                 method: 'POST', 
                 url: serviceBase + '/api/usuarios/usuarios?XDEBUG_SESSION_START=CB3FFBE9',
                 data: 'Nombre=' + encodeURIComponent(usuario.Nombre) + '&Apellidos=' + encodeURIComponent(usuario.Apellidos) +
-                '&Email=' + encodeURIComponent(usuario.Email) + '&FechaNacimiento=' + fechaToInt(usuario.FechaNacimiento)         
+                '&Email=' + encodeURIComponent(usuario.Email) + '&FechaNacimiento=' + utils.FechaHelper.fechaToInt(usuario.FechaNacimiento)         
                 })
-                .then(postUsuarioComplete)
-                .catch(function(message) {
-                    exception.catcher('XHR Failed para postUsuario')(message);
-                });
+                .then(postUsuarioComplete);
 
             function postUsuarioComplete(data, status, headers, config) {
                 return data;
@@ -138,12 +131,9 @@
                 method: 'PUT', 
                 url: serviceBase + '/api/usuarios/usuarios',
                 data: 'Id=' + usuario.Id + '&Nombre=' + encodeURIComponent(usuario.Nombre) + '&Apellidos=' + encodeURIComponent(usuario.Apellidos) +
-                '&Email=' + encodeURIComponent(usuario.Email) + '&FechaNacimiento=' + fechaToInt(usuario.FechaNacimiento)
+                '&Email=' + encodeURIComponent(usuario.Email) + '&FechaNacimiento=' + utils.FechaHelper.fechaToInt(usuario.FechaNacimiento)
                 })
-                .then(putUsuarioComplete)
-                .catch(function(message) {
-                    exception.catcher('XHR Failed para putUsuario')(message);
-                });
+                .then(putUsuarioComplete);
 
             function putUsuarioComplete(data, status, headers, config) {
                 return data;
@@ -152,11 +142,7 @@
         
         function deleteUsuarios(usuario) {
             return $http.delete(serviceBase + '/api/usuarios/usuarios/' + usuario)
-                .then(deleteUsuariosComplete)
-                .catch(function(message) {
-                    exception.catcher('XHR Failed para deleteUsuarios')(message);
-                    // $location.url('/');
-                });
+                .then(deleteUsuariosComplete);
 
             function deleteUsuariosComplete(data, status, headers, config) {
                 return data;
@@ -165,10 +151,7 @@
         
         function getRoles() {
             return $http.get(serviceBase + '/api/roles/roles')
-                .then(getRolesComplete)
-                .catch(function(message) {
-                    exception.catcher('XHR Failed para getRoles')(message);
-                });
+                .then(getRolesComplete);
 
             function getRolesComplete(data, status, headers, config) {
                 return data.data;
@@ -177,10 +160,7 @@
         
         function getParticipantes() {
             return $http.get(serviceBase + '/api/participantes/participantes')
-                .then(getParticipantesComplete)
-                .catch(function(message) {
-                    exception.catcher('XHR Failed para getParticipantes')(message);
-                });
+                .then(getParticipantesComplete);
 
             function getParticipantesComplete(data, status, headers, config) {
                 return data.data;
@@ -190,8 +170,7 @@
         function getParticipantesCount() {
             var count = 0;
             return getActividades()
-                .then(getActividadesComplete)
-                .catch(exception.catcher('XHR Failed para getActividadesCount'));
+                .then(getActividadesComplete);
 
             function getActividadesComplete (data) {
                 if (data !== undefined) { 
@@ -200,6 +179,42 @@
                 return $q.when(count);
             }
         }
+
+        var param = function (obj) {
+            var query = '', name, value, fullSubName, subName, subValue, innerObj, i;
+
+            for (name in obj) {
+                value = obj[name];
+
+                if (value instanceof Array) {
+                    for (i = 0; i < value.length; ++i) {
+                        subValue = value[i];
+                        fullSubName = name + '[' + i + ']';
+                        innerObj = {};
+                        innerObj[fullSubName] = subValue;
+                        query += param(innerObj) + '&';
+                    }
+                }
+                else if (value instanceof Object) {
+                    for (subName in value) {
+                        subValue = value[subName];
+                        fullSubName = name + '[' + subName + ']';
+                        innerObj = {};
+                        innerObj[fullSubName] = subValue;
+                        query += param(innerObj) + '&';
+                    }
+                }
+                else if (value !== undefined && value !== null)
+                    query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
+            }
+
+            return query.length ? query.substr(0, query.length - 1) : query;
+        };
+
+        // Override $http service's default transformRequest
+        $http.defaults.transformRequest = [function (data) {
+            return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
+        }];
     }
 
 })();

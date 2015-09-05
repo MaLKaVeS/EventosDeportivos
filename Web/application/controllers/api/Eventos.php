@@ -194,6 +194,7 @@ class Eventos extends REST_Controller {
         $this->Evento->HoraFin = (int) $this->post('HoraFin');
         $this->Evento->Estado = 0;
         $this->Evento->EstadoRegistro = (int) $this->post('EstadoRegistro');
+        $this->Evento->MaximoNumeroParticipantes = 0;
 
         $status  = REST_Controller::HTTP_CREATED; // CREATED (201) HTTP response code
         if ($this->Evento->insert())

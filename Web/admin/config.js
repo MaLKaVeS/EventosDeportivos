@@ -4,7 +4,7 @@ var ApplicationConfiguration = (function () {
 
     var applicationModuleName = 'eventos';
     var applicationCoreModuleName = 'eventos.core';
-    var applicationModuleVendorDependencies = ['ui.router', 'ui.bootstrap'];
+    var applicationModuleVendorDependencies = ['ui.router', 'ui.bootstrap', 'LocalStorageModule'];
     var applicationHelperFunctions = {};
     var applicationUrlServiceBase = window.location.protocol + '//' + window.location.host +
             ((window.location.hostname === 'localhost') ? '/index.php' : '/pardo/index.php');
