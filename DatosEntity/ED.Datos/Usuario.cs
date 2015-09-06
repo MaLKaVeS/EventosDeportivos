@@ -105,18 +105,31 @@ namespace ED.Datos
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public string Id { get; set; }
-        //[InverseProperty("Id")]
-        //[ForeignKey("UsuarioId")]
-        //[Key]
         public Usuario Usuario { get; set; }
-        //[InverseProperty("Id")]
-        //[ForeignKey("ActividadId")]
-        //[Key]
         public Actividad Actividad { get; set; }
-        public bool MostrarEdad  { get; set; }
+        public bool MostrarEdad { get; set; }
         public bool MostrarEmail { get; set; }
+        [MaxLength(1000)]
         public string Imagen { get; set; }
+        [MaxLength(600)]
         public string Bio { get; set; }
+        public int FechaCreacion { get; set; }
+        public int HoraCreacion { get; set; }
+    }
+
+    /// <summary>
+    /// Relación entre un perfil de participante y un evento
+    /// </summary>
+    public class PerfilEvento
+    {
+        [Key]
+        [Column(Order = 0)]
+        public int Perfil_Id { get; set; }
+        public PerfilParticipante Perfil { get; set; }
+        [Key]
+        [Column(Order = 1)]
+        public int Evento_Id { get; set; }
+        public Evento Evento { get; set; }
         public int FechaInscripcion { get; set; }
         public int HoraInscripcion { get; set; }
     }
