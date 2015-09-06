@@ -1,11 +1,11 @@
 ﻿<div data-ng-controller="ContactoController as contacto">
     <h1>Formulario de Contacto</h1>
-    <form class="form-horizontal">
+    <form class="form-horizontal" name="contacto.datosFormulario">
         <div class="form-group">
             <label for="nombre" class="col-sm-3 control-label">Nombre</label>
             <div class="col-sm-9">
-                <p class="input-group">
-                    <input type="text" class="form-control" id="nombre" placeholder="Nombre" ng-model="contacto.Nombre" required>
+                <p class="input-group" ng-class="{'has-error': contacto.datosFormulario.nombre.$invalid && contacto.datosFormulario.$submitted }">
+                    <input type="text" class="form-control" name="nombre" placeholder="Nombre" ng-model="contacto.Nombre" required ng-minlength="3" ng-maxlength="20">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-user"></i></button>
                     </span>
@@ -15,8 +15,8 @@
         <div class="form-group">
             <label for="apellidos" class="col-sm-3 control-label">Apellidos</label>
             <div class="col-sm-9">
-                <p class="input-group">
-                    <input type="text" class="form-control" id="apellidos" placeholder="Apellidos" ng-model="contacto.Apellidos" required>
+                <p class="input-group" ng-class="{'has-error': contacto.datosFormulario.apellidos.$invalid && contacto.datosFormulario.$submitted }">
+                    <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" ng-model="contacto.Apellidos" required>
                     <span class="input-group-btn">                    
                         <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-user"></i></button>
                     </span>
@@ -26,8 +26,8 @@
         <div class="form-group">
             <label for="email" class="col-sm-3 control-label">Dirección de Email</label>
             <div class="col-sm-9">
-                <p class="input-group">
-                    <input type="email" class="form-control" id="email" placeholder="Email" ng-model="contacto.Email" required>
+                <p class="input-group" ng-class="{'has-error': contacto.datosFormulario.email.$invalid && contacto.datosFormulario.$submitted }">
+                    <input type="email" class="form-control" name="email" placeholder="Email" ng-model="contacto.Email" required>
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-envelope"></i></button>
                     </span>
@@ -37,7 +37,7 @@
         <div class="form-group">
             <label for="asunto" class="col-sm-3 control-label">Asunto</label>
             <div class="col-sm-9">
-                <p class="input-group">
+                <p class="input-group" ng-class="{'has-error': contacto.datosFormulario.asunto.$invalid && contacto.datosFormulario.$submitted }">
                     <input type="text" class="form-control" name="asunto" id="asunto" placeholder="Asunto" ng-model="contacto.Asunto" required>
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-envelope"></i></button>
@@ -47,11 +47,25 @@
         </div>
         <div class="form-group">
             <label for="mensaje" class="col-sm-3 control-label">Mensaje</label>
-            <div class="col-sm-9">                
-                <textarea type="text" class="form-control" id="mensaje" name="mensaje" placeholder="Mensaje" ng-model="contacto.Mensaje" required></textarea>                
+            <div class="col-sm-9" ng-class="{'has-error': contacto.datosFormulario.mensaje.$invalid && contacto.datosFormulario.$submitted }">                
+                <textarea type="text" class="form-control" id="mensaje" rows="5" name="mensaje" placeholder="Mensaje" ng-model="contacto.Texto" required></textarea>                
             </div>
         </div>
-        
+
+        <div class="ng-hide col-sm-offset-3 col-sm-9" ng-show="contacto.mostrarCargando || contacto.mensajeOk || contacto.mensajeError">
+            <div class="alert alert-warning ng-hide"  ng-show="contacto.mostrarCargando">
+                <i class="fa fa-spin fa-spinner"></i> <span>Enviando ...</span>
+            </div>
+            <div class="alert alert-success ng-hide" ng-show="!contacto.mostrarCargando && contacto.mensajeOk">
+                <i class="fa fa-thumbs-up"></i>
+                <span>Mensaje enviado con éxito.</span>
+            </div>
+            <div class="alert alert-danger ng-hide" ng-show="!contacto.mostrarCargando && contacto.mensajeError">
+                <i class="fa fa-exclamation"></i>
+                <span class="ng-hide" ng-show="!contacto.datosFormulario.$invalid">Error al enviar el mensaje.</span>
+                <span class="ng-hide" ng-show="contacto.datosFormulario.$invalid">Debe rellenar todos los campos en rojo</span>
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-9">
                 <button type="button" class="btn btn-primary" ng-click="contacto.clickEnviar()"><i class="fa fa-envelope"></i> Enviar</button>

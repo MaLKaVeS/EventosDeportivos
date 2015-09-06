@@ -9,9 +9,9 @@
     angular.module(moduleName)
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$timeout','UsuariosDataService'];
+    LoginController.$inject = ['$state','$timeout','UsuariosDataService'];
 
-    function LoginController($timeout, UsuariosDataService) {
+    function LoginController($state, $timeout, UsuariosDataService) {
 
         /* jshint validthis: true */
         var vm = this;
@@ -74,7 +74,7 @@
                     $timeout(function () {
                         vm.mostrarCargando = true;
                         vm.mensaje = 'Entrando ...';
-                        location.href = '/';
+                        location.href = location.pathname;
                     }, 2000);
                 }
                 else {

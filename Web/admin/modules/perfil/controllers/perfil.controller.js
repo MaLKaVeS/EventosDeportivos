@@ -12,61 +12,75 @@
 	function PerfilController($timeout, $location, LoginDataService, ActividadesDataService, UsuariosDataService) {
 		var vm = this;
 		/* Propiedades */
-		vm.title = 'Perfil de Usuario | Eventos Deportivos';
-		vm.nombre = '';
-		vm.apellido1 = '';
-		vm.apellido2 = '';
-		vm.email = '';
+		var util = ApplicationConfiguration.applicationHelperFunctions;
 
+		vm.Nombre = '';
+		vm.Email = '';
+		vm.Clave = '';
+		vm.ConfirmarClave = '';
+		vm.Apellidos = '';
+		vm.FechaNacimiento = '';
+		vm.estadoFechaNacimiento = { abierto: false };
+		vm.formatoFecha = 'dd/MM/yyyy';
+		vm.dateOptions = {
+		    formatYear: 'yy',
+		    startingDay: 1
+		};
 		vm.mostrarCargando = true;
-		
-		/* Funciones */
+		vm.mostrarErroresValidacion = false;
+
+		vm.openDatePicker = openDatePicker;
 		vm.getDatos = getDatos;
-		vm.guardarDatos = guardarDatos;
-		vm.cambiarClave = cambiarClave;
-		
-		/* Eventos */
+
+		vm.valNombre = false;
+		vm.valApellidos = false;
+		vm.valEmail = false;
+		vm.valFechaNacimiento = false;
+		vm.valClave = false;
+
 		activate();
 
 		function activate() {
-			vm.mostrarCargando = true;
-			if (!LoginDataService.getAuthData()) {
-			    $location.path('/login');
+		    vm.mostrarCargando = true;
+		    var datos = LoginDataService.getAuthData();
+			if (!datos) {
+			    location.href = location.pathname + '#/login';
 			}
 			else {
-			    vm.getDatos();
+			    vm.getDatos(datos.userName);
 			}
 		}
 
-		function getDatos() {
-			UsuariosDataService.getUsuario()
-				.then(getUsuarioComplete);
+		function getDatos(userName) {
+			UsuariosDataService.getUsuario(userName)
+				                .then(getUsuarioComplete);
 
 			function getUsuarioComplete(data) {
-				vm.nombre = data.Nombre;
-				vm.email = data.Email;
-				vm.apellido1 = data.Apellido1;
-				vm.apellido2 = data.Apellido2;
+			    vm.usuario = data;
+			    vm.Nombre = vm.usuario.Nombre;
+			    vm.Apellidos = vm.usuario.Apellidos;
+			    vm.Email = vm.usuario.Email;
+			    vm.FechaNacimiento = util.FechaHelper.fechaToString(vm.usuario.FechaNacimiento);
 				vm.mostrarCargando = false;
 			}
 		}
 		
-		function guardarDatos() {
-		    UsuariosDataService.getActividadesCount()
-				.then(countActividadesComplete);
+		function openDatePicker() {
+		    vm.estadoFechaNacimiento.abierto = !vm.estadoFechaNacimiento.abierto;
+		}
 
-			function countActividadesComplete(data) {
-				vm.actividades = data;
+		function guardarDatos() {
+		   
+
+		    function guardarDatosComplete(data) {
 				vm.mostrarCargando = false;
 			}
 		}
 		
 		function cambiarClave() {
-		    ActividadesDataService.getActividadesCount()
-				.then(countActividadesComplete);
+		    
 
-			function countActividadesComplete(data) {
-				vm.actividades = data;
+		    function cambiarClaveComplete(data) {
 				vm.mostrarCargando = false;
 			}
 		}

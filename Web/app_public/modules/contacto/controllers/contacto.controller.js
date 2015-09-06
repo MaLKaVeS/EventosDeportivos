@@ -17,19 +17,16 @@
         var vm = this;
         vm.Nombre = '';
         vm.Email = '';
-        vm.Clave = '';
-        vm.ConfirmarClave = '';
+        vm.Asunto = '';
+        vm.Texto = '';
         vm.Apellidos = '';
-        vm.FechaNacimiento = '';
-        vm.estadoFechaNacimiento = { abierto: false };
-        vm.formatoFecha = 'dd/MM/yyyy';
-        vm.dateOptions = {
-			formatYear: 'yy',
-			startingDay: 1
-		};
         
-        vm.openDatePicker = openDatePicker;
+        vm.mostrarCargando = false;
+        vm.mensajeOk = false;
+        vm.mensajeError = false;
+
         vm.clickEnviar = clickEnviar;
+        vm.isValid = isValid;
         
         activate();
 
@@ -40,12 +37,48 @@
             }
         }
 
-        function openDatePicker() {
-            vm.estadoFechaNacimiento.abierto = !vm.estadoFechaNacimiento.abierto;
+        function isValid() {
+            var isOk = false;
+
+            return isOk;
         }
         
         function clickEnviar() {
-            
+            vm.mostrarCargando = true;
+            vm.datosFormulario.$submitted = true;
+            if (vm.isValid()) {
+                vm.mensajeOk = false;
+                vm.mensajeError = false;
+
+                var mensaje = {
+                    Asunto: vm.Asunto,
+                    Apellidos: vm.Apellidos,
+                    Email: vm.Email,
+                    Nombre: vm.Nombre,
+                    Texto: vm.Texto
+                };
+
+                ContactoDataService.postMensaje(mensaje)
+                                   .then(postMensajeComplete, postMensajeFail);
+            }
+            else
+            {
+                vm.mensajeError = true;
+                vm.mostrarCargando = false;
+                vm.mensajeOk = false;
+            }
+
+            function postMensajeComplete(data) {
+                vm.mostrarCargando = false;
+                vm.mensajeOk = true;
+                vm.mensajeError = false;
+            }
+
+            function postMensajeFail(err) {
+                vm.mostrarCargando = false;
+                vm.mensajeOk = false;
+                vm.mensajeError = true;
+            }
         }
     }
 

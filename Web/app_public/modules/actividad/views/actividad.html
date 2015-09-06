@@ -24,7 +24,7 @@
                         <small ng-bind="evento.FechaInicio | fecha"></small> - <small ng-bind="evento.FechaFin  | fecha"></small>
                     </p>
                     <p>
-                        <a ng-href="#/eventos/{{evento.Id}}"><i class="fa fa-eye"></i> Ver detalles</a>
+                        <a ng-href="#/evento/{{evento.Id}}"><i class="fa fa-eye"></i> Ver detalles</a>
                         <!--<a ui-sref="eventos/{{evento.Id}}">Ver detalles</a>-->
                     </p>
                 </div>
@@ -35,7 +35,7 @@
                         <small ng-bind="actividad.Eventos[$index + 1].FechaInicio | fecha"></small> - <small ng-bind="actividad.Eventos[$index + 1].FechaFin  | fecha"></small>
                     </p>
                     <p>
-                        <a ng-href="#/eventos/{{actividad.Eventos[$index + 1].Id}}"><i class="fa fa-eye"></i> Ver detalles</a>
+                        <a ng-href="#/evento/{{actividad.Eventos[$index + 1].Id}}"><i class="fa fa-eye"></i> Ver detalles</a>
                         <!--<a ui-sref="eventos/{{actividad.Eventos[$index + 1].Id}}">Ver detalles</a>-->
                     </p>
                 </div>
@@ -46,7 +46,7 @@
                         <small ng-bind="actividad.Eventos[$index + 2].FechaInicio | fecha"></small> - <small ng-bind="actividad.Eventos[$index + 2].FechaFin  | fecha"></small>
                     </p>
                     <p>
-                        <a ng-href="#/eventos/{{actividad.Eventos[$index + 2].Id}}"><i class="fa fa-eye"></i> Ver detalles</a>
+                        <a ng-href="#/evento/{{actividad.Eventos[$index + 2].Id}}"><i class="fa fa-eye"></i> Ver detalles</a>
                         <!--<a ui-sref="eventos/{{actividad.Eventos[$index + 1].Id}}">Ver detalles</a>-->
                     </p>
                 </div>

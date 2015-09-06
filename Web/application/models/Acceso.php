@@ -16,7 +16,7 @@ class Acceso extends CI_Model
     public $Fecha;
     public $Resultado;
 
-    const TABLA  = "accesoes";
+    const TABLA  = "Accesoes";
 
     public function __construct()
     {

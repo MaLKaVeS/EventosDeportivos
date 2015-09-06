@@ -103,12 +103,24 @@
             }
         }
         
-        function getUsuario(usuario) {
-            return $http.get(serviceBase + '/api/usuarios/usuarios/' + usuario)
-                .then(getUsuarioComplete);
+        function getUsuario(userName) {
+            return $http({
+                method: 'GET',
+                url: serviceBase + '/api/usuarios/datos/' + encodeURIComponent(userName),
+            })
+                        .then(getUsuarioComplete, getUsuarioFail);
 
-            function getUsuarioComplete(data, status, headers, config) {
-                return data.data;
+            function getUsuarioComplete(data) {
+                if (data.status === 200) {
+                    return data.data;
+                }
+                else {
+                    return data.data;
+                }
+            }
+
+            function getUsuarioFail(err) {
+                return err;
             }
         }
         

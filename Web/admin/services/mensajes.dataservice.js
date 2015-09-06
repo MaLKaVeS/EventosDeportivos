@@ -1,22 +1,45 @@
-﻿'use strict';
+'use strict';
 
 (function () {
 
     angular.module(ApplicationConfiguration.applicationCoreModuleName)
-        .factory('ContactoDataService', ContactoDataService);
+        .factory('MensajesDataService', MensajesDataService);
 
-    ContactoDataService.$inject = ['$http', '$q', '$timeout', '$location'];
+    MensajesDataService.$inject = ['$http', '$q', '$timeout', '$location'];
 
-    function ContactoDataService($http, $q, $timeout, $location) {
+    function MensajesDataService($http, $q, $timeout, $location) {
+
         $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 
         var serviceBase = ApplicationConfiguration.applicationUrlServiceBase;
 
         var service = {
-            postMensaje: postMensaje
+            getMensajes: getMensajes,
+            postMensaje: postMensaje,
+            putMensaje: putMensaje
         }
 
         return service;
+
+        function getMensajes(loginData) {
+
+            return $http.get(serviceBase + '/api/mensajes/mensajes')
+                        .then(getMensajesComplete, getMensajesFail);
+
+            function getMensajesComplete(data) {
+                if (data.status == 200) {
+                    return data.data;
+                }
+                else {
+                    return [];
+                }
+
+            }
+
+            function getMensajesFail(err) {
+                return err;
+            }
+        }
 
         function postMensaje(mensaje) {
 
@@ -29,7 +52,7 @@
                     .then(postMensajeComplete, postMensajeFail);
 
             function postMensajeComplete(data) {
-                if (data.status == 200 || data.status == 201) {
+                if (data.status == 200) {
                     return data.data;
                 }
                 else {
@@ -40,6 +63,10 @@
             function postMensajeFail(err) {
                 return err;
             }
+        }
+
+        function putMensaje() {
+
         }
 
         var param = function (obj) {
@@ -78,5 +105,4 @@
             return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
         }];
     }
-
 })();

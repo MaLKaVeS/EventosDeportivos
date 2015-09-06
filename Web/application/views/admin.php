@@ -143,6 +143,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="admin/services/login.dataservice.js"></script>
     <script src="admin/services/actividades.dataservice.js"></script>
     <script src="admin/services/eventos.dataservice.js"></script>
+    <script src="admin/services/mensajes.dataservice.js"></script>
     <script src="admin/services/usuarios.dataservice.js"></script>
 
     <!-- Login Module -->
@@ -185,10 +186,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="admin/modules/perfil/config/perfil.routes.js"></script>
     <script src="admin/modules/perfil/controllers/perfil.controller.js"></script>
 
-    <!-- Perfil Module -->
+    <!-- Ajustes Module -->
     <script src="admin/modules/ajustes/ajustes.init.js"></script>
     <script src="admin/modules/ajustes/config/ajustes.routes.js"></script>
     <script src="admin/modules/ajustes/controllers/ajustes.controller.js"></script>
+
+    <!-- Mensajes Module -->
+    <script src="admin/modules/mensajes/mensajes.init.js"></script>
+    <script src="admin/modules/mensajes/config/mensajes.routes.js"></script>
+    <script src="admin/modules/mensajes/controllers/mensajes.controller.js"></script>
 </body>
 
 </html>

@@ -55,7 +55,6 @@
             return $http({
                 method: 'GET',
                 url: serviceBase + '/api/usuarios/datos/' + encodeURIComponent(userName), 
-                //data :'userName=' + 
                     })
                         .then(getUsuarioComplete, getUsuarioFail);
 
