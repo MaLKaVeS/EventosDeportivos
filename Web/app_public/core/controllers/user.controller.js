@@ -13,8 +13,8 @@
 
         /* jshint validthis: true */
         var vm = this;
-        vm.email = '';        
         vm.userName = '';
+        vm.nombre = 'Usuario';
         vm.isLoggedIn = false;
         
         vm.doLogOut = doLogOut;
@@ -27,10 +27,24 @@
             if (datos) {
                 vm.isLoggedIn = true;
                 vm.userName = datos.userName;
+
+                UsuariosDataService.getUsuario(vm.userName)
+                                   .then(getUsuarioComplete, getUsuarioFail);
             }
             else
             {
                 vm.userName = '';
+                vm.isLoggedIn = false;
+            }
+
+            function getUsuarioComplete(data) {
+                UsuariosDataService.storeUserData(data);
+                vm.nombre = data.Nombre;
+            }
+
+            function getUsuarioFail(err) {
+                vm.userName = '';
+                vm.nombre = '';
                 vm.isLoggedIn = false;
             }
         }

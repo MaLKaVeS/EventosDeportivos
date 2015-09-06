@@ -22,3 +22,4 @@ C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.Migration
 C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.Migrations.Imagenes.resources
 C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.Migrations.Mensajes.resources
 C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.Migrations.PerfilEvento.resources
+C:\Proyectos\EventosDeportivos\DatosEntity\ED.Datos\obj\Debug\ED.Datos.Migrations.PerfilEvento_Keys.resources

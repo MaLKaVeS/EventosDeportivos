@@ -1,14 +1,14 @@
-﻿create table `PerfilEventoes` (`Perfil_Id` int not null ,`Evento_Id` int not null ,`FechaInscripcion` int not null ,`HoraInscripcion` int not null ,`Evento_Id1` nvarchar(128) ,`Perfil_Id1` nvarchar(128) ,primary key ( `Perfil_Id`,`Evento_Id`) ) engine=InnoDb auto_increment=0
-CREATE index  `IX_Evento_Id1` on `PerfilEventoes` (`Evento_Id1` DESC) using HASH
-CREATE index  `IX_Perfil_Id1` on `PerfilEventoes` (`Perfil_Id1` DESC) using HASH
-alter table `PerfilParticipantes` add column `FechaCreacion` int not null  
-alter table `PerfilParticipantes` add column `HoraCreacion` int not null  
-alter table `PerfilParticipantes` modify `Imagen` nvarchar(1000) 
-alter table `PerfilParticipantes` modify `Bio` nvarchar(600) 
-alter table `PerfilParticipantes` drop column `FechaInscripcion`
-alter table `PerfilParticipantes` drop column `HoraInscripcion`
-alter table `PerfilEventoes` add constraint `FK_PerfilEventoes_Eventoes_Evento_Id1`  foreign key (`Evento_Id1`) references `Eventoes` ( `Id`) 
-alter table `PerfilEventoes` add constraint `FK_PerfilEventoes_PerfilParticipantes_Perfil_Id1`  foreign key (`Perfil_Id1`) references `PerfilParticipantes` ( `Id`) 
+﻿create table `PerfilEventoes` (`Perfil_Id` int not null ,`Evento_Id` int not null ,`FechaInscripcion` int not null ,`HoraInscripcion` int not null ,`Evento_Id1` nvarchar(128) ,`Perfil_Id1` nvarchar(128) ,primary key ( `Perfil_Id`,`Evento_Id`) ) engine=InnoDb auto_increment=0;
+CREATE index  `IX_Evento_Id1` on `PerfilEventoes` (`Evento_Id1` DESC) using HASH;
+CREATE index  `IX_Perfil_Id1` on `PerfilEventoes` (`Perfil_Id1` DESC) using HASH;
+alter table `PerfilParticipantes` add column `FechaCreacion` int not null;  
+alter table `PerfilParticipantes` add column `HoraCreacion` int not null;  
+alter table `PerfilParticipantes` modify `Imagen` nvarchar(1000); 
+alter table `PerfilParticipantes` modify `Bio` nvarchar(600); 
+alter table `PerfilParticipantes` drop column `FechaInscripcion`;
+alter table `PerfilParticipantes` drop column `HoraInscripcion`;
+alter table `PerfilEventoes` add constraint `FK_PerfilEventoes_Eventoes_Evento_Id1`  foreign key (`Evento_Id1`) references `Eventoes` ( `Id`); 
+alter table `PerfilEventoes` add constraint `FK_PerfilEventoes_PerfilParticipantes_Perfil_Id1`  foreign key (`Perfil_Id1`) references `PerfilParticipantes` ( `Id`); 
 INSERT INTO `__MigrationHistory`(
 `MigrationId`, 
 `ContextKey`, 

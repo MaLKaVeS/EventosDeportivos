@@ -27,33 +27,89 @@ class Participantes extends REST_Controller {
         $this->methods['participantes_get']['limit'] = 500; // 500 requests per hour per user/key
         $this->methods['participante_get']['limit'] = 500; // 500 requests per hour per user/key
         $this->methods['evento_get']['limit'] = 500; // 500 requests per hour per user/key
+        $this->methods['eventos_get']['limit'] = 500; // 500 requests per hour per user/key
         $this->methods['participantes_post']['limit'] = 100; // 100 requests per hour per user/key
         $this->methods['participantes_put']['limit'] = 100; // 100 requests per hour per user/key
         $this->methods['participantes_delete']['limit'] = 50; // 50 requests per hour per user/key
+        $this->methods['inscribir_post']['limit'] = 100; // 100 requests per hour per user/key
 
         // Cargamos el modelo
         $this->load->model('Participante');
     }
 
     /**
-     * Recupera un rol si se envía el parametro id. Si no todos los roles en la base de datos.
+     * Inscribe a un usuario en un evento
      */
-    public function participante_get($id = NULL)
+    public function inscribir_post()
     {
-        $encuentro = $this->Participante->getById($id);
+        $evento_id = $this->post('Evento_Id');
+        $usuario_id = $this->post('Usuario_Id');
+
+        if (!isset($evento_id) || !isset($usuario_id))
+        {
+            $this->response([
+                    'status' => FALSE,
+                    'message' => 'No se indicaron los datos de evento o de usuario'
+                ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) HTTP response code
+        }
+
+        if ($this->Participante->inscribir_participante($usuario_id, $evento_id))
+        {
+            $this->response([
+                    'status' => FALSE,
+                    'message' => 'Participante inscrito'
+                ], REST_Controller::HTTP_OK); // OK (200) HTTP response code
+        }
+        else
+        {
+            $this->response([
+                    'status' => FALSE,
+                    'message' => 'Error al grabar el usuario'
+                ], REST_Controller::HTTP_OK); // OK (200) HTTP response code
+        }
+    }
+
+    /**
+     * Recupera los eventos para los que está inscrito un participante.
+     */
+    public function participante_get($usuario_id)
+    {
+        $this->Participante->Usuario_Id = $usuario_id;
+        $eventos = $this->Participante->getPerfilesUsuario();
 
         // Miramos si el resultado contiene algo
-        if ($encuentro)
+        if ($eventos)
         {
             // Set the response and exit
-            $this->response($encuentro, REST_Controller::HTTP_OK); // OK (200) HTTP response code
+            $this->response($eventos, REST_Controller::HTTP_OK); // OK (200) HTTP response code
         }
         else
         {            
             // No hay un rol para ese identificador
             $this->set_response([
                'status' => FALSE,
-               'message' => 'No se encontro el Encuentro'
+               'message' => 'No se encontraron eventos'
+            ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) HTTP response code            
+        }
+    }
+
+    public function eventos_get($usuario_id)
+    {
+        $this->Participante->Usuario_Id = $usuario_id;
+        $eventos = $this->Participante->getEventosUsuario();
+
+        // Miramos si el resultado contiene algo
+        if ($eventos)
+        {
+            // Set the response and exit
+            $this->response($eventos, REST_Controller::HTTP_OK); // OK (200) HTTP response code
+        }
+        else
+        {            
+            // No hay un rol para ese identificador
+            $this->set_response([
+               'status' => FALSE,
+               'message' => 'No se encontraron eventos'
             ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) HTTP response code            
         }
     }
@@ -63,13 +119,13 @@ class Participantes extends REST_Controller {
      */
     public function evento_get($evento_id = NULL)
     {
-        $encuentro = $this->Participante->getByEventoId($evento_id);
+        $inscripciones = $this->Participante->getParticipantesEvento($evento_id);
 
         // Miramos si el resultado contiene algo
-        if ($encuentro)
+        if ($inscripciones)
         {
             // Set the response and exit
-            $this->response($encuentro, REST_Controller::HTTP_OK); // OK (200) HTTP response code
+            $this->response($inscripciones, REST_Controller::HTTP_OK); // OK (200) HTTP response code
         }
         else
         {            

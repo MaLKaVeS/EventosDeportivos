@@ -124,11 +124,11 @@ namespace ED.Datos
     {
         [Key]
         [Column(Order = 0)]
-        public int Perfil_Id { get; set; }
+        public string Perfil_Id { get; set; }
         public PerfilParticipante Perfil { get; set; }
         [Key]
         [Column(Order = 1)]
-        public int Evento_Id { get; set; }
+        public string Evento_Id { get; set; }
         public Evento Evento { get; set; }
         public int FechaInscripcion { get; set; }
         public int HoraInscripcion { get; set; }

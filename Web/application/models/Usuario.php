@@ -63,13 +63,13 @@ class Usuario extends CI_Model
     {
         if ($id !== NULL && $id !== "")
         {
-            $query = $this->db->where('Id', $id)->get(self::TABLA);
+            $query = $this->db->where('Id', $id)->get(self::TABLA)->row();
         }
         else
         {
-            $query = $this->db->get(self::TABLA);
+            $query = $this->db->get(self::TABLA)->result();
         }
-        return $query->result();
+        return $query;
     }
 
     public function get_by_email($email)

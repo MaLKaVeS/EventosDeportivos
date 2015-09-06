@@ -27,7 +27,9 @@
             getValidacionEmail: getValidacionEmail,
             postUsuario: postUsuario,
             hayRegistro: hayRegistro,
-            getUsuario: getUsuario
+            getUsuario: getUsuario,
+            storeUserData: storeUserData,
+            getUserStoredData: getUserStoredData
         }
 
         return service;
@@ -72,6 +74,22 @@
             }
         }
 
+        function storeUserData(usuario) {
+            localStorageService.set('userData', usuario);
+        }
+
+        function getUserStoredData() {
+            var usuario = null;
+
+            try {
+                usuario = localStorageService.get('userData');
+            } catch (e) {
+                usuario = false;
+            }
+
+            return usuario;
+        }
+
         function postUsuario(usuario) {
 
             return $http({
@@ -82,12 +100,12 @@
                 '&Clave=' + encodeURIComponent(usuario.Clave)
 
             })
-            .then(getActividadesComplete, getActividadesFail);
+            .then(postUsuarioComplete, postUsuarioFail);
 
 
-            function getActividadesComplete(data) {
+            function postUsuarioComplete(data) {
                 if (data.status === 200 || data.status == 201) {
-                    localStorageService.set('authorizationData', {
+                    localStorageService.set('registroData', {
                         userName: data
                     });
 
@@ -98,7 +116,7 @@
                 }
             }
 
-            function getActividadesFail(err) {
+            function postUsuarioFail(err) {
                 return err;
             }
         }
@@ -107,7 +125,7 @@
             var hay = null;
 
             try {
-                hay = localStorageService.get('authorizationData');
+                hay = localStorageService.get('registroData');
             } catch (e) {
                 hay = false;
             }
@@ -163,6 +181,7 @@
 
         function LogOut() {
             localStorageService.remove('authorizationData');
+            localStorageService.remove('userData');
 
             authentication.isAuth = false;
             authentication.userName = '';

@@ -1,4 +1,9 @@
 ﻿<div data-ng-controller="PerfilController as perfil" class="margin-top-40">
+    <div class="loading" ng-show="perfil.mostrarCargando">
+        <p>
+            <i class="fa fa-spin fa-spinner fa-3x"></i> <span ng-bind="perfil.textoCargando"></span>
+        </p>
+    </div>
     <div class="row">
         <div class="col-lg-3">
             <span style="background-image: url(img/user_2x.png); border-radius: 50%; display:block;float:left; margin:-1px 5px -1px -1px;height:192px; width:192px;"></span>
@@ -59,6 +64,42 @@
     </div>
     <div class="row">
         <h3>Eventos</h3>
-        <p>No está inscrito en ningún evento</p>
+        <tabset class="ng-hide" ng-show="perfil.actividades.length > 0">
+            <tab ng-repeat="actividad in perfil.actividades" role="presentation" active="actividad.active" heading="{{ actividad.Nombre }}">
+                <!--<a ng-bind="actividad.Nombre" ng-class="{'active' : $index == 0}"></a>-->
+            </tab>
+        </tabset>
+        <!--<ul class="nav nav-pills" role="tablist">
+            <li ng-repeat="actividad in perfil.actividades" role="presentation">
+                <a ng-bind="actividad.Nombre" ng-class="{'active' : $index == 0}"></a>
+            </li>
+        </ul>-->
+        <table class="table ng-hide" ng-show="perfil.eventos.length > 0">
+            <thead>
+                <tr>
+                    <th>Evento</th>
+                    <th>Fechas</th>
+                    <th>Fecha de Inscripción</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="evento in perfil.eventos">
+                    <td ng-bind="evento.Nombre"></td>
+                    <td>
+                        <i class="fa fa-calendar"></i>
+                        <span ng-bind="evento.FechaInicio"></span> -
+                        <span ng-bind="evento.FechaFin"></span> 
+                    </td>
+                    <td></td>
+                    <td>
+                        <a href="#/evento/{{ evento.Id}}">
+                            <i class="fa fa-eye"></i> Ver detalle
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="ng-hide" ng-show="!perfil.mostrarCargando && perfil.eventos.length == 0">No está inscrito en ningún evento</p>
     </div>
 </div>

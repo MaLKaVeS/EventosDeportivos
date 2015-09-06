@@ -106,6 +106,10 @@
     <Compile Include="Migrations\201509061814154_PerfilEvento.Designer.cs">
       <DependentUpon>201509061814154_PerfilEvento.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509061954260_PerfilEvento_Keys.cs" />
+    <Compile Include="Migrations\201509061954260_PerfilEvento_Keys.Designer.cs">
+      <DependentUpon>201509061954260_PerfilEvento_Keys.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MySqlConfiguration.cs" />
     <Compile Include="MySqlHistoryContext.cs" />
@@ -150,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509061814154_PerfilEvento.resx">
       <DependentUpon>201509061814154_PerfilEvento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509061954260_PerfilEvento_Keys.resx">
+      <DependentUpon>201509061954260_PerfilEvento_Keys.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -53,9 +53,19 @@ class Evento extends CI_Model
         }
     }
 
-    public function get($actividad = "", $id = "")
+    public function getById($id = "")
     {
         if (isset($id))
+        {
+            $query = $this->db->where('Id', $id)->get(self::TABLA);
+            return $query->row();
+        }
+        return NULL;
+    }
+
+    public function get($actividad = "", $id = "")
+    {
+        if (isset($id) && isset($actividad))
         {
             $query = $this->db->where('Actividad_Id', $actividad)->where('Id', $id)->get(self::TABLA);
         }

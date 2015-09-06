@@ -9,20 +9,22 @@
     angular.module(moduleName)
         .controller('PerfilController', PerfilController);
 
-    PerfilController.$inject = ['$state','$timeout', 'UsuariosDataService'];
+    PerfilController.$inject = ['$state', '$timeout', '$q', 'UsuariosDataService', 'ActividadesDataService', 'EventosDataService', 'ParticipantesDataService'];
 
-    function PerfilController($state, $timeout, UsuariosDataService) {
+    function PerfilController($state, $timeout, $q, UsuariosDataService, ActividadesDataService, EventosDataService, ParticipantesDataService) {
 
         /* jshint validthis: true */
         var vm = this;
         var util = ApplicationConfiguration.applicationHelperFunctions;
 
+        vm.textoCargando = 'Cargando datos del usuario';
         vm.Nombre = '';
         vm.Email = '';
         vm.Clave = '';
         vm.ConfirmarClave = '';
         vm.Apellidos = '';
         vm.FechaNacimiento = '';
+        vm.FechaAlta = '';
         vm.estadoFechaNacimiento = { abierto: false };
         vm.formatoFecha = 'dd/MM/yyyy';
         vm.dateOptions = {
@@ -40,6 +42,12 @@
         vm.valEmail = false;
         vm.valFechaNacimiento = false;
         vm.valClave = false;
+
+        vm.actividades = [];
+        vm.eventos = [];
+        vm.inscripciones = [];
+
+        vm.activeTab = '';
 
         activate();
 
@@ -59,7 +67,39 @@
                 vm.Nombre = vm.usuario.Nombre;
                 vm.Apellidos = vm.usuario.Apellidos;
                 vm.Email = vm.usuario.Email;
+                vm.FechaAlta = vm.usuario.FechaAlta;
                 vm.FechaNacimiento = util.FechaHelper.fechaToString(vm.usuario.FechaNacimiento);
+
+                var promises = [];
+
+                promises.push(ActividadesDataService.getActividades());
+                promises.push(EventosDataService.getEventos());
+                promises.push(ParticipantesDataService.getEventosParticipante(vm.usuario.Id));
+
+                $q.all(promises).then(promisesComplete);
+
+                function promisesComplete(data) {
+                    vm.inscripciones = data[2];
+
+                    if (vm.inscripciones.length > 0) {
+                        var eventos = _.pluck(vm.inscripciones, 'Evento_Id');
+
+                        vm.eventos = _.select(data[1], function (evento) {
+                            return eventos.indexOf(evento.Id) != -1
+                        });
+
+                        var actividades = _.pluck(vm.eventos, 'Actividad_Id');
+
+                        vm.actividades = _.select(data[0], function (actividad) {
+                            return actividades.indexOf(actividad.Id) != -1
+                        });
+
+                        if (vm.actividades.length > 0) {
+                            vm.activeTab = vm.actividades[0].Id;
+                        }
+                    }
+                    vm.mostrarCargando = false;
+                }
             }
 
             function getUsuarioFail(err) {

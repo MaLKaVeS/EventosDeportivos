@@ -996,8 +996,9 @@
     <Compile Include="application\libraries\Format.php" />
     <Compile Include="application\libraries\REST_Controller.php" />
     <Compile Include="application\models\Encuentro.php" />
+    <Compile Include="application\models\ParticipanteEvento.php" />
     <Compile Include="application\models\PasswordHash.php" />
-    <Compile Include="application\models\Participantes.php" />
+    <Compile Include="application\models\Participante.php" />
     <Compile Include="application\models\Mensaje.php" />
     <Compile Include="application\models\Usuario.php" />
     <Compile Include="application\models\Evento.php" />

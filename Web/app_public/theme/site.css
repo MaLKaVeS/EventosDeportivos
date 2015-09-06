@@ -91,21 +91,35 @@ div.loading {
     div.loading i, div.loading p {
         margin: 10% auto;
         color: #2676ad;
-        font-size: 20px;
     }
 
-    .navbar-inverse {
+.navbar-inverse {
     background-color: #000;
     border-color: #2676ad;
 }
 
-h1, h2, h3, h4, h5 { 
+h1, h2, h3, h4, h5 {
     border-bottom: #2676ad 2px solid;
     margin-top: 30px;
     color: #2676ad;
 }
 
-.jumbotron h1,.jumbotron h2 {
-    border-bottom: none
+.jumbotron h1, .jumbotron h2 {
+    border-bottom: none;
+}
 
+div.navbar-form > div > ul > li {
+    list-style: none;
+    list-style-image: none;
+    list-style-type: none;
+}
+
+span.avatar {
+    background-image: url(../../img/user.png);
+    border-radius: 50%;
+    display: block;
+    float: right;
+    margin: -1px -1px -1px 10px;
+    height: 40px;
+    width: 40px;
 }
