@@ -1,48 +1,51 @@
 ﻿<div data-ng-controller="InicioEventosController as inicioEventos">
-	<div class="loading" ng-show="inicioEventos.mostrarCargando">
-		<p>
-			<i class="fa fa-spin fa-spinner"></i> <span ng-bind="inicioEventos.textoCargando"></span>
-		</p>
-	</div>
+    <div class="loading" ng-show="inicioEventos.mostrarCargando">
+        <p>
+            <i class="fa fa-spin fa-spinner"></i> <span ng-bind="inicioEventos.textoCargando"></span>
+        </p>
+    </div>
     <div ng-repeat="evento in inicioEventos.eventos" class="row" data-ng-if="$index % 3 == 0">
-		<div class="col-md-4">
-			<h2 ng-bind="evento.Nombre"></h2>
-            <a data-ng-href="#/actividad/{{ evento.Actividad_Id }}"><h3 ng-bind="evento.Actividad"></h3></a>
-			<p ng-bind="evento.Descripcion"></p>
-			<p>
-				<i class="fa fa-calendar"></i> <small ng-bind="evento.FechaInicio | fecha"></small> - <small  ng-bind="evento.FechaFin  | fecha"></small> 
-			</p>
-			<p>
-				<a ng-href="#/evento/{{evento.Id}}"><i class="fa fa-eye"></i> Ver detalles</a>
-				<!--<a ui-sref="eventos/{{evento.Id}}">Ver detalles</a>-->
-			</p>
-		</div>
+        <div class="col-md-4 panel">
+            <h2>
+                <span ng-bind="evento.Nombre"></span> <i class="fa fa-ticket"></i>
+            </h2>
+            <a data-ng-href="#/actividad/{{ evento.Actividad_Id }}"><label class="cursor" ng-bind="evento.Actividad"></label></a>
+            <p ng-bind="evento.Descripcion"></p>
+            <p>
+                <i class="fa fa-calendar"></i> <small ng-bind="evento.FechaInicio | fecha"></small> - <small ng-bind="evento.FechaFin  | fecha"></small>
+            </p>
+            <p>
+                <a ng-href="#/evento/{{evento.Id}}"><i class="fa fa-eye"></i> Ver detalles</a>
+            </p>
+        </div>
         <div class="col-md-4" data-ng-class="{ 'ng-hide' : !inicioEventos.eventos[$index + 1] }">
-            <h2 ng-bind="inicioEventos.eventos[$index + 1].Nombre"></h2>
-            <h3 ng-bind="inicioEventos.eventos[$index + 1].Actividad"></h3>
+            <h2>
+                <span ng-bind="inicioEventos.eventos[$index + 1].Nombre"></span> <i class="fa fa-ticket"></i>
+            </h2>
+            <a data-ng-href="#/actividad/{{ inicioEventos.eventos[$index + 1].Actividad_Id }}"><label class="cursor" ng-bind="inicioEventos.eventos[$index + 1].Actividad"></label></a>
             <p ng-bind="inicioEventos.eventos[$index + 1].Descripcion"></p>
             <p>
-                <small ng-bind="inicioEventos.eventos[$index + 1].FechaInicio | fecha"></small> - <small ng-bind="inicioEventos.eventos[$index + 1].FechaFin  | fecha"></small>
+                <i class="fa fa-calendar"></i> <small ng-bind="inicioEventos.eventos[$index + 1].FechaInicio | fecha"></small> - <small ng-bind="inicioEventos.eventos[$index + 1].FechaFin  | fecha"></small>
             </p>
             <p>
                 <a ng-href="#/evento/{{inicioEventos.eventos[$index + 1].Id}}"><i class="fa fa-eye"></i> Ver detalles</a>
-                <!--<a ui-sref="eventos/{{evento.Id}}">Ver detalles</a>-->
             </p>
         </div>
         <div class="col-md-4" data-ng-class="{ 'ng-hide' : !inicioEventos.eventos[$index + 2] }">
-            <h2 ng-bind="inicioEventos.eventos[$index + 2].Nombre"></h2>
-            <h3 ng-bind="inicioEventos.eventos[$index + 2].Actividad"></h3>
+            <h2>
+                <span ng-bind="inicioEventos.eventos[$index + 2].Nombre"></span> <i class="fa fa-ticket"></i>
+            </h2>
+            <a data-ng-href="#/actividad/{{ inicioEventos.eventos[$index + 2].Actividad_Id }}"><label class="cursor" ng-bind="inicioEventos.eventos[$index + 2].Actividad"></label></a>
             <p ng-bind="inicioEventos.eventos[$index + 2].Descripcion"></p>
             <p>
-                <small ng-bind="inicioEventos.eventos[$index + 2].FechaInicio | fecha"></small> - <small ng-bind="inicioEventos.eventos[$index + 2].FechaFin  | fecha"></small>
+                <i class="fa fa-calendar"></i> <small ng-bind="inicioEventos.eventos[$index + 2].FechaInicio | fecha"></small> - <small ng-bind="inicioEventos.eventos[$index + 2].FechaFin  | fecha"></small>
             </p>
             <p>
                 <a ng-href="#/evento/{{inicioEventos.eventos[$index + 2].Id}}"><i class="fa fa-eye"></i> Ver detalles</a>
-                <!--<a ui-sref="eventos/{{evento.Id}}">Ver detalles</a>-->
             </p>
         </div>
-	</div>
-	<div class="ng-hide" ng-show="!vm.mostrarCargando && vm.haCargado">
-		<p>No hay eventos disponibles<p>
-	</div>
+    </div>
+    <div class="ng-hide" ng-show="!vm.mostrarCargando && vm.haCargado">
+        <p>No hay eventos disponibles<p>
+    </div>
 </div>

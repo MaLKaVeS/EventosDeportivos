@@ -23,6 +23,8 @@
         vm.participantes = [];
         vm.encuentros = [];
 
+        vm.tiposInscripciones = [{ id: 0, valor: 'Abierta' }, { id: 1, valor: 'Administrada' }, { id: 2, valor: 'Cerrada' }];
+
         activate();
 
         function activate() {
@@ -41,7 +43,7 @@
                 vm.evento = data[1];
                 vm.actividad = _.find(data[0], function (actividad) { return actividad.Id === vm.evento.Actividad_Id; });
                 vm.encuentros = data[2];
-                vm.participantes = data[3];
+                vm.participantes = (data[3]) ? data[3] : [];
                 vm.mostrarCargando = false;
             }
 

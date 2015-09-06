@@ -1,4 +1,4 @@
-﻿<div data-ng-controller="ActividadController as actividad">   
+﻿<div data-ng-controller="ActividadController as actividad">
     <div class="loading" ng-show="actividad.mostrarCargando">
         <p>
             <i class="fa fa-spin fa-spinner"></i> <span ng-bind="actividad.textoCargando"></span>
@@ -6,13 +6,13 @@
     </div>
     <div class="jumbotron ng-hide" data-ng-hide="actividad.mostrarCargando">
         <h1>
-            <img ng-src="{{ actividad.Icono }}" alt="actividad.Nombre" height="50" width="50" /> <span ng-bind="actividad.Nombre"></span>
+            <img class="ng-hide" ng-show="actividad.Icono" ng-src="{{ actividad.Icono }}" alt="actividad.Nombre" height="50" width="50" /> <span ng-bind="actividad.Nombre"></span>
         </h1>
         <p class="lead" ng-bind="actividad.Descripcion"></p>
     </div>
-    <div class="row ng-hide" data-ng-hide="actividad.mostrarCargando">        
-        <div  class="col-lg-3">
-            <img ng-src="{{ actividad.Imagen }}" alt="{{ actividad.Nombre }}" width="200" />            
+    <div class="row ng-hide" data-ng-hide="actividad.mostrarCargando">
+        <div class="col-lg-3 ng-hide" ng-show="actividad.Imagen">
+            <img  ng-src="{{ actividad.Imagen }}" alt="{{ actividad.Nombre }}" width="200" />
         </div>
         <div class="col-lg-9">
             <h2>Eventos</h2>
@@ -50,7 +50,12 @@
                         <!--<a ui-sref="eventos/{{actividad.Eventos[$index + 1].Id}}">Ver detalles</a>-->
                     </p>
                 </div>
-            </div>            
+            </div>
+            <div class="row ng-hide" ng-show="actividad.Eventos.length == 0">
+                <div class="col-lg-12">
+                    No hay eventos registrados para <span ng-bind="actividad.Nombre"></span>.
+                </div>
+            </div>
         </div>
-    </div>        
+    </div>
 </div>

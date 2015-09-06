@@ -30,7 +30,7 @@
 
             return $http({
                 method: 'POST', 
-                url: serviceBase + '/api/usuarios/acceso?XDEBUG_SESSION_START=CB3FFBE9',
+                url: serviceBase + '/api/usuarios/acceso',
                 data: 'Usuario=' + loginData.usuario + '&Clave=' + loginData.clave         
                 })
                 .then(postAccesoComplete, postAccesoFail);

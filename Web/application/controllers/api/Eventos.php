@@ -56,7 +56,7 @@ class Eventos extends REST_Controller {
         }
         else
         {
-            if ($id === NULL && $actividad === NULL)
+            if (isset($id) && isset($actividad))
             {
                 // No hay eventos en la bbdd
                 $this->response([
@@ -155,28 +155,12 @@ class Eventos extends REST_Controller {
             $this->response($eventos, REST_Controller::HTTP_OK); // OK (200) HTTP response code
         }
         else
-        {
-            if ($id === NULL && $actividad === NULL)
-            {
-                // No hay eventos en la bbdd
-                $this->response([
-                    'status' => FALSE,
-                    'message' => 'No se encontraron eventos'
-                ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) HTTP response code
-            }
-            else if (FALSE)
-            {
-                // Identificador no valido.
-                $this->response(NULL, REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) HTTP response code
-            }
-            else
-            {
-                // No hay un evento para ese identificador y actividad
-                $this->set_response([
-                   'status' => FALSE,
-                   'message' => 'No se encontro el Evento'
-                ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) HTTP response code
-            }
+        {   
+            // No hay eventos en la bbdd
+            $this->response([
+                'status' => FALSE,
+                'message' => 'No se encontraron eventos'
+            ], REST_Controller::HTTP_OK); // OK (200) HTTP response code
         }
     }
 
@@ -215,6 +199,45 @@ class Eventos extends REST_Controller {
             $status = REST_Controller::HTTP_BAD_REQUEST; // BAD_REQUEST (400) HTTP response code
         }
         $this->set_response($message, $status);
+    }
+
+
+    public function estado_put($actividad, $id, $estado)
+    {
+        $evento = $this->Evento->get($actividad, $id);
+        if ($evento)
+        {
+            $this->Evento->Id = $id;
+
+            foreach ($evento as $valor)
+            {
+                $this->Evento->Nombre = $valor->Nombre;
+                $this->Evento->Descripcion = $valor->Descripcion;
+                $this->Evento->Actividad_Id = $valor->Actividad_Id;
+                $this->Evento->FechaCreacion = $valor->FechaCreacion;
+                $this->Evento->HoraCreacion = $valor->HoraCreacion;
+                $this->Evento->FechaInicio = $valor->FechaInicio;
+                $this->Evento->HoraInicio = $valor->HoraInicio;
+                $this->Evento->FechaFin = $valor->FechaFin;
+                $this->Evento->HoraFin = $valor->HoraFin;
+                $this->Evento->Estado = (int)$estado;
+                $this->Evento->EstadoRegistro = $valor->EstadoRegistro;
+            }
+            
+            if ($this->Evento->update())
+            {
+                $evento->Estado = $estado;
+                $this->response($evento, REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) HTTP response code
+            }
+        }
+        else        
+        {
+            $error = [
+                   'status' => FALSE,
+                   'message' => 'No existe el evento'
+                ];
+            $this->response($error, REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) HTTP response code
+        }
     }
 
     /**

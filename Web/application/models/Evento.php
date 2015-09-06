@@ -55,11 +55,11 @@ class Evento extends CI_Model
 
     public function get($actividad = "", $id = "")
     {
-        if ($id !== NULL && $id !== "")
+        if (isset($id))
         {
             $query = $this->db->where('Actividad_Id', $actividad)->where('Id', $id)->get(self::TABLA);
         }
-        else if ($actividad !== NULL && $actividad !== "")
+        else if (isset($actividad))
         {
             $query = $this->db->where('Actividad_Id', $actividad)->get(self::TABLA);
         }
@@ -72,16 +72,16 @@ class Evento extends CI_Model
 
     public function ultimos($actividad = "", $id = "", $limite = 20)
     {
-        if ($id !== NULL && $id !== "" && $actividad !== NULL && $actividad !== "")
+        if (isset($id) && isset($actividad))
         {
-            $query = $this->db->where('Estado < ',0)
+            $query = $this->db->where('Estado > ',0)
                 ->where('Actividad_Id', $actividad)
                 ->where('Id', $id)
                 ->order_by('FechaInicio', 'DESC')
                 ->limit($limite)
                 ->get(self::TABLA);
         }
-        else if ($actividad !== NULL && $actividad !== "")
+        else if (isset($actividad))
         {
             $query = $this->db->where('Estado < ',0)
                 ->where('Actividad_Id', $actividad)
@@ -103,9 +103,9 @@ class Evento extends CI_Model
     {
         if (isset($actividad_id))
         {
-            $query = $this->db->where('Estado >= ',0)
+            $query = $this->db->where('Estado >= ', 1)
                 ->where('Actividad_Id', $actividad_id)
-                ->order_by('FechaInicio', 'DESC')
+                ->order_by('FechaInicio', 'DESC') 
                 ->get(self::TABLA);
         }
         return $query->result();

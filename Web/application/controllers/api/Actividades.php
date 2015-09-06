@@ -79,6 +79,9 @@ class Actividades extends REST_Controller {
     {
         $this->Actividad->Nombre = $this->post('Nombre');
         $this->Actividad->Descripcion = $this->post('Descripcion');
+        $this->Actividad->Icono = $this->post('Icono');
+        $this->Actividad->Imagen = $this->post('Imagen');
+        $this->Actividad->ImagenPortada = 'ImagenPortada';
 
         $status  = REST_Controller::HTTP_CREATED; // CREATED (201) HTTP response code
         if ($this->Actividad->insert())
@@ -109,6 +112,9 @@ class Actividades extends REST_Controller {
         $this->Actividad->Id = $this->put('Id');
         $this->Actividad->Nombre = $this->put('Nombre');
         $this->Actividad->Descripcion = $this->put('Descripcion');
+        $this->Actividad->Icono = $this->put('Icono');
+        $this->Actividad->Imagen = $this->put('Imagen');
+        $this->Actividad->ImagenPortada = 'ImagenPortada';
 
         $status =  REST_Controller::HTTP_ACCEPTED; // CREATED (202) HTTP response code
 

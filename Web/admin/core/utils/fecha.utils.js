@@ -5,6 +5,7 @@
 
     var service = {
         fechaToInt: fechaToInt,
+        fechaToString: fechaToString,
     }
 
     ApplicationConfiguration.applicationHelperFunctions.FechaHelper = service;
@@ -21,6 +22,13 @@
         } else {
             return fecha;
         }
+    }
+
+    function fechaToString(fecha) {
+        if (isNumber(fecha) && fecha > 0) {
+            fecha = fecha.toString().substring(6, 8) + "/" + fecha.toString().substring(4, 6) + "/" + fecha.toString().substring(0, 4);
+            return fecha;
+        } else { return fecha; }
     }
 
     function isNumber(n) {

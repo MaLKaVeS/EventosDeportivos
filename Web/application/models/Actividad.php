@@ -46,7 +46,9 @@ class Actividad extends CI_Model
     {
         if ($id !== NULL && $id !== "")
         {
-            $query = $this->db->where('Id', $id)->get(self::TABLA);
+            $query = $this->db->where('Id', $id)
+                ->order_by('Nombre', 'DESC')
+                ->get(self::TABLA);
         }
         else
         {

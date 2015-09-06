@@ -45,15 +45,15 @@
 
             function activateComplete(data) {
                 vm.mostrarCargando = false;
-                if (Object.prototype.toString.call(data[0]) === '[object Object]'
-                    && Object.prototype.toString.call(data[1]) === '[object Array]') {
+                if (Object.prototype.toString.call(data[0]) === '[object Object]') {
                     var actividad = data[0];
-
                     vm.Nombre = actividad.Nombre;
-                    vm.Icono = actividad.Icono;
+                    vm.Icono = (actividad.Icono !== "null") ? actividad.Icono : '';
                     vm.Descripcion = actividad.Descripcion;
-                    vm.Imagen = actividad.Imagen;
+                    vm.Imagen = (actividad.Imagen !== "null") ? actividad.Imagen : '';
+                }
 
+                if (Object.prototype.toString.call(data[1]) === '[object Array]') {
                     vm.Eventos = data[1];
                 }
             }

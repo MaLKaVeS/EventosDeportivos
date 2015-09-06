@@ -25,6 +25,7 @@ class Usuarios extends REST_Controller {
         // Configure limits on our controller methods
         // Ensure you have created the 'limits' table and enabled 'limits' within application/config/rest.php
         $this->methods['usuarios_get']['limit'] = 500; // 500 requests per hour per user/key
+        $this->methods['datos_get']['limit'] = 500; // 500 requests per hour per user/key
         $this->methods['usuarios_post']['limit'] = 100; // 100 requests per hour per user/key
         $this->methods['usuarios_put']['limit'] = 100; // 100 requests per hour per user/key
         $this->methods['usuarios_delete']['limit'] = 50; // 50 requests per hour per user/key
@@ -76,6 +77,40 @@ class Usuarios extends REST_Controller {
     }
 
     /**
+     * Recupera los datos de un usuario publico
+     */
+    public function datos_get($id)
+    {
+        $email = urldecode($id);
+
+        if (!isset($email))
+        {
+            $this->response([
+                'status' => FALSE,
+                'message' => 'No se indico nombre de usuario'
+            ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) HTTP response code
+            return;
+        }
+
+        $usuario = $this->Usuario->get_by_email($email);
+
+        // Miramos si el resultado contiene algo
+        if ($usuario)
+        {
+            // Set the response and exit
+            $this->response($usuario, REST_Controller::HTTP_OK); // OK (200) HTTP response code
+        }
+        else
+        {
+            // No hay roles en la bbdd
+            $this->response([
+                'status' => FALSE,
+                'message' => 'No se encontro al usuario '.$email
+            ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) HTTP response code
+        }
+    }
+
+    /**
      * Inserta un nuevo Rol en la base de datos
      */
     public function usuarios_post()
@@ -84,7 +119,7 @@ class Usuarios extends REST_Controller {
         $this->Usuario->Apellidos = $this->post('Apellidos');
         $this->Usuario->Email = $this->post('Email');
         $this->Usuario->FechaNacimiento = $this->post('FechaNacimiento');
-        $clave = $this->post('clave');
+        $clave = $this->post('Clave');
 
         $status  = REST_Controller::HTTP_CREATED; // CREATED (201) HTTP response code
         if ($this->Usuario->insert($clave))

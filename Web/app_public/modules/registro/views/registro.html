@@ -7,7 +7,7 @@
                 <div class="form-group">
                     <label for="nombre" class="col-sm-2 control-label">Nombre</label>
                     <div class="col-sm-10">
-                        <p class="input-group" ng-class="{'has-error': registro.datosFormulario.nombre.$error && registro.datosFormulario.$submitted }">
+                        <p class="input-group" ng-class="{'has-error': registro.datosFormulario.nombre.$invalid && registro.datosFormulario.$submitted }">
                             <input type="text" class="form-control" name="nombre" ng-minlength="3" ng-maxlength="20" placeholder="Nombre" ng-model="registro.Nombre"
                             required>
                             <span class="input-group-btn">
@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <label for="apellidos" class="col-sm-2 control-label">Apellidos</label>
                     <div class="col-sm-10">
-                        <p class="input-group" ng-class="{'has-error': registro.datosFormulario.apellidos.$error && registro.datosFormulario.$submitted }">
+                        <p class="input-group" ng-class="{'has-error': registro.datosFormulario.apellidos.$invalid && registro.datosFormulario.$submitted }">
                             <input type="text" class="form-control" name="apellidos" ng-minlength="3" ng-maxlength="20" placeholder="Apellidos" ng-model="registro.Apellidos"
                             required>
                             <span class="input-group-btn">                    
@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <label for="email" class="col-sm-2 control-label">Dirección de Email</label>
                     <div class="col-sm-10">
-                        <p class="input-group" ng-class="{'has-error': registro.datosFormulario.email.$error && registro.datosFormulario.$submitted }">
+                        <p class="input-group" ng-class="{'has-error': registro.datosFormulario.email.$invalid && registro.datosFormulario.$submitted }">
                             <input type="email" class="form-control" name="email" placeholder="Email" ng-model="registro.Email" required ng-maxlength="200">
                             <span class="input-group-btn">
                         <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-envelope"></i></button>
@@ -42,7 +42,7 @@
                 <div class="form-group">
                     <label for="email" class="col-sm-2 control-label">Fecha de Nacimiento</label>
                     <div class="col-sm-10">
-                        <p class="input-group" ng-class="{'has-error': registro.datosFormulario.fechaNacimiento.$error && registro.datosFormulario.$submitted }">
+                        <p class="input-group" ng-class="{'has-error': (registro.datosFormulario.fechaNacimiento.$invalid || !registro.valFechaNacimiento) && registro.datosFormulario.$submitted }">
                             <input ng-model="registro.FechaNacimiento" name="fechaNacimiento" type="text" class="form-control" placeholder="Fecha en formato dd/mm/yyyy"
                             datepicker-popup="{{ 	registro.formatoFecha }}" datepicker-options="registro.dateOptions" ng-required="true"
                             close-text="cerrar" current-text="hoy" clear-text="limpiar" is-open="registro.estadoFechaNacimiento.abierto"
@@ -56,8 +56,8 @@
                 <div class="form-group">
                     <label for="clave" class="col-sm-2 control-label">Clave</label>
                     <div class="col-sm-10">
-                        <p class="input-group" ng-class="{'has-error': registro.datosFormulario.clave.$error && registro.datosFormulario.$submitted }">
-                            <input type="password" class="form-control" placeholder="Clave" name="clave" ng-model="registro.Clave" ng-minlength="8" ng-maxlength="32">
+                        <p class="input-group" ng-class="{'has-error': (registro.datosFormulario.clave.$invalid || !registro.valClave ) && registro.datosFormulario.$submitted }">
+                            <input type="password" class="form-control" placeholder="Clave" name="clave" ng-model="registro.Clave" ng-minlength="8" ng-maxlength="32" required>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
                             </span>
@@ -67,9 +67,9 @@
                 <div class="form-group">
                     <label for="confirmar" class="col-sm-2 control-label">Confirmar clave</label>
                     <div class="col-sm-10">
-                        <p class="input-group" ng-class="{'has-error': registro.datosFormulario.clave.$error && registro.datosFormulario.$submitted }">
+                        <p class="input-group" ng-class="{'has-error': (registro.datosFormulario.confirmarClave.$invalid || !registro.valClave) && registro.datosFormulario.$submitted }">
                             <input type="password" class="form-control" placeholder="Confirmar clave" ng-model="registro.ConfirmarClave" name="confirmarClave"
-                            ng-minlength="8" ng-maxlength="32">
+                            ng-minlength="8" ng-maxlength="32" required>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
                             </span>
@@ -78,7 +78,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <div class="checkbox">
+                        <div class="checkbox" ng-class="{'has-error': registro.datosFormulario.acepto.$invalid && registro.datosFormulario.$submitted }">
                             <label>
                                 <input type="checkbox" name="acepto" ng-model="registro.Aceptado" required> He leido y acepto las condiciones de uso
                             </label>
@@ -86,8 +86,11 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
+                    <div class="col-sm-offset-2 col-sm-10 margin-bottom-20" ng-class="{'ng-hide' : registro.mostrarCargando}">
                         <button type="button" class="btn btn-primary" ng-click="registro.clickEnviar()"><i class="fa fa-envelope"></i> Enviar</button>
+                    </div>
+                    <div class="ng-hide col-sm-offset-2 col-sm-10 alert" ng-show="registro.mostrarCargando || registro.mostrarErroresValidacion" ng-class="{'alert-warning' : registro.mostrarCargando, 'alert-danger' : registro.mostrarErroresValidacion}">
+                        <i class="fa" ng-class="{'fa-spin fa-spinner' : registro.mostrarCargando , 'fa-exclamation' : registro.mostrarErroresValidacion}"></i> <span ng-bind="registro.mensaje"></span>
                     </div>
                 </div>
             </form>

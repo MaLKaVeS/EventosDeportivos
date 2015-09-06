@@ -20,8 +20,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     }
     ?>
 
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Eventos deportivos, fechas, lugares, participantes, resultados, encuentros">
+    <meta name="author" content="Álvaro Pardo de Santayana Novo">
     <link rel="icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
@@ -46,44 +46,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         .ng-hide {
             display: none !important;
         }
-
-        html {
-            position: relative;
-            min-height: 100%;
-        }
-
-        body {
-            padding-top: 50px;
-            padding-bottom: 20px;
-            margin-bottom: 60px;
-        }
-
-        .footer {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            /* Set the fixed height of the footer here */
-            height: 60px;
-            background-color: #f5f5f5;
-        }
-
-        div.loading {
-            height: 100%;
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 100%;
-            z-index: 2000;
-            text-align: center;
-            /*display: none;
-            background-image: url(../Images/transparente.png);*/
-        }
-
-            div.loading i, div.loading p {
-                margin: 10% auto;
-                color: #2676ad;
-                font-size: 20px;
-            }
     </style>
 
     <title update-title>Eventos Deportivos</title>
@@ -100,11 +62,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?php
     if (isset($_SERVER['CI_ENV']) && $_SERVER['CI_ENV'] === 'production')
     {
-        echo '<link href="app_admin/theme/site.css" rel="stylesheet">';
+        echo '<link href="app_public/theme/site.css" rel="stylesheet">';
     }
     else
     {
-        echo '<link href="/app_admin/theme/site.css" rel="stylesheet">';
+        echo '<link href="/app_public/theme/site.css" rel="stylesheet">';
     }
     ?>
     
@@ -152,6 +114,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="app_public/core/directives/updatetitle.directive.js"></script>
     <script src="app_public/core/filters/fecha.filter.js"></script>
     <script src="app_public/core/utils/fecha.utils.js"></script>
+    <script src="app_public/core/controllers/user.controller.js"></script>
 
     <!-- Services -->
     <script src="app_public/services/actividades.dataservice.js"></script>
@@ -177,6 +140,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="app_public/modules/registro/registro.init.js"></script>
     <script src="app_public/modules/registro/config/registro.routes.js"></script>
     <script src="app_public/modules/registro/controllers/registro.controller.js"></script>
+    <script src="app_public/modules/registro/controllers/registro.completado.controller.js"></script>
 
     <!-- Acercade Modules -->
     <script src="app_public/modules/acercade/acercade.init.js"></script>
@@ -222,5 +186,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="app_public/modules/login/login.init.js"></script>
     <script src="app_public/modules/login/config/login.routes.js"></script>
     <script src="app_public/modules/login/controllers/login.controller.js"></script>
+
+    <!-- Acceso Modules -->
+    <script src="app_public/modules/perfil/perfil.init.js"></script>
+    <script src="app_public/modules/perfil/config/perfil.routes.js"></script>
+    <script src="app_public/modules/perfil/controllers/perfil.controller.js"></script>
 </body>
 </html>

@@ -17,6 +17,7 @@
         var vm = this;
         vm.mostrarCargando = true;
         vm.textoCargando = 'Cargando actividades';
+        vm.buscar = '';
         vm.actividades = [];
         
         activate();
@@ -28,7 +29,7 @@
             
             function getActividadesComplete(data) {
                 vm.mostrarCargando = false;
-                vm.actividades = data;                
+                vm.actividades = _.sortBy(data, 'Nombre');
             }
             
             function getActividadesFail(data) {

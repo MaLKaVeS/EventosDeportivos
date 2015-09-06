@@ -13,7 +13,7 @@
         var serviceBase = ApplicationConfiguration.applicationUrlServiceBase;
 
         var utils = ApplicationConfiguration.applicationHelperFunctions;
-        
+
         var service = {
             getUltimosEventos: getUltimosEventos,
             getEventoById: getEventoById,
@@ -22,8 +22,9 @@
             getEventosCount: getEventosCount,
             postEvento: postEvento,
             putEvento: putEvento,
+            putEstado: putEstado,
             deleteEvento: deleteEvento,
-            
+
         }
 
         return service;
@@ -31,29 +32,27 @@
         function getUltimosEventos() {
             var defered = $q.defer();
             var promise = defered.promise;
-            
+
             $http.get(serviceBase + '/api/eventos/ultimos')
                 .then(getUltimosEventosComplete, getUltimosEventosFail);
 
             return promise;
-                    
+
             function getUltimosEventosComplete(data) {
-                if (data.status === 200)
-                {
-                  defered.resolve(data.data);
+                if (data.status === 200) {
+                    defered.resolve(data.data);
                 }
                 else {
                     defered.reject(data.data);
                 }
             }
-            
+
             function getUltimosEventosFail() {
                 promise.reject();
             }
         }
 
-        function getEventoById(id)
-        {
+        function getEventoById(id) {
             var defered = $q.defer();
             var promise = defered.promise;
 
@@ -68,9 +67,9 @@
 
             return promise;
         }
-        
+
         function getEventosFiltrados() {
-            
+
         }
 
         function getEventos() {
@@ -81,54 +80,70 @@
                 return data.data;
             }
         }
-        
-        function postEvento(evento) {            
+
+        function postEvento(evento) {
             return $http({
-                method: 'POST', 
+                method: 'POST',
                 url: serviceBase + '/api/eventos/eventos',
                 data: 'Nombre=' + evento.Nombre + '&Descripcion=' + evento.Descripcion +
                 '&Actividad_Id=' + evento.Actividad_Id + '&FechaInicio=' + utils.FechaHelper.fechaToInt(evento.FechaInicio) +
                 '&HoraInicio=' + evento.HoraInicio + '&FechaFin=' + utils.FechaHelper.fechaToInt(evento.FechaFin) +
-                '&HoraFin=' + evento.HoraFin + '&EstadoRegistro=' + evento.EstadoRegistro               
-                })
+                '&HoraFin=' + evento.HoraFin + '&EstadoRegistro=' + evento.EstadoRegistro
+            })
                 .then(postEventoComplete);
 
             function postEventoComplete(data) {
                 return data;
             }
         }
-        
+
         function putEvento(evento) {
             return $http({
-                method: 'PUT', 
+                method: 'PUT',
                 url: serviceBase + '/api/eventos/eventos',
                 data: 'Id=' + evento.Id + '&Nombre=' + evento.Nombre + '&Descripcion=' + evento.Descripcion +
                 '&Actividad_Id=' + evento.Actividad_Id + '&FechaInicio=' + fechaToInt(evento.FechaInicio) +
                 '&HoraInicio=' + evento.HoraInicio + '&FechaFin=' + fechaToInt(evento.FechaFin) +
                 '&HoraFin=' + evento.HoraFin + '&EstadoRegistro=' + evento.EstadoRegistro
-                 })
+            })
                 .then(putEventoComplete);
 
             function putEventoComplete(data, status, headers, config) {
                 return data;
             }
         }
-        
+
+        function putEstado(evento, estado) {
+            return $http({
+                method: 'PUT',
+                url: serviceBase + '/api/eventos/estado/' + evento.Actividad_Id +  '/' + evento.Id + '/' + estado
+            })
+                .then(putEstadoComplete, putEstadoFail);
+
+            function putEstadoComplete(data) {
+                return data.data;
+            }
+
+            function putEstadoFail(err) {
+                return err;
+            }
+        }
+
         function deleteEvento(evento, actividad) {
-            return $http.delete(serviceBase + '/api/eventos/eventos/' + evento + '/'  + actividad)
+            return $http.delete(serviceBase + '/api/eventos/eventos/' + evento + '/' + actividad)
                 .then(deleteEventoComplete);
 
             function deleteEventoComplete(data, status, headers, config) {
                 return data;
             }
         }
-        
+
         function getEventosCount() {
             var count = 0;
             return getEventos()
                 .then(getEventosCountComplete);
 
-            function getEventosCountComplete (data) {
+            function getEventosCountComplete(data) {
                 if (data !== undefined) {
                     count = data.length;
                 }

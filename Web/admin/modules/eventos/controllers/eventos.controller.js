@@ -17,6 +17,9 @@
         /* Propiedades */
         vm.title = 'Eventos | Eventos Deportivos';
         vm.tituloModal = 'Añadir evento';
+        vm.textoConfirmaModal = '';
+        vm.tituloConfirmaModal = 'Confirmar borrado';
+        vm.accionModal = 0;
         vm.evento = '';
         vm.buscar = '';
         vm.mostrarCargando = true;
@@ -65,6 +68,8 @@
         vm.clickBorrar = clickBorrar;
         vm.clickConfirmaBorrar = clickConfirmaBorrar;
         vm.openDatePicker = openDatePicker;
+        vm.clickPublicar = clickPublicar;
+        vm.clickFinalizar = clickFinalizar;
 
         activate();
 
@@ -158,9 +163,8 @@
                     vm.mensajeError = 'El nombre del evento debe tener al menos 5 caracteres. ';
                 }
 
-                if (!vm.valActividad_Id)
-                {
-                    vm.mensajeError += '\nDebe indicar la actividad del evento. ';                    
+                if (!vm.valActividad_Id) {
+                    vm.mensajeError += '\nDebe indicar la actividad del evento. ';
                 }
 
                 if (!vm.valFechaInicio) {
@@ -234,9 +238,9 @@
             vm.addActividad_Id = evento.Actividad_Id;
             vm.addNombre = evento.Nombre;
             vm.addDescripcion = evento.Descripcion;
-            vm.addFechaInicio = dataservice.fechaToString(evento.FechaInicio);
+            vm.addFechaInicio = util.FechaHelper.fechaToString(evento.FechaInicio);
             vm.addHoraInicio = evento.HoraInicio;
-            vm.addFechaFin = dataservice.fechaToString(evento.FechaFin);
+            vm.addFechaFin = util.FechaHelper.fechaToString(evento.FechaFin);
             vm.addHoraFin = evento.HoraFin;
             vm.addRegistro = evento.EstadoRegistro;
             vm.valActividad_Id = false;
@@ -254,17 +258,27 @@
         }
 
         function clickBorrar(evento) {
+            vm.tituloConfirmaModal = 'Confirmar borrado';
+            vm.textoConfirmaModal = '¿Desea eliminar el evento "' + evento.Nombre + '"? Esta operación no se puede deshacer.';
             vm.evento = evento;
             vm.idEvento = evento.Id;
+            vm.accionModal = 0;
             $('#modalConfirmar').modal('show');
         }
 
         function clickConfirmaBorrar() {
-            EventosDataService.deleteEvento(vm.idEvento, vm.evento.Actividad_Id)
-				.then(borradoComplete)
-				.catch(function () {
+            switch (vm.accionModal) {
+                case 0:
+                    EventosDataService.deleteEvento(vm.idEvento, vm.evento.Actividad_Id)
+				                      .then(borradoComplete);
+                    break;
+                case 1:
+                case 3:
+                    EventosDataService.putEstado(vm.evento, vm.accionModal)
+				                      .then(borradoComplete);
+                    break;
+            }
 
-				});
 
             function borradoComplete() {
                 vm.evento = {};
@@ -272,6 +286,24 @@
                 $('#modalConfirmar').modal('hide');
                 activate();
             }
+        }
+
+        function clickPublicar(evento) {
+            vm.tituloConfirmaModal = 'Publicar evento';
+            vm.textoConfirmaModal = '¿Desea publicar el evento "' + evento.Nombre + '"? Desde ese momento aparecerá en la parte pública de Eventos Deportivos.';
+            vm.evento = evento;
+            vm.idEvento = evento.Id;
+            vm.accionModal = 1;
+            $('#modalConfirmar').modal('show');
+        }
+
+        function clickFinalizar(evento) {
+            vm.tituloConfirmaModal = 'Finalizar evento';
+            vm.textoConfirmaModal = '¿Desea marcar el evento "' + evento.Nombre + '" como finalizado? No se podrán realizar más cambios en el mismo.';
+            vm.evento = evento;
+            vm.accionModal = 3;
+            vm.idEvento = evento.Id;
+            $('#modalConfirmar').modal('show');
         }
     }
 })();

@@ -15,14 +15,12 @@
                     '': {
                         templateUrl: 'app_public/modules/registro/views/registro.html'
                     }
-                    // ,
-                    // 'actividades@inicio': {
-                    //     templateUrl: 'app_public/modules/inicio/views/actividades.html'
-                    // },
-                    // 'eventos@inicio': {
-                    //     templateUrl: 'app_public/modules/inicio/views/eventos.html'
-                    // }
                 }
+            })
+            .state('completado', {
+                url: '/completado',
+                templateUrl: 'app_public/modules/registro/views/completado.html',
+                data: { title: 'Registro completado - Eventos deportivos' }
             });
     }]);
 

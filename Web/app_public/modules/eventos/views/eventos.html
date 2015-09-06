@@ -4,10 +4,13 @@
             <i class="fa fa-spin fa-spinner"></i> <span ng-bind="eventos.textoCargando"></span>
         </p>
     </div>
-    <div ng-repeat="evento in eventos.eventos" class="row" data-ng-if="$index % 3 == 0">
+    <div ng-repeat="evento in eventos.eventos | orderBy: 'Nombre'" class="row" data-ng-if="$index % 3 == 0">
         <div class="col-md-4">
             <h2 ng-bind="evento.Nombre"></h2>
             <p ng-bind="evento.Descripcion"></p>
+            <p>
+                <i class="fa fa-calendar"></i> <small ng-bind="evento.FechaInicio | fecha"></small> - <small ng-bind="evento.FechaFin  | fecha"></small>
+            </p>
             <p>
                 <a ng-href="#/evento/{{evento.Id}}"><i class="fa fa-ticket"></i> Ver detalles</a>
                 <!--<a ui-sref="eventos/{{evento.Id}}">Ver detalles</a>-->
@@ -17,13 +20,19 @@
             <h2 ng-bind="eventos.eventos[$index + 1].Nombre"></h2>
             <p ng-bind="eventos.eventos[$index + 1].Descripcion"></p>
             <p>
+                <i class="fa fa-calendar"></i> <small ng-bind="eventos.eventos[$index + 1].FechaInicio | fecha"></small> - <small ng-bind="eventos.eventos[$index + 1].FechaFin  | fecha"></small>
+            </p>
+            <p>
                 <a ng-href="#/evento/{{eventos.eventos[$index + 1].Id}}"><i class="fa fa-ticket"></i> Ver detalles</a>
                 <!--<a ui-sref="eventos/{{evento.Id}}">Ver detalles</a>-->
             </p>
         </div>
-        <div class="col-md-4" ng-class="{ 'ng-hide' : !actividades.actividades[$index + 2] }">
+        <div class="col-md-4" ng-class="{ 'ng-hide' : !eventos.eventos[$index + 2] }">
             <h2 ng-bind="eventos.eventos[$index + 2].Nombre"></h2>
             <p ng-bind="eventos.eventos[$index + 2].Descripcion"></p>
+            <p>
+                <i class="fa fa-calendar"></i> <small ng-bind="eventos.eventos[$index + 2].FechaInicio | fecha"></small> - <small ng-bind="eventos.eventos[$index + 2].FechaFin  | fecha"></small>
+            </p>
             <p>
                 <a ng-href="#/eventos/{{eventos.eventos[$index + 2].Id}}"><i class="fa fa-ticket"></i> Ver detalles</a>
                 <!--<a ui-sref="eventos/{{actividades.actividades[$index + 2].Id}}">Ver detalles</a>-->

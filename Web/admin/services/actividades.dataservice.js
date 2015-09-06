@@ -53,6 +53,8 @@
                 url: serviceBase + '/api/actividades/actividades',
                 data: 'Nombre=' + encodeURIComponent(actividad.Nombre)
                 + '&Descripcion=' + encodeURIComponent(actividad.Descripcion)
+                + '&Icono=' + encodeURIComponent(actividad.Icono)
+                + '&Imagen=' + encodeURIComponent(actividad.Imagen)
             })
                 .then(postActividadesComplete);
 
@@ -67,6 +69,8 @@
                 url: serviceBase + '/api/actividades/actividades',
                 data: 'Id=' + actividad.Id + '&Nombre=' + encodeURIComponent(actividad.Nombre)
                  + '&Descripcion=' + encodeURIComponent(actividad.Descripcion)
+                + '&Icono=' + encodeURIComponent(actividad.Icono)
+                + '&Imagen=' + encodeURIComponent(actividad.Imagen)
                  })
                 .then(putActividadesComplete);
 

@@ -9,9 +9,9 @@
     angular.module(moduleName)
         .controller('ContactoController', ContactoController);
 
-    ContactoController.$inject = ['ContactoDataService'];
+    ContactoController.$inject = ['ContactoDataService', 'UsuariosDataService'];
 
-    function ContactoController(ContactoDataService) {
+    function ContactoController(ContactoDataService, UsuariosDataService) {
 
         /* jshint validthis: true */
         var vm = this;
@@ -34,7 +34,10 @@
         activate();
 
         function activate() {
-
+            var datos = UsuariosDataService.getAuthData();
+            if (datos) {
+                vm.Email = datos.userName;
+            }
         }
 
         function openDatePicker() {

@@ -1,6 +1,5 @@
 User-agent: *
-Disallow: /admin/
-Disallow: /views/secret.html
+Disallow: index.php/admin/
 
 # The sitemap must be an absolute URL
 sitemap: http://mysite.com/sitemap.xml

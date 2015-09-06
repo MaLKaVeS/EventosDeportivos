@@ -115,7 +115,7 @@
         function postUsuario(usuario) {
             return $http({
                 method: 'POST', 
-                url: serviceBase + '/api/usuarios/usuarios?XDEBUG_SESSION_START=CB3FFBE9',
+                url: serviceBase + '/api/usuarios/usuarios',
                 data: 'Nombre=' + encodeURIComponent(usuario.Nombre) + '&Apellidos=' + encodeURIComponent(usuario.Apellidos) +
                 '&Email=' + encodeURIComponent(usuario.Email) + '&FechaNacimiento=' + utils.FechaHelper.fechaToInt(usuario.FechaNacimiento)         
                 })

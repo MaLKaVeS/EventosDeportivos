@@ -5,34 +5,48 @@
         </p>
     </div>
     <div class="jumbotron ng-hide" data-ng-hide="evento.mostrarCargando">
-        <h1 ng-bind="evento.evento.Nombre"></h1>
+        <h1 ng-bind="evento.evento.Nombre" class="center-block"></h1>
         <h2>
-            <img data-ng-src="{{ evento.actividad.Icono }}" /><span ng-bind="evento.actividad.Nombre"></span>
+            <img data-ng-src="{{ evento.actividad.Icono }}" height="32" width="32" class="margin-rigth-10" /> <span ng-bind="evento.actividad.Nombre"></span>
         </h2>
-        <p><i class="fa fa-calendar"></i>
+        <p>
+            <i class="fa fa-calendar"></i>
             <small ng-bind="evento.evento.FechaInicio | fecha"></small> - <small ng-bind="evento.evento.FechaFin  | fecha"></small>
         </p>
         <p class="lead" ng-bind="evento.evento.Descripcion"></p>
     </div>
-    <div class="row ng-hide" data-ng-hide="evento.mostrarCargando && evento.evento.Estado > 1">
+    <div class="row ng-hide" data-ng-hide="evento.mostrarCargando">
         <div class="col-md-4">
             <h4>Inscripción</h4>
+            <div class="row margin-bottom-10">
+                <div class="col-md-7">
+                    <label>
+                        Estado Registro: 
+                        <span ng-repeat="tipoIns in evento.tiposInscripciones | filter: evento.evento.EstadoRegistro" ng-bind="tipoIns.valor" ng-class="{'text-success' : tipoIns.valor == 'Abierta', 'text-danger' : tipoIns.valor == 'Cerrada'}"></span>
+                    </label>
+                </div>
+                <div class="col-md-5">
+                    <label>Inscritos: <span ng-class="{'text-success' : eventos.participantes.length == 0,  'text-danger' : eventos.participantes.length == evento.evento.MaximoNumeroParticipantes }">{{ evento.participantes.length }} </span>/ {{ evento.evento.MaximoNumeroParticipantes }}</label>
+                </div>
+            </div>
+            <p class="ng-hide" data-ng-show="evento.participantes.length >= evento.evento.MaximoNumeroParticipantes">Se ha alcanzado el cupo de participantes.</p>
             <p class="ng-hide" data-ng-show="evento.evento.EstadoRegistro == '0' && evento.participantes.length < evento.evento.MaximoNumeroParticipantes">Puede inscribirse en el evento <a class="btn btn-primary"><i class="fa fa-file"></i> Aquí</a></p>
             <p class="ng-hide" data-ng-show="evento.evento.EstadoRegistro == '1' && evento.participantes.length < evento.evento.MaximoNumeroParticipantes">Para inscribirse al evento debe enviar sus datos a: </p>
             <p class="ng-hide" data-ng-show="evento.evento.EstadoRegistro == '2' || evento.participantes.length >= evento.evento.MaximoNumeroParticipantes">La inscripción para este evento está cerrada.</p>
         </div>
         <div class="col-md-4">
             <h4>Donde</h4>
-            <p></p>
+            <p>No hay información</p>
         </div>
         <div class="col-md-4">
             <h4>Cuando</h4>
+            <p>No hay información</p>
         </div>
     </div>
     <div class="row ng-hide" data-ng-hide="evento.mostrarCargando">
         <div class="col-lg-6 ng-hide" ng-show="evento.participantes.length > 0">
             <h2>Participantes</h2>
-            <table>
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Dorsal</th>
@@ -45,11 +59,11 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-lg-6 ng-hide" ng-show="evento.encuentros.length > 0"
+        <div class="col-lg-6 ng-hide" ng-show="evento.encuentros.length > 0">
             <h2>Encuentros</h2>
             <div data-ng-repeat="encuentro in evento.encuentros" class="row">
                 <div class="col-md-12">
-                    <table>
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>Ronda</th>

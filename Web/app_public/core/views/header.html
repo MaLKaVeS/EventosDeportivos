@@ -2,12 +2,12 @@
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" ui-sref="inicio">Eventos Deportivos</a>
+            <a class="navbar-brand" ui-sref="inicio"> Eventos Deportivos <img alt="logo" src="favicon-32x32.png" class="rigth" /></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -16,16 +16,30 @@
                 <li><a ui-sref="contacto">Contacto</a></li>
                 <li><a ui-sref="acercade">Acerca de</a></li>
             </ul>
-            <form class="navbar-form navbar-right">
-                <!--<div class="form-group">
-                <input type="text" placeholder="Email" class="form-control">
+            <div class="navbar-form navbar-right" data-ng-controller="UserController as user">
+                <div class="ng-hide" ng-show="!user.isLoggedIn">
+                    <a ui-sref="acceso" class="btn btn-success"><i class="fa fa-sign-in"></i> Acceso</a>
+                    <a ui-sref="registro" class="btn btn-primary"><i class="fa fa-user-plus"></i> Registro</a>
                 </div>
-                <div class="form-group">
-                <input type="password" placeholder="Clave" class="form-control">
-                </div>-->
-                <a ui-sref="acceso" class="btn btn-success">Acceso</a>
-                <a ui-sref="registro" class="btn btn-primary">Registro</a>
-            </form>
+                <div class="ng-hide" ng-show="user.isLoggedIn">
+                    <ul>
+                        <li class="dropdown cursor">
+                            <a class="dropdown-toggle cursor" data-toggle="dropdown">
+                                <i class="fa fa-user fa-fw cursor"></i> <span class="cursor" ng-bind="user.userName"></span> <i class="fa fa-caret-down cursor"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li>
+                                    <a href="#/perfil"><i class="fa fa-user fa-fw"></i> Perfil de usuario</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li  class="cursor">
+                                    <a class="cursor"  ng-click="user.doLogOut()"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
+                                </li>
+                            </ul>
+                        <li>
+                    </ul>
+                </div>
+            </div>
         </div><!--/.navbar-collapse -->
     </div>
 </nav>

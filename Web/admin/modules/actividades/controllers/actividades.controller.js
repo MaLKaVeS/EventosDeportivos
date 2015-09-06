@@ -50,6 +50,7 @@
                 $location.path('/login');
             }
             else {
+                vm.hayError = false;
 
                 ActividadesDataService.getActividades()
                     .then(getActividadesComplete);
@@ -70,6 +71,7 @@
         function clickGrabar() {
             if (vm.validar()) {
                 vm.mostrarCargando = true;
+                vm.hayError = false;
 
                 vm.actividad.Nombre = vm.addNombre;
                 vm.actividad.Descripcion = vm.addDescripcion;
@@ -91,6 +93,7 @@
             }
 
             function grabarActividadComplete() {
+                vm.hayError = false;
                 $('#modalActividad').modal('hide');
                 vm.tituloModal = 'Añadir Actividad';
                 vm.actividad = {};
@@ -109,22 +112,28 @@
         }
 
         function clickAdd() {
+            vm.hayError = false;
             vm.tituloModal = 'Añadir Actividad';
             vm.valNombre = false;
             vm.addNombre = '';
             vm.addDescripcion = '';
             vm.actividad = {};
+            vm.addIcono = '';
+            vm.addImagen = '';
             vm.idActividad = '';
 
             $('#modalActividad').modal('show');
         }
 
         function clickEditar(actividad) {
+            vm.hayError = false;
             vm.tituloModal = 'Editar Actividad';
             vm.actividad = actividad;
             vm.idActividad = actividad.Id;
             vm.addNombre = actividad.Nombre;
             vm.addDescripcion = actividad.Descripcion;
+            vm.addIcono = actividad.Icono;
+            vm.addImagen = actividad.Imagen;
 
             $('#modalActividad').modal('show');
         }

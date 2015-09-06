@@ -1,0 +1,64 @@
+﻿<div data-ng-controller="PerfilController as perfil" class="margin-top-40">
+    <div class="row">
+        <div class="col-lg-3">
+            <span style="background-image: url(img/user_2x.png); border-radius: 50%; display:block;float:left; margin:-1px 5px -1px -1px;height:192px; width:192px;"></span>
+        </div>
+        <div class="col-lg-9">
+            <h2>Datos de usuario</h2>
+            <form class="form-horizontal" name="perfil.datosFormulario">
+                <div class="form-group">
+                    <label for="nombre" class="col-sm-2 control-label">Nombre</label>
+                    <div class="col-sm-10">
+                        <p class="input-group" ng-class="{'has-error': perfil.datosFormulario.nombre.$invalid && perfil.datosFormulario.$submitted }">
+                            <input type="text" class="form-control" name="nombre" ng-minlength="3" ng-maxlength="20" placeholder="Nombre" ng-model="perfil.Nombre"
+                                   required>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-user"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="apellidos" class="col-sm-2 control-label">Apellidos</label>
+                    <div class="col-sm-10">
+                        <p class="input-group" ng-class="{'has-error': perfil.datosFormulario.apellidos.$invalid && perfil.datosFormulario.$submitted }">
+                            <input type="text" class="form-control" name="apellidos" ng-minlength="3" ng-maxlength="20" placeholder="Apellidos" ng-model="perfil.Apellidos"
+                                   required>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-user"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-sm-2 control-label">Dirección de Email</label>
+                    <div class="col-sm-10">
+                        <p class="input-group" ng-class="{'has-error': perfil.datosFormulario.email.$invalid && perfil.datosFormulario.$submitted }">
+                            <input type="email" class="form-control" name="email" placeholder="Email" ng-model="perfil.Email" required ng-maxlength="200">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-envelope"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-sm-2 control-label">Fecha de Nacimiento</label>
+                    <div class="col-sm-10">
+                        <p class="input-group" ng-class="{'has-error': (perfil.datosFormulario.fechaNacimiento.$invalid || !perfil.valFechaNacimiento) && perfil.datosFormulario.$submitted }">
+                            <input ng-model="perfil.FechaNacimiento" name="fechaNacimiento" type="text" class="form-control" placeholder="Fecha en formato dd/mm/yyyy"
+                                   datepicker-popup="{{ 	perfil.formatoFecha }}" datepicker-options="perfil.dateOptions" ng-required="true"
+                                   close-text="cerrar" current-text="hoy" clear-text="limpiar" is-open="perfil.estadoFechaNacimiento.abierto" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="perfil.openDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <h3>Eventos</h3>
+        <p>No está inscrito en ningún evento</p>
+    </div>
+</div>
